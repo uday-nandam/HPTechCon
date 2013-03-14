@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <title>Checkin</title>
+        
+		<!-- Adapted from API panel example-->
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
+		<script type="text/javascript" src="cordova-2.4.0.js"></script>
+		<script src="JS/barcodescanner.js"></script>
+			
+		<!-- Link css and js files -->
+		<link rel="stylesheet" href="css/my.css" />
+		<script src="js/handlebars.js"></script>
+        <script src="js/main.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+
+        <!-- User-generated js -->
+        <script>
+            try {
+
+    $(function() {
+
+    });
+
+  } catch (error) {
+    console.error("Your javascript has an error: " + error);
+  }
+        </script>
+    </head>
+    <body>
+        <!-- Main page -->
+        <div data-role="page" data-url ="checkin-main" id="checkin-main" class="ui-responsive-panel">
+			<!-- Header -->
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <h3 class="headerTitle">Check In</h3>
+				<a href="home.html#home-main" rel="external" data-icon="home" data-iconpos="notext left">Home</a>
+            </div>
+            <div data-role="content" class="jqm-content">
+                
+				<div class="ui-grid-b" id="eventBar">
+					<div class="ui-block-a">
+						<label for="checkinInput" class="ui-hidden-accessible">Enter Event ID: </label>
+						<input name="checkinInput" id="checkinInput" placeholder="Enter Event ID" value="" type="text">
+					</div>
+					<div class="ui-block-b">
+						<a href="#checkin-new" id="submitButton" onclick="searchSession()" data-role="button" data-mini="true">Go</a>
+					</div>
+                    <div class="ui-block-c">
+						<!-- QR image button 
+						<input name="scanQRCode" id="QR" type="image" onclick="cameraFunction()" src="images/qrcode.png">-->
+						<button class = "buttonCam" data-mini="true"  onclick="scan()" data-inline="true" data-icon="camera" data-iconpos="right">Scan QR</button>
+					</div>
+				</div>             
+                
+				<!-- Input text box; not search
+				<div class="ui-grid-b" id="eventBar">
+                    <div class="ui-block-a">
+					<button class="buttonCam" data-mini="true"  onclick="scan()" data-inline="true" data-icon="camera" data-iconpos="top">Scan QR</button>
+					</div>
+					<div class="ui-block-b">
+					<label for="checkinInput" class="ui-hidden-accessible">Enter Event ID: </label>
+					<input name="checkinInput" id="checkinInput" placeholder="Enter Event ID" value="" type="text">
+					</div>
+					<div class="ui-block-c">
+					<a href="#event-details" id="submitButton" onclick="searchSession()" data-role="button" data-mini="true">Go</a>
+					</div>
+				</div>
+                -->
+				
+				<!-- Listview for saved checkins -->
+				<div id = "currentEventsdiv">
+					<script id="currentEvents-template" type="text/x-handlebars-template">
+					<ul data-role="listview" data-inset="true"  data-divider-theme="b" id="currentEvents" class="listLook">
+					<li data-role="list-divider">Current Events</li>
+					{{#currentEvents}}
+					<li><a href="#event-details" onclick="getSession('{{id}}')">
+						<h2>{{name}}</h2>
+						<p>Location: {{location}}</p>
+						<p class="ui-li-aside"><strong>{{time}}</strong></p>
+					</a></li>
+					{{/currentEvents}}
+					</ul>
+					</script>
+				</div>
+            </div>
+        </div>		
+		<!-- Details page -->
+        <div data-role="page" data-url ="event-details" id="event-details" class="ui-responsive-panel">
+			<!-- Header -->
+            <div data-role="header" data-theme="b" data-position="fixed">
+                <h3 class="headerTitle">Event Details</h3>
+            </div>
+			<div data-role="content" class="jqm-content">
+                <div id="eventDetails" class="eventDetails">
+                	<script id="eventDetails-template" type="text/x-handlebars-template">
+						<table class="personDetails">
+							<tr>
+								<th colspan="2">{{name}}</th>
+							</tr>
+							<tr>
+								<td>Presenter:</td>
+								<td>{{speaker}}</td>
+							</tr>
+							<tr>
+								<td>Location:</td>
+								<td>{{location}}</td>
+							</tr>
+							<tr>
+								<td>Date:</td>
+								<td>{{date}}</td>
+							</tr>
+							<tr>
+								<td>Time:</td>
+								<td>{{time}}</td>
+							</tr>
+							<tr>
+								<td>Tag:</td>
+								<td>#HPScan</td>
+							</tr>
+						</table>
+					</script>
+				</div>
+				<br />
+				<div class="options ui-grid-a">
+                    <div class="ui-block-a">
+						<a href="#checkin-main" onclick = "reload()" data-role="button">Cancel</a>
+                    </div>
+                    <div class="ui-block-b">
+						<button class = "buttonCheckIn" type = "button" onclick="checkInConfirm()" data-theme="b">Check In</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

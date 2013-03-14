@@ -1,0 +1,146 @@
+/* Log in page */
+#logIn label{
+	font-size: small;
+}
+#logo{
+	text-align: center;
+}
+
+/* Home page */
+#featuresGrid{
+	text-align: center;
+}
+#featuresGrid div{
+	padding-top: 10px;
+}
+#featuresGrid a:link{ 
+	color: #000000; 
+	text-decoration: none;
+}
+#featuredGrid a:visited{ 
+	color: #000000; 
+	text-decoration: none;
+}
+.homeIcons{
+	width: 80px;
+	height: 80px;
+}
+
+#features-panel span{
+	font-size: medium;
+}
+
+/* Navigcation panel */
+#nav-panel li{
+	height: 70px;
+}
+#nav-panel img{
+	width: 50px;
+	height: 50px;
+	padding-top: 5px;
+	padding-left: 10px;
+}
+
+/* Change how it looks in all listviews */
+.header{
+	text-align: center;
+}
+.listLook span{
+	font-size: small;
+}
+.listLook p{
+	font-size: small;
+}
+.listLook h2{
+	font-size: small;
+}
+.listLook img{
+	width: 50px;
+	height: 50px;
+	padding-top: 15px;
+	padding-left: 10px;
+}
+.ui-listview .ui-li-desc{
+	white-space: normal;
+}
+/* Change padding between image and text in listviews */
+.ui-li-has-thumb .ui-btn-inner a.ui-link-inherit,.ui-li-static.ui-li-has-thumb{padding-left:70px !important}
+
+/* Exchange-main page */
+#inputBar .ui-block-a{
+	width: 80%;
+}
+#inputBar .ui-block-b{
+	width: 20%;
+	padding-top: 7px;
+}
+.recentExchngDivider{
+	height: 40px;
+}
+
+/* Exchange-details page */
+.portrait{
+	width: 90px;
+	height: 90px;
+	padding-top: 15px;
+}
+
+table th{
+	vertical-align: text-top;
+	text-align: left;
+}
+table td{
+	font-weight: normal;
+	overflow: auto;
+}
+
+.exchangeDetails .ui-block-a{
+	width: 32%; /* PLEASE TEST ON PHONE */
+}
+
+#savedNote{
+	height: 100px;
+	font-size: small;
+	font-weight: normal;
+}
+#inputNote{
+	height: 100px;
+	font-size: small;
+	font-weight: normal;
+}
+
+/* Attachment option bar */
+.options{
+	font-size: small;
+}
+
+/* Check in Page */
+#eventBar .ui-block-a{
+	width: 55%;
+}
+#eventBar .ui-block-b{
+	padding-top: 6px;
+	width: 15%;
+}
+#eventBar .ui-block-c{
+	/* border-left: 1px solid #848484; */
+	padding-top: 6px;
+	width: 20%;
+}
+#QR{
+	width: 45px;
+	height: 45px;
+}
+
+.eventDetails td{
+	
+}
+
+/* Icons */
+.ui-icon-camera{
+	background-image: url("images/camera.png");
+}
+
+.ui-icon-microphone{
+	background-image: url("images/microphone.png");
+}
