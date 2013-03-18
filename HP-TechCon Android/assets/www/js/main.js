@@ -9,7 +9,7 @@ var _speaker = "";
 var _time = "";
 var title = "";
 
-//$('.ui-page').on('pagehide', function(){$(this).remove(); });
+
 Parse.initialize(PARSE_APP, PARSE_JS);
 checkEvents();
 
@@ -39,7 +39,7 @@ function searchSession(){
 			
 			var source = $("#eventDetails-template").html();
 			var template = Handlebars.compile(source);
-	
+			
 			var data = {
 				name: _name, 
 				speaker: _speaker,
@@ -50,12 +50,14 @@ function searchSession(){
 			
 			var html = template(data);
 			$("#eventDetails").html(template(data));
+			
 		},
 		error: function(result, error) {
 			// error is an instance of Parse.Error.
 			alert("Error");
 		}
 	});
+	
 	$("#checkinInput").val("");
 }
 
@@ -70,7 +72,7 @@ function searchSession(){
 	checkin.set("EventId", _id);
 	checkin.set("UserID", userID);
 	checkin.set("EventName", _name);
-	/*
+	
 	employee = Parse.Object.extend("employee");
 	query = new Parse.Query(employee);
 	userID = parseInt(userID);
@@ -83,28 +85,26 @@ function searchSession(){
 			locat = emp.get("location");
 			title = emp.get("title");
 			
+			checkin.set("Name", name);
+			checkin.set("location", locat);
+			checkin.set("Title", title);
 			
+			var date = new Date();
+		 	var time = convertTime(date);
+		 	
+			checkin.save(null, {
+				success: function(exchange) {
+					alert("You have successfully checked into " + _name + " at " + time);
+					$.mobile.changePage("#checkin-main", {transition: "slideup"});
+				},
+				error: function(exchange, error) {
+					alert("Error");
+					$.mobile.changePage("#checkin-main", {transition: "slideup"});
+				}
+			});	
 		}
 	});
 	
-	wait();
-	
-	checkin.set("Name", name);
-	checkin.set("location", locat);
-	checkin.set("Title", title);
-	*/
-	var date = new Date();
- 	var time = convertTime(date);
- 	
-	checkin.save(null, {
-		success: function(exchange) {
-			alert("You have successfully checked into " + _name + " at " + time);
-		},
-		error: function(exchange, error) {
-			alert("Error");
-		}
-	});	
-	$.mobile.changePage("#checkin-main", {transition: "slideup"});
  }
  
 // checks the system time against the parse server data to 
@@ -326,10 +326,6 @@ function scan() {
         } catch (ex) {
             console.log(ex.message);
         }
-  }
+ }
 
-function wait(){
-	if (title == ""){
-		setTimeout("wait()",1000);
-	}
-}
+

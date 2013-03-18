@@ -12,7 +12,7 @@
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
 		<script type="text/javascript" src="cordova-2.4.0.js"></script>
-		<script src="JS/barcodescanner.js"></script>
+		<script src="js/barcodescanner.js"></script>
 			
 		<!-- Link css and js files -->
 		<link rel="stylesheet" href="css/my.css" />
@@ -49,11 +49,9 @@
 						<input name="checkinInput" id="checkinInput" placeholder="Enter Event ID" value="" type="text">
 					</div>
 					<div class="ui-block-b">
-						<a href="#checkin-new" id="submitButton" onclick="searchSession()" data-role="button" data-mini="true">Go</a>
+						<a href="#event-details" id="submitButton" onclick="searchSession()" data-role="button" data-mini="true">Go</a>
 					</div>
                     <div class="ui-block-c">
-						<!-- QR image button 
-						<input name="scanQRCode" id="QR" type="image" onclick="cameraFunction()" src="images/qrcode.png">-->
 						<button class = "buttonCam" data-mini="true"  onclick="scan()" data-inline="true" data-icon="camera" data-iconpos="right">Scan QR</button>
 					</div>
 				</div>             
