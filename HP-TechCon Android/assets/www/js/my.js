@@ -1,3 +1,4 @@
+// USING GIT NOW.
 // my.js - Summary 
 // This is the main javascript file which
 // will hold ALL the javascript for the app
