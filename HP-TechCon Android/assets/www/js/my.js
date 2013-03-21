@@ -1,3 +1,4 @@
+// USING GIT NOW.
 // my.js - Summary 
 // This is the main javascript file which
 // will hold ALL the javascript for the app
@@ -45,6 +46,13 @@ function searchContact() {
 	query.find({
 		success: function(result) {
 			// result is an instance of Parse.Object.
+			
+			// Checking for invalid input.
+			if (result.length == 0) {
+				alert("No Employee exists with this HP ID.");
+				reload();
+			}
+			
 			var emp = result[0];
 			
 			_name = emp.get("name");
@@ -95,7 +103,6 @@ function exchangeConfirm() {
 			//alert("Error");
 		}
 	});	
-	//window.location = "#exchange-main"; // Redirect back to "exchange-main".
 	reload();
 }
 
@@ -104,8 +111,6 @@ function recentExchanges() {
 	var Exchange = Parse.Object.extend("Exchange");
 	var query = new Parse.Query(Exchange);
 	
-	// *********************************************************
-	// WE WANT TO LIMIT ENTRIES TO 'initiatedFrom' = my user id.
 	query.descending("createdAt");
 	query.equalTo("initiatedBy", my_id);
 	query.limit(4); // We only want the first 4 Exchanges to show under Recent Exchanges.
@@ -130,7 +135,7 @@ function recentExchanges() {
 			data += ']}';
 			
 			var arr = JSON.parse(data);
-			//var html = template(arr);
+			
 			var template = Handlebars.compile(source);
 			$("#recentExchangesdiv").append(template(arr)).trigger('create');
 		},
@@ -167,9 +172,9 @@ function allExchanges() {
 			data += ']}';
 			
 			var arr = JSON.parse(data);
-			//var html = template(arr);
+			
 			var template = Handlebars.compile(source);
-			//$("#allExchangesdiv").append(template(arr)).trigger('create');
+			
 			$("#allExchangesdiv").html(template(arr)).trigger('create');
 		},
 		error: function(error) {
@@ -219,7 +224,7 @@ function createExchangeDetailTemplate(id, _comments, _time) {
 				time: _time
 			};
 			var html = template(data);
-			//$("exchangedetailsdiv").html(template(data)).trigger('create');
+			
 			$("#exchangedetailsdiv").html(template(data)).trigger('create');
 			
 			source = $("#exchangedetailscomments-template").html();
@@ -235,34 +240,18 @@ function createExchangeDetailTemplate(id, _comments, _time) {
 
 // Script for saving exchange notes
 function saveExchangeNotes() {
-	var input = $("#savedNote").val(); // Retrieve what the user searched for.
-	//alert(_exchangeId + ":" + input);
+	var input = $("#savedNote").val();
+	var ex = Parse.Object.extend("Exchange");
+	var query = new Parse.Query(ex);
 	
-	var Exchange = Parse.Object.extend("Exchange");
-	var query = new Parse.Query(Exchange);
-	query.equalTo("objectId", _exchangeId);
-	alert(query.count(Exchange));
-	query.find({
-		success: function(result) {
-		alert(result.length);
-			//result[0].set("comments", input);
-			//result[0].save();
-		},
-		error: function(error) {
-			alert("Error: " + error.code + " " + error.message);
-		}
-	});
-	/*query.get(_exchangeId, {
-		success: function(object) {
-			alert(object.get("comments"));
-			// object is an instance of Parse.Object.
+		query.get(_exchangeId, {
+			success: function(object) {
+			alert(object.get("name"));
 		},
 		error: function(object, error) {
-			// error is an instance of Parse.Error.
-			alert("Error: " + error.code + " " + error.message);
+			alert("FAIL");
 		}
-	});*/
-	
+	});
 	reload();
 }
 // Script for camera
