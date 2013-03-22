@@ -23,205 +23,219 @@
     <body>
         <!-- Main page -->
         <div data-role="page" data-url ="exchange-main" id="exchange-main" class="ui-responsive-panel">
-                        <!-- Header -->
-            <div data-role="header" data-theme="b" data-position="fixed">
+            <!-- Header -->
+            <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Exchange</h3>
-                                <a href="home.html#home-main" rel="external" data-icon="home" data-iconpos="notext left">Home</a>
-                                <a href="#exchange-all" onclick = "allExchanges()" data-icon="arrow-r" data-iconpos="right">More</a>
+				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
             </div>
+			<!-- Content -->
             <div data-role="content" class="jqm-content">
-                                <!-- Input text box; not search -->
-                                <div class="ui-grid-a" id="inputBar">
-                                        <div class="ui-block-a">
-                                            <label for="exchangeInput" class="ui-hidden-accessible">Enter E-mail or ID: </label>
-                                            <input name="exchangeInput" id="exchangeInput" placeholder="Enter E-mail or ID" value="" type="text">
-                                        </div>
-                                        <div class="ui-block-b">
-                                            <a href="#exchange-new" id="submitButton" onclick="searchContact()" data-role="button" data-mini="true">Go</a>
-                                        </div>
-                                </div>
-                                
-                                <!-- Listview for saved exchanges -->
-                                <div id = "recentExchangesdiv">
-                                        <script id="recentexchanges-template" type="text/x-handlebars-template">
-                                        <ul data-role="listview" data-inset="true"  data-divider-theme="b" id="savedExchanges" class="listLook">
-                                        <li data-role="list-divider"> Recent Exchanges </li>                                    
-                                                {{#recentExchanges}}
-                                                        <li id = "{{id}}"><a onclick = "exchangeDetails('{{id}}')" href="#exchange-details">
-                                                                <img src="images/person1.PNG" alt="Photo">
-                                                                <h2>{{to_name}}</h2>
-                                                                <p>{{comments}}</p>
-                                                                <p class="ui-li-aside">{{time}}</p>
-															</a>
-														</li>
-                                                {{/recentExchanges}}
-                                        </ul>
-                                        </script>
-                                </div>                             
+				<!-- Input text box; not search -->
+				<div class="ui-grid-a" id="inputBar">
+					<div class="ui-block-a">
+						<label for="exchangeInput" class="ui-hidden-accessible">Enter E-mail or ID: </label>
+						<input name="exchangeInput" id="exchangeInput" placeholder="Enter E-mail or ID" value="" type="text">
+					</div>
+					<div class="ui-block-b">
+						<a href="#exchange-new" id="submitButton" onclick="searchContact()" data-role="button" data-mini="true">Go</a>
+					</div>
+				</div>
+				
+				<!-- Listview for saved exchanges -->
+				<div id = "recentExchangesdiv">
+					<script id="recentexchanges-template" type="text/x-handlebars-template">
+					<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="savedExchanges" class="listLook">
+						<li data-role="list-divider"> Recent Exchanges </li>                                    
+							{{#recentExchanges}}
+									<li id = "{{id}}"><a onclick = "exchangeDetails('{{id}}')" href="#exchange-details">
+											<img src="images/person1.PNG" alt="Photo">
+											<h2>{{to_name}}</h2>
+											<p>{{comments}}</p>
+											<p class="ui-li-aside">{{time}}</p>
+										</a>
+									</li>
+							{{/recentExchanges}}
+						<li data-icon="arrow-r"><a href="#exchange-all">
+							<span>View all exchanges</span>
+						</a></li>
+					</ul>
+					</script>
+				</div>                             
             </div>
-                        <div data-role="panel" data-position-fixed="true"  data-display="reveal" data-theme="a" id="nav-panel">
-                                <ul data-role="listview" data-theme="b" class="nav-search">
-                                        <li><a href="home.html#home-main" rel="external">Home</a></li>
-                                        <li><a href="#">Check In</a></li>
-                                        <li><a href="#exchange-main">Exchange</a></li>
-                                        <li><a href="#">Microblog</a></li>
-                                </ul>
-                        </div>
+            <!-- Navigation panel -->
+			<div data-role="panel" data-position-fixed="true"  data-display="reveal" data-theme="a" id="nav-panel">
+				<ul data-role="listview" data-theme="a" class="nav-search">
+					<li><a href="home.html#home-main" rel="external">
+						<img src="images/Home_1.png" alt="Home">Home
+					</a></li>
+					<li><a href="checkin.html#checkin-main" rel="external">
+						<img src="images/Check_In_1.png" alt="Check In">Check In
+					</a></li>
+					<li><a href="#exchange-main">
+						<img src="images/Exchange_1.png" alt="Exchange">Exchange
+					</a></li>
+					<li><a href="microblog.html#microblog-main" rel="external">
+						<img src="images/Microblog_1.png" alt="Microblog">Microblog
+					</a></li>
+					<li><a href="#">
+						<img src="images/Note_1.png" alt="Notes">Notes
+					</a></li>
+					<li><a href="#">
+						<img src="images/Agenda_1.png" alt="Agenda">Agenda
+					</a></li>
+					<li><a href="#">
+						<img src="images/People_1.png" alt="People">People
+					</a></li>
+				</ul>
+			</div>
         </div>
                 
-                <!-- All exchanges page -->
+        <!-- All exchanges page -->
         <div data-role="page" data-url ="exchange-all" id="exchange-all" class="ui-responsive-panel">
-                        <!-- Header -->
-            <div data-role="header" data-theme="b" data-position="fixed">
+            <!-- Header -->
+            <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">All Exchanges</h3>
-                                <a href="#exchange-main" data-icon="back" data-iconpos="notext">Back</a>
+                <a href="#" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
             </div>
-            <div data-role="content" class="jqm-content">                               
-                                <!-- Listview for all exchanges; NOTE: I tried autodividers; will not work --> 
-								
-							<div id = "allExchangesdiv">
-								<script id="allexchanges-template" type="text/x-handlebars-template">
-									<ul data-role="listview" id="allExchanges" data-autodividers="false" data-filter="true" data-inset="false"  data-divider-theme="b" class="listLook">
-										{{#allExchanges}}	
-											<li id = "{{id}}"><a onclick = "exchangeDetails('{{id}}')" href="#exchange-details">
-													<img src="images/person3.PNG" alt="Photo">
-													<h2>{{to_name}}</h2>
-													<p>{{comments}}</p>
-													<p class="ui-li-aside">{{time}}</p>
-											</a></li>
-										{{/allExchanges}}
-									</ul>
-								</script>	
-							</div>	
+			<!-- Content -->
+            <div data-role="content" class="jqm-content">
+				<div id="allExchangesdiv">
+				<script id="allexchanges-template" type="text/x-handlebars-template">
+					<ul data-role="listview" id="allExchanges" data-autodividers="false" data-filter="true" 
+					data-inset="true"  data-divider-theme="a" data-filter-placeholder="Find an exchange" class="listLook" data-icon="edit">
+						{{#allExchanges}}	
+								<li id = "{{id}}"><a onclick = "exchangeDetails('{{id}}')" href="#exchange-details">
+										<img src="images/person3.PNG" alt="Photo">
+										<h2>{{to_name}}</h2>
+										<p>{{comments}}</p>
+										<p class="ui-li-aside">{{time}}</p>
+								</a></li>
+						{{/allExchanges}}
+					</ul>
+				</script>
+				</div>
             </div>
         </div>
-                
-                <!-- Details page -->
+        
+		<!-- Details page -->
         <div data-role="page" data-url ="exchange-details" id="exchange-details" class="ui-responsive-panel">
-                        <!-- Header -->
-            <div data-role="header" data-theme="b" data-position="fixed">
+			<!-- Header -->
+            <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Exchange Details</h3>
             </div>
-                        <div data-role="content" class="jqm-content">
-                <div class="exchangeDetails ui-grid-a">
-                    <div class="ui-block-a">
-                                                <img src="images/person1.PNG" alt="Photo" class="portrait">
-                    </div>
-                    <div id = "exchangedetailsdiv" class="ui-block-b">
-									<script id="exchangedetails-template" type="text/x-handlebars-template">
-                                                <table class="personDetails">
-                                                        <tr>
-                                                                <th colspan="2">{{name}}</th>
-                                                        </tr>
-                                                        <tr>
-                                                                <td>E-mail:</td>
-                                                                <td>{{email}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                                <td>Location:</td>
-                                                                <td>{{location}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                                <td>Department:</td>
-                                                                <td>{{department}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                                <td>Title:</td>
-                                                                <td>{{title}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                                <td>Exchanged:</td>
-                                                                <td>{{time}}</td>
-                                                        </tr>
-                                                </table>
-									</script>			
-                    </div>
-                                </div>
-                                <br />
-                                <div class="noteField">
-                                        <label for="savedNote" class="ui-hidden-accessible">Add note (visible to you only)</label>	
-								<div id = "exchangedetailscommentsdiv">
-									<script id="exchangedetailscomments-template" type="text/x-handlebars-template">	
-                                        <textarea cols="40" rows="8" name="savedNote" id="savedNote" placeholder="Add note (visible to you only)">{{comments}}</textarea>
-									</script>
-								</div>
-                                </div>
-                                <div class="options ui-grid-a">
-                    <div class="ui-block-a">
-                                                <button class = "buttonCam" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>
-                                                <button class = "buttonMic" data-mini="true"  onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</button>
-                    </div>
-                    <div class="ui-block-b">
-
-                    </div>
-                    <div class="ui-block-a">
-                                                <a href="#exchange-main" onclick = "reload()" data-role="button">Cancel</a>
-                    </div>
-                    <div class="ui-block-b">
-                                                <button class = "buttonSave" type = "button" onclick="saveExchangeNotes()" data-theme="b">Save</button>
-                    </div>
-                </div>
+			<!-- Content -->
+			<div data-role="content" class="jqm-content">
+				<div id="exchangedetailsdiv">
+				<script id="exchangedetails-template" type="text/x-handlebars-template">
+					<ul data-role="listview" data-inset="true" data-divider-theme="a">
+						<li data-role="list-divider">
+							<h1>{{name}}</h1>
+						</li>
+						<li><div class="exchangeDetails ui-grid-a">
+							<div class="ui-block-a">
+								<img src="images/person1.PNG" alt="Photo" class="portrait">
+							</div>
+							<div class="ui-block-b">
+								<table class="personDetails">
+									<tr>
+										<th>E-mail:</th> <td>{{email}}</td>
+									</tr>
+									<tr>
+										<th>Place:</th> <td>{{location}}</td>
+									</tr>
+									<tr>
+										<th>Dept:</th> <td>{{department}}</td>
+									</tr>
+									<tr>
+										<th>Title:</th> <td>{{title}}</td>
+									</tr>
+									<tr>
+										<th>Date:</th> <td>{{time}}</td>
+									</tr>
+								</table>
+							</div>
+						</div></li>
+						<li><div class="noteField">
+							<label for="savedNote" class="ui-hidden-accessible">Add note (visible to you only)</label>
+							<script id="exchangedetailscomments-template" type="text/x-handlebars-template">	
+								<textarea cols="40" rows="8" name="savedNote" id="savedNote" placeholder="Add note (visible to you only)">{{comments}}</textarea>
+							</script>
+							<div class="options">
+								<strong>Attach:</strong>
+								<button class = "buttonCam" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>
+								<button class = "buttonMic" data-mini="true"  onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</button>
+							</div>
+						</div></li>
+						<li><div class="ui-grid-a">
+							<div class="ui-block-a">
+								<a href="#exchange-main" onclick = "reload()" data-role="button">Cancel</a>
+							</div>
+							<div class="ui-block-b">
+								<button class = "buttonSave" type = "button" onclick="saveExchangeNotes()" data-theme="a">Save</button>
+							</div>
+						</div></li>
+					</ul>
+				</script>
+				</div>
             </div>
         </div>
                 
-                <!-- New exchange page -->
+        <!-- New exchange page -->
         <div data-role="page" data-url ="exchange-new" id="exchange-new" class="ui-responsive-panel">
-                        <!-- Header -->
-            <div data-role="header" data-theme="b" data-position="fixed">
+			<!-- Header -->
+            <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Exchange Details</h3>
             </div>
-                        <div data-role="content" class="jqm-content">
-                <div class="exchangeDetails ui-grid-a">
-                    <div class="ui-block-a">
-                                                <img src="images/personNew.PNG" alt="Photo" class="portrait">
-                    </div>
-                    <div id = "newexchange-div" class="ui-block-b">
-                                        <script id="newexchange-template" type="text/x-handlebars-template">
-                                                <table class="personDetails">
-                                                        <tr>
-                                                                <th colspan="2">{{name}}</th>
-                                                        </tr>
-                                                        <tr>
-                                                                <td>E-mail:</td>
-                                                                <td>{{email}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                                <td>Location:</td>
-                                                                <td>{{location}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                                <td>Department:</td>
-                                                                <td>{{department}}</td>
-                                                        </tr>
-                                                        <tr>
-                                                                <td>Title:</td>
-                                                                <td>{{title}}</td>
-                                                        </tr>
-                                                </table>
-                                        </script>
-                    </div>
-                                </div>
-                                <br />
-                                <div class="noteField">
-                                        <label for="inputNote" class="ui-hidden-accessible">Add note (visible to you only)</label>
-                                        <textarea cols="40" rows="8" name="inputNote" id="inputNote" placeholder="Add note"></textarea>
-                                </div>
-                                <div class="options ui-grid-a">
-                    <div class="ui-block-a">
-                                                <button class = "buttonCam" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>
-                                                <button class = "buttonMic" data-mini="true"  onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</button>
-                    </div>
-                    <div class="ui-block-b">
-                    </div>
-                    <div class="ui-block-a">
-                                               <!-- <a href="#exchange-main" onclick = "reload()" data-role="button">Cancel</a> -->
-											   <a onclick = "reload()" data-role="button">Cancel</a>
-                    </div>
-                    <div class="ui-block-b">
-                                                <button class = "buttonExchange" type = "button" onclick = "exchangeConfirm()" data-theme="b">Exchange</button>
-                    </div>
-                </div>
-            </div>
+			<!-- Content -->
+			<div data-role="content" class="jqm-content">
+				<div id="newexchange-div">
+				<script id="newexchange-template" type="text/x-handlebars-template">
+					<ul data-role="listview" data-inset="true" data-divider-theme="a">
+						<li data-role="list-divider">
+							<h1>{{name}}</h1>
+						</li>
+						<li><div class="exchangeDetails ui-grid-a">
+							<div class="ui-block-a">
+								<img src="images/personNew.PNG" alt="Photo" class="portrait">
+							</div>
+							<div class="ui-block-b">
+								<table class="personDetails">
+									<tr>
+										<th>E-mail:</th> <td>{{email}}</td>
+									</tr>
+									<tr>
+										<th>Place:</th> <td>{{location}}</td>
+									</tr>
+									<tr>
+										<th>Dept:</th> <td>{{department}}</td>
+									</tr>
+									<tr>
+										<th>Title:</th> <td>{{title}}</td>
+									</tr>
+								</table>
+							</div>
+						</div></li>
+						<li><div class="noteField">
+							<label for="inputNote" class="ui-hidden-accessible">Add note (visible to you only)</label>
+							<textarea cols="40" rows="8" name="inputNote" id="inputNote" placeholder="Add note (visible to you only)"></textarea>
+							<div class="options">
+								<strong>Attach:</strong>
+								<button class = "buttonCam" data-mini="true" onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>
+								<button class = "buttonMic" data-mini="true" onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</button>
+							</div>
+						</div></li>
+						<li><div class="options ui-grid-a">
+							<div class="ui-block-a">
+								<a onclick = "reload()" data-role="button">Cancel</a>
+							</div>
+							<div class="ui-block-b">
+								<button class = "buttonExchange" type = "button" onclick = "exchangeConfirm()" data-theme="b">Exchange</button>
+							</div>
+						</div></li>
+					</ul>				
+				</script>
+				</div>                
+            </div> 
         </div>  
     </body>
 </html>

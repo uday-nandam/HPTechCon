@@ -1,17 +1,9 @@
-/* Put your custom CSS here */
+/* Log in page */
 #logIn label{
 	font-size: small;
 }
-
-/* Home page */
 #logo{
-	position: relative;
-	top: 10%;
-	left: 5px;
-}
-
-#features-panel span{
-	font-size: medium;
+	text-align: center;
 }
 
 /* Home page */
@@ -30,8 +22,12 @@
 	text-decoration: none;
 }
 .homeIcons{
-	width: 60px;
-	height: 60px;
+	width: 80px;
+	height: 80px;
+}
+
+#features-panel span{
+	font-size: medium;
 }
 
 /* Navigation panel */
@@ -67,6 +63,16 @@
 .ui-listview .ui-li-desc{
 	white-space: normal;
 }
+.listLook .attachment{
+	width: 30px;
+	height: 30px;
+	padding-top: 0px;
+	padding-left: 0px;
+	
+	border: 1px solid black;
+}
+/* Change padding between image and text in listviews */
+.ui-li-has-thumb .ui-btn-inner a.ui-link-inherit,.ui-li-static.ui-li-has-thumb{padding-left:70px !important}
 
 /* Exchange-main page */
 #inputBar .ui-block-a{
@@ -82,28 +88,30 @@
 	width: 90px;
 	height: 90px;
 	padding-top: 15px;
-	padding-left: 5px;
 }
 
 table th{
+	vertical-align: text-top;
 	text-align: left;
-	font-size: large; /* PLEASE TEST THIS ON PHONE */
 }
 table td{
-	
+	font-weight: normal;
+	overflow: auto;
 }
 
 .exchangeDetails .ui-block-a{
-	width: 28%; /* PLEASE TEST ON PHONE */
+	width: 32%; /* PLEASE TEST ON PHONE */
 }
 
 #savedNote{
 	height: 100px;
 	font-size: small;
+	font-weight: normal;
 }
 #inputNote{
 	height: 100px;
 	font-size: small;
+	font-weight: normal;
 }
 
 /* Attachment option bar */
@@ -112,30 +120,30 @@ table td{
 }
 
 /* Check in Page */
-/* Check in Page */
 #eventBar .ui-block-a{
-	width: 51%;
+	width: 55%;
 }
 #eventBar .ui-block-b{
 	padding-top: 6px;
-	width: 21%;
+	width: 15%;
 }
 #eventBar .ui-block-c{
 	/* border-left: 1px solid #848484; */
 	padding-top: 6px;
 	width: 20%;
 }
-#QR{
-	width: 45px;
-	height: 45px;
-}
 
-.eventDetails{
+/* .eventDetails{
 	padding-left: 10%;
 }
 
 .eventDetails th{
 	font-size: large;
+} */
+
+/* Microblog Post */
+#blogNote{
+	font-weight: normal;
 }
 
 /* Icons */
