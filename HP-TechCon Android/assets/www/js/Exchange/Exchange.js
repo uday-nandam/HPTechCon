@@ -238,22 +238,6 @@ function createExchangeDetailTemplate(id, _comments, _time) {
 	});
 }
 
-// Script for saving exchange notes
-function saveExchangeNotes() {
-	var input = $("#savedNote").val();
-	var ex = Parse.Object.extend("Exchange");
-	var query = new Parse.Query(ex);
-	
-		query.get(_exchangeId, {
-			success: function(object) {
-			alert(object.get("name"));
-		},
-		error: function(object, error) {
-			alert("FAIL");
-		}
-	});
-	reload();
-}
 // Script for camera
 function cameraFunction() {
 	alert("The camera icon works!");
