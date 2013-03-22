@@ -55,7 +55,7 @@
 										</a>
 									</li>
 							{{/recentExchanges}}
-						<li data-icon="arrow-r"><a href="#exchange-all">
+						<li data-icon="arrow-r"><a href="#exchange-all" onclick = "allExchanges()">
 							<span>View all exchanges</span>
 						</a></li>
 					</ul>
@@ -157,9 +157,7 @@
 						</div></li>
 						<li><div class="noteField">
 							<label for="savedNote" class="ui-hidden-accessible">Add note (visible to you only)</label>
-							<script id="exchangedetailscomments-template" type="text/x-handlebars-template">	
-								<textarea cols="40" rows="8" name="savedNote" id="savedNote" placeholder="Add note (visible to you only)">{{comments}}</textarea>
-							</script>
+							<textarea cols="40" rows="8" name="savedNote" id="savedNote" placeholder="Add note (visible to you only)">{{comments}}</textarea>
 							<div class="options">
 								<strong>Attach:</strong>
 								<button class = "buttonCam" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>

@@ -73,7 +73,8 @@ function searchContact() {
 			};
 			
 			var html = template(data);
-			$("#newexchange-div").html(template(data));
+			$("#newexchange-div").html(template(data)).trigger("create");
+			$("#newexchange-div ul").listview();
 		},
 		error: function(result, error) {
 			// error is an instance of Parse.Error.
@@ -226,11 +227,12 @@ function createExchangeDetailTemplate(id, _comments, _time) {
 			var html = template(data);
 			
 			$("#exchangedetailsdiv").html(template(data)).trigger('create');
+			$("#exchangedetailsdiv ul").listview();
 			
-			source = $("#exchangedetailscomments-template").html();
-			template = Handlebars.compile(source);
+			//source = $("#exchangedetailscomments-template").html();
+			//template = Handlebars.compile(source);
 			
-			$("#exchangedetailscommentsdiv").html(template(data));
+			//$("#exchangedetailscommentsdiv").html(template(data));
 		},
 		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
