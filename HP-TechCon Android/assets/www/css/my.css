@@ -1,3 +1,7 @@
+textarea{
+	resize: none;
+}
+
 /* Log in page */
 #logIn label{
 	font-size: small;
@@ -64,8 +68,8 @@
 	white-space: normal;
 }
 .listLook .attachment{
-	width: 30px;
-	height: 30px;
+	width: 80%;
+	height: 100px;
 	padding-top: 0px;
 	padding-left: 0px;
 	
@@ -144,6 +148,33 @@ table td{
 /* Microblog Post */
 #blogNote{
 	font-weight: normal;
+}
+
+/* Post details */
+.attachView{
+	width: 350px;
+	height: 250px;
+	text-align: center;
+}
+.postDetails .ui-block-a{
+	width: 32%; /* PLEASE TEST ON PHONE */
+}
+.postDetails .ui-block-b{
+	width: 68%; /* PLEASE TEST ON PHONE */
+}
+.postDetails p{
+	font-size: medium;
+}
+
+/* Comment Feed */
+#myComment{
+	resize: none;
+	font-size: small;
+	font-weight: normal;
+}
+#commentButton{
+	width: 25%;
+	padding-left: 75%;
 }
 
 /* Icons */
