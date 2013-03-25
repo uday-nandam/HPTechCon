@@ -71,8 +71,17 @@
 					</div>
 				</div>
                 -->
+				<!-- Recommended events -->
+				<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="recommendedEvents" class="listLook">
+					<li data-role="list-divider">Recommended Events</li>
+					<li><a href="#event-details">
+						<h2>HP Scanner</h2>
+						<p>Location: Ballroom</p>
+						<p class="ui-li-aside"><strong>2:00</strong>PM</p>
+					</a></li>
+				</ul>
 				
-				<!-- Listview for saved checkins -->
+				<!-- Listview for current events -->
 				<div id = "currentEventsdiv">
 					<script id="currentEvents-template" type="text/x-handlebars-template">
 					<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="currentEvents" class="listLook">
@@ -164,6 +173,31 @@
 					</div></li>
 				</ul>
 				</div>
+				<!-- Listview for comments -->
+				<ul data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook">
+					<li data-role="list-divider" class="header">Comments</li>
+					<li>
+						<img src="images/person1.PNG" alt="Photo">
+						<h2>Stephen Weber</h2>
+						<p>Great event!</p>
+						<p class="ui-li-aside"><strong>2:55</strong>PM</p>
+					</li>
+					<li>
+						<img src="images/personNew.PNG" alt="Photo">
+						<h2>Leeroy Jenkins</h2>
+						<p>Definitely worth the time to check it out.</p>
+						<p class="ui-li-aside"><strong>3:10</strong>PM</p>
+					</li>
+					<li>
+						<img src="images/personMe.PNG" alt="Photo">
+						<h2>My Name</h2>
+						<label for="myComment" class="ui-hidden-accessible">Add your comment</label>
+						<textarea cols="40" rows="5" id="myComment" name="myComment" placeholder="Add your comment"></textarea>
+						<div id="commentButton">
+						<a href="#" data-role="button" data-mini="true">Submit</a>
+						</div>
+					</li>
+				</ul>
             </div>
         </div>
 		
@@ -220,6 +254,9 @@
                 <ul data-role="listview" data-inset="true" data-divider-theme="a">
 					<li data-role="list-divider">
 						<h1>HP Scanners</h1>
+						<p class="ui-li-aside">
+						<button class = "buttonShare" data-mini="true"  onclick="" data-inline="true" data-icon="share" data-iconpos="right">Share</button>
+						</p>
 					</li>
 					<li><table class="personDetails">
 						<tr>
@@ -253,6 +290,31 @@
 							<a href="microblog.html#microblog-main" rel="external" data-role="button">Post About It</a>
 						</div>
 					</div></li>
+				</ul>
+				<!-- Listview for comments -->
+				<ul data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook">
+					<li data-role="list-divider" class="header">Comments</li>
+					<li>
+						<img src="images/person1.PNG" alt="Photo">
+						<h2>Stephen Weber</h2>
+						<p>Decent session. Presenter has another similar lecture tomorrow. Check it out</p>
+						<p class="ui-li-aside"><strong>2:55</strong>PM</p>
+					</li>
+					<li>
+						<img src="images/personNew.PNG" alt="Photo">
+						<h2>Leeroy Jenkins</h2>
+						<p>Great event!</p>
+						<p class="ui-li-aside"><strong>3:05</strong>PM</p>
+					</li>
+					<li>
+						<img src="images/personMe.PNG" alt="Photo">
+						<h2>My Name</h2>
+						<label for="myComment" class="ui-hidden-accessible">Add your comment</label>
+						<textarea cols="40" rows="5" id="myComment" name="myComment" placeholder="Add your comment"></textarea>
+						<div id="commentButton">
+						<a href="#" data-role="button" data-mini="true">Submit</a>
+						</div>
+					</li>
 				</ul>
             </div>
         </div>

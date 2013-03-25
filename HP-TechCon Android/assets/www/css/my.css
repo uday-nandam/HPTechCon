@@ -177,6 +177,18 @@ table td{
 	padding-left: 75%;
 }
 
+/* Share Page */
+.listLook label{
+	font-size: small;
+	font-weight: bold;
+}
+#messageTo{
+	
+}
+#messageBody{
+	height: 100px;
+}
+
 /* Icons */
 .ui-icon-camera{
 	background-image: url("../images/camera.png");
@@ -184,6 +196,10 @@ table td{
 
 .ui-icon-microphone{
 	background-image: url("../images/microphone.png");
+}
+
+.ui-icon-share{
+	background-image: url("../images/share.png");
 }
 
 .ui-page {
