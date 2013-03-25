@@ -1,3 +1,11 @@
+$(document).ready(function () {
+	$("#submitButton").click(function() {
+		_id = $("#checkinInput").val();
+		searchSession(_id);
+		
+	});
+});
+
 var PARSE_APP = "9AeVfYuAP1SWUgUv5bogPOaGwldaZTstNEO8tdJx";
 var PARSE_JS = "w4ffwNOQtdfqDb2tWBXUoPmD7qJrpmHv6xcnuZj4";
 
@@ -14,10 +22,9 @@ Parse.initialize(PARSE_APP, PARSE_JS);
 checkEvents();
 
 
-function searchSession(){
-	var input = $("#checkinInput").val(); // Retrieve what the user searched for.
+
+function searchSession(input){
 	_id = input;
-	
 	Session = Parse.Object.extend("sessions");
 	
 	query = new Parse.Query(Session);
@@ -26,6 +33,11 @@ function searchSession(){
 	query.find({
 		success: function(result) {
 			// result is an instance of Parse.Object
+			
+			if (result.length == 0){
+				alert("Sorry, that Event ID is not listed");
+				reload();
+			}
 			var sess = result[0];
 			
 			_name = sess.get("Name");
@@ -38,8 +50,9 @@ function searchSession(){
 			locTime = convertTime(locTime);
 			
 			var source = $("#eventDetails-template").html();
-			var template = Handlebars.compile(source);
 			
+			var template = Handlebars.compile(source);
+		
 			var data = {
 				name: _name, 
 				speaker: _speaker,
@@ -47,9 +60,11 @@ function searchSession(){
 				date: locDate,
 				time: locTime
 			};
-			
+			$.mobile.changePage("#event-details", {transition: "slideup"});
 			var html = template(data);
-			$("#eventDetails").html(template(data));
+			$("#eventDetails").html(template(data)).trigger('create');
+			$("#eventDetails").listview('refresh');
+			
 			
 		},
 		error: function(result, error) {
@@ -94,12 +109,13 @@ function searchSession(){
 		 	
 			checkin.save(null, {
 				success: function(exchange) {
-					alert("You have successfully checked into " + _name + " at " + time);
-					$.mobile.changePage("#checkin-main", {transition: "slideup"});
+					//alert("You have successfully checked into " + _name + " at " + time);
+					//$.mobile.changePage("#checkin-main", {transition: "slideup"});
+					reload();
 				},
 				error: function(exchange, error) {
 					alert("Error");
-					$.mobile.changePage("#checkin-main", {transition: "slideup"});
+					$.mobile.changePage("#checkin-main", {reloadPage : true});
 				}
 			});	
 		}
@@ -185,48 +201,6 @@ function checkEvents(){
 	});
 }
 
-function getSession(id){
-
-	Session = Parse.Object.extend("sessions");
-	_id = id;
-	var query = new Parse.Query(Session);
-	
-	query.equalTo("ID", id);
-	query.find({
-		success: function(result) {
-			// result is an instance of Parse.Object
-			var sess = result[0];
-			
-			_name = sess.get("Name");
-			_speaker = sess.get("Speaker");
-			_location = sess.get("Location");
-			_time = sess.get("Time");
-			
-			var locTime = new Date(_time);
-			var locDate = convertDate(locTime);
-			locTime = convertTime(locTime);
-			
-			var source = $("#eventDetails-template").html();
-			var template = Handlebars.compile(source);
-	
-			var data = {
-				name: _name, 
-				speaker: _speaker,
-				location: _location,
-				date: locDate,
-				time: locTime
-			};
-			
-			var html = template(data);
-			$("#eventDetails").html(template(data));
-		},
-		error: function(result, error) {
-			// error is an instance of Parse.Error.
-			alert("Error");
-		}
-	});
-}
-
 function recentCheckins() {
 	var checkin = Parse.Object.extend("CheckIn");
 	var query = new Parse.Query(checkin);
@@ -264,27 +238,6 @@ function recentCheckins() {
 	});
 }
 
-function convertTime(time){
-	var time = new Date(time);
-	var hours = time.getHours();
-	var minutes = time.getMinutes();
-	if(minutes < 10){
-		minutes = "0" + minutes;
-	}
-	if(hours > 11){
-		var postfix = "PM";
-	} else {
-		var postfix = "AM";
-	}
-	if (hours > 12){
-		hours -= 12;
-	}
-	var d = "";
-	d += hours + ":" + minutes + " " + postfix;
-	
-	return d;
-			
-}
 
 function convertDate(date){
 	var date = new Date(date);
@@ -327,5 +280,29 @@ function scan() {
             console.log(ex.message);
         }
  }
+ 
+	
+function convertTime(time){
+	var time = new Date(time);
+	var hours = time.getHours();
+	var minutes = time.getMinutes();
+	
+	if(minutes < 10){
+		minutes = "0" + minutes;
+	}
+	if(hours > 11){
+		var postfix = "PM";
+	} else {
+		var postfix = "AM";
+	}
+	if (hours > 12){
+		hours -= 12;
+	}
+	var d = "";
+	d += hours + ":" + minutes + " " + postfix;
+	
+	return d;
+			
+}
 
 
