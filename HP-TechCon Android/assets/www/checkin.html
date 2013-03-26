@@ -163,30 +163,30 @@
 				</script>
 				</div>
 				<!-- Listview for comments -->
-				<ul data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook">
+				<div id="commentSection">
+					<script id="comments-template" type="text/x-handlebars-template">
+					<ul data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook">
 					<li data-role="list-divider" class="header">Comments</li>
-					<li>
-						<img src="images/person1.PNG" alt="Photo">
-						<h2>Stephen Weber</h2>
-						<p>Great event!</p>
-						<p class="ui-li-aside"><strong>2:55</strong>PM</p>
-					</li>
-					<li>
-						<img src="images/personNew.PNG" alt="Photo">
-						<h2>Leeroy Jenkins</h2>
-						<p>Definitely worth the time to check it out.</p>
-						<p class="ui-li-aside"><strong>3:10</strong>PM</p>
-					</li>
-					<li>
-						<img src="images/personMe.PNG" alt="Photo">
-						<h2>My Name</h2>
-						<label for="myComment" class="ui-hidden-accessible">Add your comment</label>
-						<textarea cols="40" rows="5" id="myComment" name="myComment" placeholder="Add your comment"></textarea>
-						<div id="commentButton">
-						<a href="#" data-role="button" data-mini="true">Submit</a>
-						</div>
-					</li>
-				</ul>
+						{{#commentSection}}
+						<li>
+							<img src="images/person1.PNG" alt="Photo">
+							<h2>{{name}}</h2>
+							<p>{{comment}}</p>
+							<!--<p class="ui-li-aside"><strong>2:55</strong>PM</p>-->
+						</li>
+						{{/commentSection}}
+						<li>
+							<img src="images/personMe.PNG" alt="Photo">
+							<h2>My Name</h2>
+							<label for="myComment" class="ui-hidden-accessible">Add your comment</label>
+							<textarea cols="40" rows="5" id="myComment" name="myComment" placeholder="Add your comment"></textarea>
+							<div id="commentButton">
+							<a id="commentSubmit" data-role="button" data-mini="true">Submit</a>
+							</div>
+						</li>
+					</ul>
+					</script>
+				</div>
             </div>
         </div>
 		

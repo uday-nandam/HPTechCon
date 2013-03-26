@@ -4,6 +4,11 @@ $(document).ready(function () {
 		searchSession(_id);
 		
 	});
+	
+	$("#commentSubmit").click(function(){
+		var input = $("#myComment").val();
+		comment(input);
+	});
 });
 
 var PARSE_APP = "9AeVfYuAP1SWUgUv5bogPOaGwldaZTstNEO8tdJx";
@@ -20,7 +25,7 @@ var title = "";
 
 Parse.initialize(PARSE_APP, PARSE_JS);
 checkEvents();
-
+//getComments();
 
 
 function searchSession(input){
@@ -64,6 +69,7 @@ function searchSession(input){
 			var html = template(data);
 			$("#eventDetails").html(template(data)).trigger('create');
 			$("#eventDetails").listview('refresh');
+			
 			
 			
 		},
@@ -198,6 +204,67 @@ function checkEvents(){
 		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
 		}
+	});
+}
+
+function comment(input){
+	var Comment = Parse.Object.extend("Comments");
+	var comments = new Comment();
+	
+	comments.set("EventId", _id);
+	comments.set("Comment", input);
+	
+	comments.save(null, {
+				success: function(exchange) {
+					alert("saved");
+				},
+				error: function(exchange, error) {
+					alert("Error");
+					$.mobile.changePage("#checkin-main", {reloadPage : true});
+				}
+			});	
+}
+
+function getComments(){
+	var name = "Tom Watts";
+	var comments;
+	
+	var Comment = Parse.Object.extend("Comments");
+	var query = new Parse.Query(Comment);
+	
+	query.equalTo("EventId", _id);
+	query.find({
+		success: function(result) {
+			// result is an instance of Parse.Object
+			var source = $("#comments-template").html();
+			var size = result.length - 1;
+			var data = '{ "commentSection" : [';
+			for(var i=0, len=result.length; i<len;i++){
+				var comm = result[i];
+				
+				comments = comm.get("Comment");
+				data += '{"name": "' + names + '", ';
+				
+				if (i == size){
+					data += '"comment": "' + comments + '"} ';				
+				}
+				else {
+				data += '"comment": "' + comments + '"}, ';
+				}
+			}
+			data += ']}';
+			
+			var arr = JSON.parse(data);		
+			var template = Handlebars.compile(source);
+	
+			$("#commentSection").append(template(arr)).trigger("create");			
+			
+		},
+		error: function(result, error) {
+			// error is an instance of Parse.Error.
+			alert("Error");
+		}
+	
 	});
 }
 
