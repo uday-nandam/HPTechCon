@@ -19,6 +19,8 @@ $(document).ready(function() {
 var PARSE_APP = "9AeVfYuAP1SWUgUv5bogPOaGwldaZTstNEO8tdJx";
 var PARSE_JS = "w4ffwNOQtdfqDb2tWBXUoPmD7qJrpmHv6xcnuZj4";
 
+Parse.initialize(PARSE_APP, PARSE_JS);
+
 var _id = 0;
 var _name = "";
 var _work_email = "";
@@ -28,9 +30,8 @@ var _title = "";
 var _exchangeId = 0;
 
 var my_id = 111111; // Personal ID hard coded. (Perhaps implemented using Login Feature).
-//var my_id = Parse.User.current().getUsername();
-
-Parse.initialize(PARSE_APP, PARSE_JS);
+//var my_id = parseInt(Parse.User.current().getUsername());
+//console.log(my_id);
 
 recentExchanges();
 
