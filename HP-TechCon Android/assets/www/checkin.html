@@ -17,7 +17,7 @@
 		<!-- Link css and js files -->
 		<link rel="stylesheet" href="css/my.css" />
 		<script src="js/handlebars.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/Checkin/Checkin.js"></script>
         <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
 
         <!-- User-generated js -->
@@ -181,7 +181,7 @@
 							<label for="myComment" class="ui-hidden-accessible">Add your comment</label>
 							<textarea cols="40" rows="5" id="myComment" name="myComment" placeholder="Add your comment"></textarea>
 							<div id="commentButton">
-							<a id="commentSubmit" data-role="button" data-mini="true">Submit</a>
+							<a id="commentSubmit" onclick= "comment()" data-role="button" data-mini="true">Submit</a>
 							</div>
 						</li>
 					</ul>
