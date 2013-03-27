@@ -21,6 +21,7 @@ var title = "";
 Parse.initialize(PARSE_APP, PARSE_JS);
 checkEvents();
 
+
 //takes event id as input and queries server for event data.
 //then navigates to event details page and appends data to html via template
 function searchSession(input){
@@ -91,6 +92,7 @@ function searchSession(input){
 	checkin.set("EventId", _id);
 	checkin.set("UserID", userID);
 	checkin.set("EventName", _name);
+	checkin.set("EventLocation", _location);
 	
 	employee = Parse.Object.extend("employee");
 	query = new Parse.Query(employee);
@@ -280,19 +282,20 @@ function recentCheckins() {
 	
 	query.find({
 		success: function(results) {
-			var source = $("#recentCheckins-template").html();
+			var source = $("#eventsAttended-template").html();
 			var size = results.length -1;
 			// Create JSON array 
-			var data = '{ "recentCheckins" : [';
+			var data = '{ "eventsAttended" : [';
 			for(var a = 0; a < results.length; a++) {
-				data += '{"name": "' + results[a].get("Name") + '", ';
+				data += '{"id": "' + results[a].get("EventId") + '", ';
 				data += '"eventName": "' + results[a].get("EventName") + '", ';
-				data += '"location": "' + results[a].get("location") + '", ';
-				data += '"title": "' + results[a].get("title") + '", ';
+				data += '"location": "' + results[a].get("EventLocation") + '", ';
+				var time = results[a].createdAt;
+				time = convertTime(time);
 				if(a == size) {
-					data += '"time": "' + results[a].createdAt + '"}';
+					data += '"time": "' + time + '"}';
 				} else { 
-					data += '"time": "' + results[a].createdAt + '"}, '; 
+					data += '"time": "' + time + '"}, '; 
 				}
 			}
 			data += ']}';
@@ -300,11 +303,65 @@ function recentCheckins() {
 			var arr = JSON.parse(data);
 			//var html = template(arr);
 			var template = Handlebars.compile(source);
-			$("#recentCheckinsdiv").html(template(arr)).trigger('create');
+			$("#eventAttended").html(template(arr)).trigger('create');
 			
 		},
 		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
+		}
+	});
+}
+//same as searchSession function but for events already checked into
+function searchChecked(input){
+	_id = input;
+	getComments();
+	Session = Parse.Object.extend("sessions");
+	
+	query = new Parse.Query(Session);
+	
+	query.equalTo("ID", _id);
+	query.find({
+		success: function(result) {
+			// result is an instance of Parse.Object
+			
+			if (result.length == 0){
+				alert("Sorry, that Event ID is not listed");
+				reload();
+			}
+			var sess = result[0];
+			
+			_name = sess.get("Name");
+			_speaker = sess.get("Speaker");
+			_location = sess.get("Location");
+			_time = sess.get("Time");
+			
+			var locTime = new Date(_time);
+			var locDate = convertDate(locTime);
+			locTime = convertTime(locTime);
+			
+			var source = $("#eventChecked-template").html();
+			
+			var template = Handlebars.compile(source);
+			
+			var data = {
+				name: _name, 
+				speaker: _speaker,
+				location: _location,
+				date: locDate,
+				time: locTime
+			};
+			
+			$.mobile.changePage("#event-checked", {transition: "slideup"});
+			var html = template(data);
+			$("#eventChecked").html(template(data)).trigger('create');
+			$("#eventChecked").listview('refresh');
+			
+			
+			
+		},
+		error: function(result, error) {
+			// error is an instance of Parse.Error.
+			alert("Error");
 		}
 	});
 }
