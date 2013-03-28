@@ -45,6 +45,8 @@ $(function() {
 	$("#submitButton").click(function(e) {
 		_id = $("#checkinInput").val();
 		var currentUser = Parse.User.current();
+		searchSession(_id);
+		getComments();
 		$.mobile.changePage('#event-details');
 		
 	});
@@ -52,13 +54,13 @@ $(function() {
 	$("#currentEventsdiv").on('click', '#currentEvents li', function(e) {
 		e.preventDefault();
 		_id = e.target.id;
+		searchSession(_id);
+		getComments();
 		$.mobile.changePage('#event-details');
 	}); 
     
 
 	$(document).delegate('#event-details', 'pageinit', function(event) {
-		searchSession(_id);
-		getComments();
 
 		$("#eventDetails").on('click', '#checkIn', function(e) {
 			e.preventDefault();
@@ -79,14 +81,14 @@ $(function() {
 			e.preventDefault();
 			console.log(e);
 			_id = e.target.id;
+			searchChecked(_id);
+			getCommentsChecked();
 			$.mobile.changePage('#event-checked');
 		});
 
 	});
 	
 	$(document).delegate("#event-checked", 'pageinit', function(event) {
-		searchChecked(_id);
-		getCommentsChecked();
 		
 		$("#eventChecked").on('click', '#attachNote', function(e) {
 			e.preventDefault();
@@ -146,7 +148,7 @@ function searchSession(input){
 			var html = eventDetailsTemplateCompiled(data);
 			
 			$("#eventDetails").html(eventDetailsTemplateCompiled(data)).trigger('create');
-			$("#eventDetails").listview('refresh');
+			$("#eventDetails ul").listview('refresh');
 			
 			
 			
@@ -295,15 +297,15 @@ function comment(){
 	comments.set("Comment", input);
 	
 	comments.save(null, {
-				success: function(exchange) {
-					alert("saved");
-					
-				},
-				error: function(exchange, error) {
-					alert("Error");
-					$.mobile.changePage("#checkin-main", {reloadPage : true});
-				}
-			});	
+		success: function(exchange) {
+			alert("saved");
+			
+		},
+		error: function(exchange, error) {
+			alert("Error");
+			$.mobile.changePage("#checkin-main", {reloadPage : true});
+		}
+	});	
 }
 // displays all comments about an event when on the event details page
 function getComments(){
@@ -359,7 +361,7 @@ function recentCheckins() {
 	
 	query.find({
 		success: function(results) {
-			var source = $("#eventsAttended-template").html();
+			
 			var size = results.length -1;
 			// Create JSON array 
 			var data = '{ "eventsAttended" : [';
@@ -378,9 +380,8 @@ function recentCheckins() {
 			data += ']}';
 			
 			var arr = JSON.parse(data);
-			//var html = template(arr);
-			var template = Handlebars.compile(source);
-			$("#eventAttended").html(template(arr)).trigger('create');
+			
+			$("#eventAttended").html(eventsAttendedTemplateCompiled(arr)).trigger('create');
 			
 		},
 		error: function(error) {
@@ -510,23 +511,23 @@ function reload() {
 }
 //function for barcode scanner
 function scan() {
-        console.log('scanning');
-        try {
-            window.plugins.barcodeScanner.scan(function(args) {
-                console.log("Scanner result: \n" +
-                    "text: " + args.text + "\n" +
-                    "format: " + args.format + "\n" +
-                    "cancelled: " + args.cancelled + "\n");
-                
-			_id = args.text;
-			getSession(_id);
-			$.mobile.changePage("#event-details", {transition: "slideup"});
+    console.log('scanning');
+    try {
+        window.plugins.barcodeScanner.scan(function(args) {
+            console.log("Scanner result: \n" +
+                "text: " + args.text + "\n" +
+                "format: " + args.format + "\n" +
+                "cancelled: " + args.cancelled + "\n");
+            
+		_id = args.text;
+		getSession(_id);
+		$.mobile.changePage("#event-details", {transition: "slideup"});
 
-               
-        });
-        } catch (ex) {
-            console.log(ex.message);
-        }
+           
+    });
+    } catch (ex) {
+        console.log(ex.message);
+    }
  }
  
 // converts server time	to local time
