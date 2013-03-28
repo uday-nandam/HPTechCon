@@ -67,7 +67,7 @@
 					{{#recommendedEvents}}
 					<li><a href="#event-details" onclick="searchSession('{{event_id}}')">
 						<h2>{{event_name}}</h2>
-						<p>From:{{from_id}}, {{comment}}</p>
+						<p>From: {{from_id}}, {{comment}}</p>
 						<p class="ui-li-aside"><strong>2:00</strong>PM</p>
 					</a></li>
 					{{/recommendedEvents}}
@@ -134,7 +134,7 @@
 					<li data-role="list-divider">
 						<h1>{{name}}</h1>
 						<p class="ui-li-aside">
-						<button class = "buttonShare" data-mini="true"  onclick="" data-inline="true" data-icon="share" data-iconpos="right">Share</button>
+						<button class = "buttonShare" data-mini="true" onclick="window.location='#event-share'" data-inline="true" data-icon="share" data-iconpos="right">Share</button>
 						</p>
 					</li>
 					<li>
@@ -332,7 +332,7 @@
 						<div class="ui-block-a">
 						</div>
 						<div class="ui-block-b">
-							<a href="#" data-role="button" data-mini="true">Share</a>
+							<a href="#" onclick="share()" data-role="button" data-mini="true">Share</a>
 						</div>
 					</div></li>
 				</ul>

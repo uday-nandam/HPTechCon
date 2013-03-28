@@ -11,7 +11,7 @@ var PARSE_JS = "w4ffwNOQtdfqDb2tWBXUoPmD7qJrpmHv6xcnuZj4";
 
 Parse.initialize(PARSE_APP, PARSE_JS);
 
-var userID = "123456";
+var userID = 123456;
 // var userID = parseInt(Parse.User.current().getUsername());
 var _id = 0;
 var _name = "";
