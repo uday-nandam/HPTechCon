@@ -1,15 +1,15 @@
-$(document).ready(function () {
-	$("#submitButton").click(function() {
-		_id = $("#checkinInput").val();
-		searchSession(_id);
-		
-	});
-});
-
-var PARSE_APP = "9AeVfYuAP1SWUgUv5bogPOaGwldaZTstNEO8tdJx";
-var PARSE_JS = "w4ffwNOQtdfqDb2tWBXUoPmD7qJrpmHv6xcnuZj4";
-
-Parse.initialize(PARSE_APP, PARSE_JS);
+var currentEventsTemplate;
+var currentEventsTemplateCompiled;
+var eventDetailsTemplate;
+var eventDetailsTemplateCompiled;
+var commentsTemplate;
+var commentsTemplateCompiled;
+var eventsAttendedTemplate;
+var eventsAttendedTemplateCompiled;
+var eventCheckedTemplate;
+var eventCheckedTemplateCompiled;
+var commentscheckedTemplate;
+var commentscheckedTemplateCompiled;
 
 var userID = 123456;
 // var userID = parseInt(Parse.User.current().getUsername());
@@ -20,16 +20,98 @@ var _speaker = "";
 var _time = "";
 var title = "";
 
-checkEvents();
 
+$(function() {
+
+	var PARSE_APP = "9AeVfYuAP1SWUgUv5bogPOaGwldaZTstNEO8tdJx";
+	var PARSE_JS = "w4ffwNOQtdfqDb2tWBXUoPmD7qJrpmHv6xcnuZj4";
+
+	Parse.initialize(PARSE_APP, PARSE_JS);
+
+    currentEventsTemplate = $("#currentEvents-template").html();
+    currentEventsTemplateCompiled = Handlebars.compile(currentEventsTemplate);
+    eventDetailsTemplate = $('#eventDetails-template').html();
+    eventDetailsTemplateCompiled = Handlebars.compile(eventDetailsTemplate);
+    commentsTemplate = $("#comments-template").html();
+    commentsTemplateCompiled = Handlebars.compile(commentsTemplate);
+    eventsAttendedTemplate = $("#eventsAttended-template").html();
+    eventsAttendedTemplateCompiled = Handlebars.compile(eventsAttendedTemplate);
+    eventCheckedTemplate = $("#eventChecked-template").html();
+    eventCheckedTemplateCompiled = Handlebars.compile(eventCheckedTemplate);
+    commentscheckedTemplate = $("#commentschecked-template").html();
+    commentscheckedTemplateCompiled = Handlebars.compile(commentscheckedTemplate);
+
+	//Enter search for Event ID
+	$("#submitButton").click(function(e) {
+		_id = $("#checkinInput").val();
+		var currentUser = Parse.User.current();
+		$.mobile.changePage('#event-details');
+		
+	});
+	
+	$("#currentEventsdiv").on('click', '#currentEvents li', function(e) {
+		e.preventDefault();
+		_id = e.target.id;
+		$.mobile.changePage('#event-details');
+	}); 
+    
+
+	$(document).delegate('#event-details', 'pageinit', function(event) {
+		searchSession(_id);
+		getComments();
+
+		$("#eventDetails").on('click', '#checkIn', function(e) {
+			e.preventDefault();
+			checkInConfirm();
+			//$.mobile.changePage('#checkin-main');
+		}); 
+		
+		$("#commentSection").on('click', '#commentSubmit', function(e) {
+			e.preventDefault();
+			comment();
+			$.mobile.changePage('#checkin-main');
+		}); 
+	});
+
+	$(document).delegate("#event-attended", 'pageinit', function(event) {
+		
+		$("#eventAttended").on('click', '#attendedEvents li', function(e) {
+			e.preventDefault();
+			console.log(e);
+			_id = e.target.id;
+			$.mobile.changePage('#event-checked');
+		});
+
+	});
+	
+	$(document).delegate("#event-checked", 'pageinit', function(event) {
+		searchChecked(_id);
+		getCommentsChecked();
+		
+		$("#eventChecked").on('click', '#attachNote', function(e) {
+			e.preventDefault();
+			createNote();
+		});
+		
+		$("#commentschecked").on('click', '#commentSubmit', function(e) {
+			e.preventDefault();
+			comment();
+			$.mobile.changePage('#checkin-main');
+		});
+
+	});
+
+    //fetch the current events
+    checkEvents();
+
+});
 
 //takes event id as input and queries server for event data.
 //then navigates to event details page and appends data to html via template
 function searchSession(input){
 	_id = input;
-	getComments();
 	Session = Parse.Object.extend("sessions");
-	
+
 	query = new Parse.Query(Session);
 	
 	query.equalTo("ID", _id);
@@ -52,10 +134,7 @@ function searchSession(input){
 			var locDate = convertDate(locTime);
 			locTime = convertTime(locTime);
 			
-			var source = $("#eventDetails-template").html();
-			
-			var template = Handlebars.compile(source);
-		
+					
 			var data = {
 				name: _name, 
 				speaker: _speaker,
@@ -64,9 +143,9 @@ function searchSession(input){
 				time: locTime
 			};
 			
-			$.mobile.changePage("#event-details", {transition: "slideup"});
-			var html = template(data);
-			$("#eventDetails").html(template(data)).trigger('create');
+			var html = eventDetailsTemplateCompiled(data);
+			
+			$("#eventDetails").html(eventDetailsTemplateCompiled(data)).trigger('create');
 			$("#eventDetails").listview('refresh');
 			
 			
@@ -106,7 +185,7 @@ function searchSession(input){
 			name = emp.get("name");
 			locat = emp.get("location");
 			title = emp.get("title");
-			
+
 			checkin.set("Name", name);
 			checkin.set("location", locat);
 			checkin.set("Title", title);
@@ -115,13 +194,13 @@ function searchSession(input){
 		 	var time = convertTime(date);
 		 	
 			checkin.save(null, {
-				success: function(exchange) {
+				success: function(checkin) {
 					//alert("You have successfully checked into " + _name + " at " + time);
 					//$.mobile.changePage("#checkin-main", {transition: "slideup"});
 					reload();
 				},
-				error: function(exchange, error) {
-					alert("Error");
+				error: function(checkin, error) {
+					alert("Error saving to server");
 					$.mobile.changePage("#checkin-main", {reloadPage : true});
 				}
 			});	
@@ -147,7 +226,6 @@ function checkEvents(){
 	query.find({
 		success:function(results){
 			
-			var source = $("#currentEvents-template").html();
 			
 			var inc = 0;
 			var events = new Array();
@@ -161,7 +239,7 @@ function checkEvents(){
 				var serDay = serDate.getDate();//day of event in server
 				var serYear = serDate.getFullYear();//year of event in server
 				
-			
+				
 				if (localYear == serYear && localDay == serDay && localMonth == serMonth && localHour <= serHour){
 					if ((localHour + 1) >= serHour){
 						if(serMinutes < 10){
@@ -197,10 +275,9 @@ function checkEvents(){
 			data += ']}';
 			
 			var arr = JSON.parse(data);		
-			var template = Handlebars.compile(source);
-	
-			$("#currentEventsdiv").append(template(arr)).trigger("create");
 			
+			$("#currentEventsdiv").html(currentEventsTemplateCompiled(arr)).trigger("create");
+			$("#currentEventsdiv ul").listview();
 		},
 		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
@@ -240,7 +317,7 @@ function getComments(){
 	query.find({
 		success: function(result) {
 			// result is an instance of Parse.Object
-			var source = $("#comments-template").html();
+			
 			var size = result.length - 1;
 			var data = '{ "commentSection" : [';
 			for(var i=0, len=result.length; i<len;i++){
@@ -260,9 +337,8 @@ function getComments(){
 			data += ']}';
 			
 			var arr = JSON.parse(data);		
-			var template = Handlebars.compile(source);
-	
-			$("#commentSection").append(template(arr)).trigger("create");
+			
+			$("#commentSection").html(commentsTemplateCompiled(arr)).trigger('create');
 			$("#commentSection").listview('refresh');			
 			
 		},
@@ -315,7 +391,7 @@ function recentCheckins() {
 //same as searchSession function but for events already checked into
 function searchChecked(input){
 	_id = input;
-	getComments();
+	
 	Session = Parse.Object.extend("sessions");
 	
 	query = new Parse.Query(Session);
@@ -340,9 +416,9 @@ function searchChecked(input){
 			var locDate = convertDate(locTime);
 			locTime = convertTime(locTime);
 			
-			var source = $("#eventChecked-template").html();
 			
-			var template = Handlebars.compile(source);
+			
+			
 			
 			var data = {
 				name: _name, 
@@ -352,11 +428,10 @@ function searchChecked(input){
 				time: locTime
 			};
 			
-			$.mobile.changePage("#event-checked", {transition: "slideup"});
-			var html = template(data);
-			$("#eventChecked").html(template(data)).trigger('create');
-			$("#eventChecked").listview('refresh');
 			
+			var html = eventCheckedTemplateCompiled(data);
+			$("#eventChecked").html(eventCheckedTemplateCompiled(data)).trigger('create');
+			$("#eventChecked").listview('refresh');
 			
 			
 		},
@@ -364,6 +439,50 @@ function searchChecked(input){
 			// error is an instance of Parse.Error.
 			alert("Error");
 		}
+	});
+}
+//retrieve the comments for the events that have already been checked into
+function getCommentsChecked(){
+	var name = "Tom Watts";
+	var comments;
+	
+	var Comment = Parse.Object.extend("Comments");
+	var query = new Parse.Query(Comment);
+	
+	query.equalTo("EventId", _id);
+	query.find({
+		success: function(result) {
+			// result is an instance of Parse.Object
+			
+			var size = result.length - 1;
+			var data = '{ "commentSection" : [';
+			for(var i=0, len=result.length; i<len;i++){
+				var comm = result[i];
+				
+				comments = comm.get("Comment");
+				
+				data += '{"name": "' + name + '", ';
+				
+				if (i == size){
+					data += '"comment": "' + comments + '"} ';				
+				}
+				else {
+				data += '"comment": "' + comments + '"}, ';
+				}
+			}
+			data += ']}';
+			
+			var arr = JSON.parse(data);		
+	
+			$("#commentschecked").html(commentscheckedTemplateCompiled(arr)).trigger("create");
+			$("#commentschecked").listview('refresh');			
+			
+		},
+		error: function(result, error) {
+			// error is an instance of Parse.Error.
+			alert("Error");
+		}
+	
 	});
 }
 
@@ -433,5 +552,7 @@ function convertTime(time){
 	return d;
 			
 }
+
+
 
 

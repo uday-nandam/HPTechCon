@@ -1,5 +1,9 @@
 // Share.js
 // This is the JS file which includes all of the "Share" feature implementation.
+var PARSE_APP = "9AeVfYuAP1SWUgUv5bogPOaGwldaZTstNEO8tdJx";
+var PARSE_JS = "w4ffwNOQtdfqDb2tWBXUoPmD7qJrpmHv6xcnuZj4";
+
+Parse.initialize(PARSE_APP, PARSE_JS);
 
 recommendedEvents();
 
@@ -40,6 +44,7 @@ function recommendedEvents()
 	
 	query.find({
 		success: function(results) {
+			
 			var source = $("#recommendedEvents-template").html();
 			// Create JSON array 
 			var data = '{ "recommendedEvents" : [';
@@ -60,6 +65,7 @@ function recommendedEvents()
 			var arr = JSON.parse(data);
 			
 			var template = Handlebars.compile(source);
+			
 			$("#recommendedEventsdiv").append(template(arr)).trigger('create');
 			$("#recommendedEventsdiv ul").listview();
 		}
