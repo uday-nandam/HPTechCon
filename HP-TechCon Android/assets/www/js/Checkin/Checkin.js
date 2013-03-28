@@ -18,6 +18,8 @@ var _name = "";
 var _location = "";
 var _speaker = ""; 
 var _time = "";
+var _description = "";
+var _inTime = "";
 var title = "";
 
 
@@ -59,7 +61,14 @@ $(function() {
 		$.mobile.changePage('#event-details');
 	}); 
     
-
+	$("#recommendedEventsdiv").on('click', '#recommendedEvents li', function(e) {
+		e.preventDefault();
+		_id = e.target.id;
+		searchSession(_id);
+		getComments();
+		$.mobile.changePage('#event-details');
+	}); 
+	
 	$(document).delegate('#event-details', 'pageinit', function(event) {
 
 		$("#eventDetails").on('click', '#checkIn', function(e) {
@@ -131,6 +140,7 @@ function searchSession(input){
 			_speaker = sess.get("Speaker");
 			_location = sess.get("Location");
 			_time = sess.get("Time");
+			_description = sess.get("Description");
 			
 			var locTime = new Date(_time);
 			var locDate = convertDate(locTime);
@@ -142,6 +152,7 @@ function searchSession(input){
 				speaker: _speaker,
 				location: _location,
 				date: locDate,
+				description: _description,
 				time: locTime
 			};
 			
@@ -298,7 +309,6 @@ function comment(){
 	
 	comments.save(null, {
 		success: function(exchange) {
-			alert("saved");
 			
 		},
 		error: function(exchange, error) {
@@ -412,13 +422,15 @@ function searchChecked(input){
 			_speaker = sess.get("Speaker");
 			_location = sess.get("Location");
 			_time = sess.get("Time");
+			_description = sess.get("Description");
+			_inTime = sess.createdAt;
 			
 			var locTime = new Date(_time);
 			var locDate = convertDate(locTime);
 			locTime = convertTime(locTime);
 			
 			
-			
+			_inTime = convertTime(_inTime);
 			
 			
 			var data = {
@@ -426,7 +438,9 @@ function searchChecked(input){
 				speaker: _speaker,
 				location: _location,
 				date: locDate,
-				time: locTime
+				description: _description,
+				time: locTime,
+				checkinTime: _inTime
 			};
 			
 			

@@ -65,11 +65,13 @@
 				<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="recommendedEvents" class="listLook">
 					<li data-role="list-divider">Recommended Events</li>
 					{{#recommendedEvents}}
-					<li><a href="#event-details" onclick="searchSession('{{event_id}}')">
-						<h2>{{event_name}}</h2>
-						<p>From: {{from_id}}, {{comment}}</p>
-						<p class="ui-li-aside"><strong>2:00</strong>PM</p>
-					</a></li>
+					<li id="{{event_id}}">
+						<a id="{{event_id}}">
+						<h2 id="{{event_id}}">{{event_name}}</h2>
+						<p id="{{event_id}}">From: {{from_id}}, {{comment}}</p>
+						<p class="ui-li-aside" id="{{event_id}}"><strong>2:00</strong>PM</p>
+						</a>
+					</li>
 					{{/recommendedEvents}}
 				</ul>
 			</script>	
@@ -156,7 +158,7 @@
 						</tr>
 						<tr>
 							<th>Summary:</th>
-							<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis risus nibh, porttitor in dictum eu, vestibulum semper risus. Aliquam vitae odio porta sapien malesuada ultrices.</td>
+							<td>{{description}}</td>
 						</tr>
 						<tr>
 							<th>Tag:</th> <td>#HPScan</td>
@@ -266,13 +268,13 @@
 							</tr>
 							<tr>
 								<th>Summary:</th>
-								<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis risus nibh, porttitor in dictum eu, vestibulum semper risus. Aliquam vitae odio porta sapien malesuada ultrices. Pellentesque velit nisi, vulputate sit amet imperdiet nec, fringilla vel justo.</td>
+								<td>{{description}}</td>
 							</tr>
 							<tr>
 								<th>Tag:</th> <td>#HPScan</td>
 							</tr>
 							<tr>
-								<th>Checked In:</th> <td>Time</td>
+								<th>Checked In:</th> <td>{{checkinTime}}</td>
 							</tr>
 						</table></li>
 						<li><div class="options ui-grid-a">
