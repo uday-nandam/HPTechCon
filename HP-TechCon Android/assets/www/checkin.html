@@ -92,7 +92,7 @@
 					<li><a href="home.html#home-main" rel="external">
 						<img src="images/Home_1.png" alt="Home">Home
 					</a></li>
-					<li><a href="#checkin-main">
+					<li><a href="#checkin-main" data-rel="close">
 						<img src="images/Check_In_1.png" alt="Check In">Check In
 					</a></li>
 					<li><a href="exchange.html#exchange-main" rel="external">
@@ -127,6 +127,9 @@
 					<ul data-role="listview" data-inset="true" data-divider-theme="a">
 					<li data-role="list-divider">
 						<h1>{{name}}</h1>
+						<p class="ui-li-aside">
+						<button class = "buttonShare" data-mini="true"  onclick="" data-inline="true" data-icon="share" data-iconpos="right">Share</button>
+						</p>
 					</li>
 					<li>
 						<table class="personDetails">
@@ -293,6 +296,39 @@
 						<a href="#" data-role="button" data-mini="true">Submit</a>
 						</div>
 					</li>
+				</ul>
+            </div>
+        </div>
+		<!-- Share page -->
+        <div data-role="page" data-url ="event-share" id="event-share" class="ui-responsive-panel">
+			<!-- Header -->
+            <div data-role="header" data-theme="a" data-position="fixed">
+                <h3 class="headerTitle">Share Event</h3>
+				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+            </div>
+			<!-- Content -->
+            <div data-role="content" class="jqm-content">
+				<!-- Quick post -->
+				<ul data-role="listview" data-inset="true" data-divider-theme="a" id="quickPost" class="listLook">
+					<li data-role="list-divider">Share /Event Name/
+					</li>
+					<li><div>
+						<label for="messageTo">Send To:</label>
+						<textarea cols="40" rows="3" name="messageTo" id="messageTo" placeholder="Username"></textarea>
+						</div>
+					</li>
+					<li><div>
+						<label for="messageBody">Post your message here</label>
+						<textarea cols="40" rows="8" name="messageBody" id="messageBody" placeholder="Post your message here"></textarea>
+						</div>
+					</li>
+					<li><div class="ui-grid-a">
+						<div class="ui-block-a">
+						</div>
+						<div class="ui-block-b">
+							<a href="#" data-role="button" data-mini="true">Share</a>
+						</div>
+					</div></li>
 				</ul>
             </div>
         </div>
