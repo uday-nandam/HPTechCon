@@ -8,6 +8,7 @@
         <title>Microblog</title>
         
 		<!-- Adapted from API panel example-->
+<<<<<<< HEAD
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
@@ -28,6 +29,18 @@
     console.error("Your javascript has an error: " + error);
   }
         </script>
+=======
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
+		<script type="text/javascript" src="cordova-2.4.0.js"></script>
+        <script src="js/handlebars.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+		
+		<!-- Link css and js files -->
+		<link rel="stylesheet" href="my_what.css">
+        <script src="js/microblog.js"></script>
+>>>>>>> Added MicroBlog
     </head>
     <body>
         <!-- Main page -->
@@ -56,7 +69,11 @@
 							</div>
 						</div>
 						<div class="ui-block-b">
+<<<<<<< HEAD
 							<a href="#" data-role="button" data-mini="true">Submit</a>
+=======
+							<a id="submitNewPost" data-role="button" data-mini="true">Submit</a>
+>>>>>>> Added MicroBlog
 						</div>
 					</div></li>
 					<li>
@@ -64,6 +81,7 @@
 					</li>
 				</ul>
 				<!-- Listview for recent microblog posts -->
+<<<<<<< HEAD
 				<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="blogNewsfeed" class="listLook">
 					<li data-role="list-divider">Microblog Feed
 					</li>
@@ -96,6 +114,41 @@
 					</li>
 				</ul>
             </div>
+=======
+				<div id="microBlogFeed">
+					<script id="microBlogFeed-template" type="text/x-handlebars-template">
+						<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="blogNewsfeed" class="listLook">
+							<li data-role="list-divider">Microblog Feed
+							</li>
+							<li>
+								<img src="images/person2.PNG" alt="Photo">
+								<h2>John Doe</h2>
+								<p>The next transistors discussion will be at 3:00PM. Please plan on attending.</p>
+								<p class="ui-li-aside"><strong>2:47</strong>PM</p>
+								<div>
+									<a href="#attachment-popup" data-rel="popup" data-position-to="window" data-transition="fade"><img src="images/snapshot-lobby.PNG" class="attachment" alt="Attachment"></a>
+								</div>
+							</li>
+							{{#feed}}
+								<li data-postid="{{post_id}}">
+									<img src="images/person3.PNG" alt="Photo">
+									<h2>{{post_author}}</h2>
+									<p>{{post_content}}</p>
+									<p class="ui-li-aside"><strong>{{posted_at}}</strong></p>
+								</li>
+							{{/feed}}
+						</ul>
+					</script>
+				</div>
+            </div>
+			<!-- Attachment Popup -->
+			<div data-role="popup" id="attachment-popup" data-overlay-theme="a" data-icon="delete" data-corners="false">
+				<!-- Close button -->
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<!-- Image -->
+				<img class="popphoto" src="images/snapshot-lobby.PNG" style="max-width:300px;" alt="attachment">
+			</div>
+>>>>>>> Added MicroBlog
 			<!-- Navigation panel -->
 			<div data-role="panel" data-position-fixed="true"  data-display="reveal" data-theme="a" id="nav-panel">
 				<ul data-role="listview" data-theme="a" class="nav-search">
@@ -108,7 +161,11 @@
 					<li><a href="exchange.html#exchange-main" rel="external">
 						<img src="images/Exchange_1.png" alt="Exchange">Exchange
 					</a></li>
+<<<<<<< HEAD
 					<li><a href="#microblog-main" data-rel="close">
+=======
+					<li><a href="#">
+>>>>>>> Added MicroBlog
 						<img src="images/Microblog_1.png" alt="Microblog">Microblog
 					</a></li>
 					<li><a href="#">
@@ -129,6 +186,7 @@
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Microblog</h3>
+<<<<<<< HEAD
 				<a href="#" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
             </div>
 			<!-- Content -->
@@ -149,6 +207,29 @@
 						<p class="ui-li-aside"><strong>1:48</strong>PM</p>
 					</a></li>
 				</ul>
+=======
+				<a href="#microblog-main" data-icon="back" data-iconpos="notext">Back</a>
+            </div>
+			<!-- Content -->
+            <div data-role="content" class="jqm-content">
+            	<div id="myBlogPosts">
+	            	<script id="myBlogPosts-template" type="text/x-handlebars-template">
+						<ul data-role="listview" id="myBlogPostsList" data-inset="true"  data-divider-theme="a" class="listLook" data-icon="edit" data-filter="true" data-filter-placeholder="Find a post">
+							<li data-role="list-divider">My Posts</li>
+							{{#allMyBlogPosts}}
+								<li id="{{post_id}}">
+									<a href="#" id="{{post_id}}">
+										<img src="images/personMe.PNG" id="{{post_id}}" alt="Photo" >
+										<br>
+										<p id="{{post_id}}">{{post_content}}</p>
+										<p class="ui-li-aside" id="{{post_id}}"><strong>{{posted_at}}</strong></p>
+									</a>
+								</li>
+							{{/allMyBlogPosts}}
+						</ul>
+					</script>
+				</div>
+>>>>>>> Added MicroBlog
             </div>			
         </div>
 		
@@ -157,6 +238,7 @@
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Microblog</h3>
+<<<<<<< HEAD
 				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="right" class="ui-btn-right">Delete Post</a>
             </div>
 			<!-- Content -->			
@@ -240,6 +322,39 @@
 						</div>
 					</li>
 				</ul>
+=======
+				<button id="deletePost" data-role="button" data-theme="a" data-icon="delete" data-iconpos="right" class="ui-btn-right">Delete Post</button>
+            </div>
+			<!-- Content -->			
+			<div data-role="content" class="jqm-content">
+				<div id="editpost">
+					<script id="editBlogPost-template" type="text/x-handlebars-template">
+						<!-- Post -->
+						<ul data-role="listview" data-inset="true" data-divider-theme="a">
+							<li data-role="list-divider">
+								<h1>Edit Post</h1>
+							</li>
+							<li><div>
+								<p>Posted at <strong>{{posted_at}}</strong></p>
+								<label for="savedNote" class="ui-hidden-accessible">Post your message here</label>
+								<textarea cols="40" rows="8" name="savedNote" id="savedNote">{{post_content}}</textarea>
+								<div class="options">
+									<strong>Attach:</strong>
+									<button class="buttonCam" data-mini="true" onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>
+								</div>
+							</div></li>
+							<li><div class="options ui-grid-a">
+								<div class="ui-block-a">
+									<a href="#" id="cancelEdit" data-role="button">Cancel</a>
+								</div>
+								<div class="ui-block-b">
+									<button id="saveEdit" data-postid="{{post_id}}" class = "buttonSave" type = "button" data-theme="a">Save</button>
+								</div>
+							</div></li>
+						</ul>
+					</script>
+				</div>
+>>>>>>> Added MicroBlog
 			</div>
 		</div>
     </body>
