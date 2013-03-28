@@ -47,9 +47,30 @@ $(function() {
 	$("#submitButton").click(function(e) {
 		_id = $("#checkinInput").val();
 		var currentUser = Parse.User.current();
-		searchSession(_id);
-		getComments();
-		$.mobile.changePage('#event-details');
+		
+		Session = Parse.Object.extend("sessions");
+
+		query = new Parse.Query(Session);
+		
+		query.equalTo("ID", _id);
+		query.find({
+			success: function(result) {
+				// result is an instance of Parse.Object
+				
+				if (result.length == 0){
+					alert("Sorry, that Event ID is not listed");
+					reload();
+				}
+				
+				else{
+					searchSession(_id);
+					getComments();
+					$.mobile.changePage('#event-details');
+				}
+			}
+		});
+		
+		
 		
 	});
 	
@@ -130,10 +151,7 @@ function searchSession(input){
 		success: function(result) {
 			// result is an instance of Parse.Object
 			
-			if (result.length == 0){
-				alert("Sorry, that Event ID is not listed");
-				reload();
-			}
+			
 			var sess = result[0];
 			
 			_name = sess.get("Name");
