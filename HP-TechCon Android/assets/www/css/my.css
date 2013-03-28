@@ -68,12 +68,10 @@ textarea{
 	white-space: normal;
 }
 .listLook .attachment{
-	width: 80%;
-	height: 100px;
-	padding-top: 0px;
-	padding-left: 0px;
-	
-	border: 1px solid black;
+	width: 70%;
+	height: 150px;
+	padding-bottom: 5px;
+	padding-left: 10px;
 }
 /* Change padding between image and text in listviews */
 .ui-li-has-thumb .ui-btn-inner a.ui-link-inherit,.ui-li-static.ui-li-has-thumb{padding-left:70px !important}

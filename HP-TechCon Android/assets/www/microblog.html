@@ -59,15 +59,14 @@
 						<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="blogNewsfeed" class="listLook">
 							<li data-role="list-divider">Microblog Feed
 							</li>
-							<li>
+							<li><a href="#microblog-view">
 								<img src="images/person2.PNG" alt="Photo">
 								<h2>John Doe</h2>
 								<p>The next transistors discussion will be at 3:00PM. Please plan on attending.</p>
 								<p class="ui-li-aside"><strong>2:47</strong>PM</p>
-								<div>
-									<a href="#attachment-popup" data-rel="popup" data-position-to="window" data-transition="fade"><img src="images/snapshot-lobby.PNG" class="attachment" alt="Attachment"></a>
+								<div><img src="images/snapshot-lobby.PNG" class="attachment" alt="Attachment">
 								</div>
-							</li>
+							</a></li>
 							{{#feed}}
 								<li data-postid="{{post_id}}">
 									<img src="images/person3.PNG" alt="Photo">
@@ -80,13 +79,6 @@
 					</script>
 				</div>
             </div>
-			<!-- Attachment Popup -->
-			<div data-role="popup" id="attachment-popup" data-overlay-theme="a" data-icon="delete" data-corners="false">
-				<!-- Close button -->
-				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-				<!-- Image -->
-				<img class="popphoto" src="images/snapshot-lobby.PNG" style="max-width:300px;" alt="attachment">
-			</div>
 			<!-- Navigation panel -->
 			<div data-role="panel" data-position-fixed="true"  data-display="reveal" data-theme="a" id="nav-panel">
 				<ul data-role="listview" data-theme="a" class="nav-search">
