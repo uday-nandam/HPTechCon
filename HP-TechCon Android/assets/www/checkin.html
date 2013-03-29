@@ -65,11 +65,13 @@
 				<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="recommendedEvents" class="listLook">
 					<li data-role="list-divider">Recommended Events</li>
 					{{#recommendedEvents}}
-					<li><a href="#event-details" onclick="searchSession('{{event_id}}')">
-						<h2>{{event_name}}</h2>
-						<p>From: {{from_id}}, {{comment}}</p>
-						<p class="ui-li-aside"><strong>2:00</strong>PM</p>
-					</a></li>
+					<li id="{{event_id}}">
+						<a id="{{event_id}}">
+						<h2 id="{{event_id}}">{{event_name}}</h2>
+						<p id="{{event_id}}">From: {{from_id}}, {{comment}}</p>
+						<p class="ui-li-aside" id="{{event_id}}"><strong>2:00</strong>PM</p>
+						</a>
+					</li>
 					{{/recommendedEvents}}
 				</ul>
 			</script>	
@@ -80,11 +82,14 @@
 					<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="currentEvents" class="listLook">
 					<li data-role="list-divider">Current Events</li>
 					{{#currentEvents}}
-					<li><a  onclick="searchSession('{{id}}')">
-						<h2>{{name}}</h2>
-						<p>Location: {{location}}</p>
-						<p class="ui-li-aside"><strong>{{time}}</strong></p>
-					</a></li>
+					<!--<li><a  onclick="searchSession('{{id}}')"-->
+					<li id="{{id}}">
+						<a  href="#" id="{{id}}">
+						<h2 id="{{id}}">{{name}}</h2>
+						<p id="{{id}}">Location: {{location}}</p>
+						<p class="ui-li-aside" id="{{id}}"><strong>{{time}}</strong></p>
+						</a>
+					</li>
 					{{/currentEvents}}
 					</ul>
 					</script>
@@ -153,7 +158,7 @@
 						</tr>
 						<tr>
 							<th>Summary:</th>
-							<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis risus nibh, porttitor in dictum eu, vestibulum semper risus. Aliquam vitae odio porta sapien malesuada ultrices.</td>
+							<td>{{description}}</td>
 						</tr>
 						<tr>
 							<th>Tag:</th> <td>#HPScan</td>
@@ -165,7 +170,8 @@
 							<a href="#checkin-main" onclick = "reload()" data-role="button">Cancel</a>
 						</div>
 						<div class="ui-block-b">
-							<button class = "buttonCheckIn" type = "button" onclick="checkInConfirm()" data-theme="a">Check In</button>
+							<!--<button class = "buttonCheckIn" type = "button" onclick="checkInConfirm()" data-theme="a">Check In</button>-->
+							<button class = "buttonCheckIn" type = "button" id="checkIn" data-theme="a">Check In</button>
 						</div>
 					</div></li>
 				</ul>
@@ -190,7 +196,8 @@
 							<label for="myComment" class="ui-hidden-accessible">Add your comment</label>
 							<textarea cols="40" rows="5" id="myComment" name="myComment" placeholder="Add your comment"></textarea>
 							<div id="commentButton">
-							<a id="commentSubmit" onclick= "comment()" data-role="button" data-mini="true">Submit</a>
+							<!--<a id="commentSubmit" onclick= "comment()" data-role="button" data-mini="true">Submit</a>-->
+							<a id="commentSubmit"  data-role="button" data-mini="true">Submit</a>
 							</div>
 						</li>
 					</ul>
@@ -207,18 +214,21 @@
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Attended Events</h3>
-				<a href="#" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
+				<a href="#checkin-main" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
             </div>
             <div id="eventAttended" data-role="content" class="jqm-content">
             	<script id="eventsAttended-template" type="text/x-handlebars-template">
 				<ul data-role="listview" id="attendedEvents" data-autodividers="false" data-filter="true" 
 				data-inset="true"  data-divider-theme="a" data-filter-placeholder="Find an event" class="listLook">
 					{{#eventsAttended}}
-					<li><a onclick="searchChecked('{{id}}')">
-						<h2>{{eventName}}</h2>
-						<p>Location: {{location}}</p>
-						<p class="ui-li-aside"><strong>{{time}}</strong></p>
-					</a></li>
+					<!--<li><a onclick="searchChecked('{{id}}')">-->
+					<li id="{{id}}">
+						<a id="{{id}}">
+						<h2 id="{{id}}">{{eventName}}</h2>
+						<p id="{{id}}">Location: {{location}}</p>
+						<p class="ui-li-aside" id="{{id}}"><strong>{{time}}</strong></p>
+						</a>
+					</li>
 					{{/eventsAttended}}
 				</ul>
 				</script>
@@ -258,18 +268,18 @@
 							</tr>
 							<tr>
 								<th>Summary:</th>
-								<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis risus nibh, porttitor in dictum eu, vestibulum semper risus. Aliquam vitae odio porta sapien malesuada ultrices. Pellentesque velit nisi, vulputate sit amet imperdiet nec, fringilla vel justo.</td>
+								<td>{{description}}</td>
 							</tr>
 							<tr>
 								<th>Tag:</th> <td>#HPScan</td>
 							</tr>
 							<tr>
-								<th>Checked In:</th> <td>Time</td>
+								<th>Checked In:</th> <td>{{checkinTime}}</td>
 							</tr>
 						</table></li>
 						<li><div class="options ui-grid-a">
 							<div class="ui-block-a">
-								<a href="#" data-role="button">Attach Note</a>
+								<a href="#" id="attachNote" data-role="button">Attach Note</a>
 							</div>
 							<div class="ui-block-b">
 								<a href="microblog.html#microblog-main" rel="external" data-role="button">Post About It</a>
@@ -279,30 +289,30 @@
 					</script>
 				</div>
 				<!-- Listview for comments -->
-				<ul data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook">
-					<li data-role="list-divider" class="header">Comments</li>
-					<li>
-						<img src="images/person1.PNG" alt="Photo">
-						<h2>Stephen Weber</h2>
-						<p>Decent session. Presenter has another similar lecture tomorrow. Check it out</p>
-						<p class="ui-li-aside"><strong>2:55</strong>PM</p>
-					</li>
-					<li>
-						<img src="images/personNew.PNG" alt="Photo">
-						<h2>Leeroy Jenkins</h2>
-						<p>Great event!</p>
-						<p class="ui-li-aside"><strong>3:05</strong>PM</p>
-					</li>
-					<li>
-						<img src="images/personMe.PNG" alt="Photo">
-						<h2>My Name</h2>
-						<label for="myComment" class="ui-hidden-accessible">Add your comment</label>
-						<textarea cols="40" rows="5" id="myComment" name="myComment" placeholder="Add your comment"></textarea>
-						<div id="commentButton">
-						<a href="#" data-role="button" data-mini="true">Submit</a>
-						</div>
-					</li>
-				</ul>
+				<div id="commentschecked">
+					<script id="commentschecked-template" type="text/x-handlebars-template">
+					<ul data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook">
+						<li data-role="list-divider" class="header">Comments</li>
+						{{#commentSection}}
+						<li>
+							<img src="images/person1.PNG" alt="Photo">
+							<h2>{{name}}</h2>
+							<p>{{comment}}</p>
+							<!--<p class="ui-li-aside"><strong>2:55</strong>PM</p>-->
+						</li>
+						{{/commentSection}}
+						<li>
+							<img src="images/personMe.PNG" alt="Photo">
+							<h2>My Name</h2>
+							<label for="myComment" class="ui-hidden-accessible">Add your comment</label>
+							<textarea cols="40" rows="5" id="myComment" name="myComment" placeholder="Add your comment"></textarea>
+							<div id="commentButton">
+							<a href="#" data-role="button" id="commentSubmit" data-mini="true">Submit</a>
+							</div>
+						</li>
+					</ul>
+					</script>
+				</div>
             </div>
         </div>
 		<!-- Share page -->
@@ -329,10 +339,9 @@
 					</li>
 					<li><div class="ui-grid-a">
 						<div class="ui-block-a">
-							<a href="#" data-rel="back" data-role="button">Cancel</a>
 						</div>
 						<div class="ui-block-b">
-							<a href="#" onclick="share()" data-role="button" data-theme="a">Share</a>
+							<a href="#" onclick="share()" data-role="button" data-mini="true">Share</a>
 						</div>
 					</div></li>
 				</ul>
