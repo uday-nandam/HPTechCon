@@ -552,7 +552,7 @@ function scan() {
                 "cancelled: " + args.cancelled + "\n");
             
 		_id = args.text;
-		getSession(_id);
+		searchSession(_id);
 		$.mobile.changePage("#event-details", {transition: "slideup"});
 
            
