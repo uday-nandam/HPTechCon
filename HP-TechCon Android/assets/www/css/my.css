@@ -175,6 +175,14 @@ table td{
 	padding-left: 75%;
 }
 
+/* Pop up options */
+#menuChecked ul{
+	font-size: small;
+}
+#menuChecked a{
+	font-size: small;
+}
+
 /* Share Page */
 .listLook label{
 	font-size: small;
