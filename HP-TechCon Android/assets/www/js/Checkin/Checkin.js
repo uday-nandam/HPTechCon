@@ -11,8 +11,7 @@ var eventCheckedTemplateCompiled;
 var commentscheckedTemplate;
 var commentscheckedTemplateCompiled;
 
-var userID = 123456;
-// var userID = parseInt(Parse.User.current().getUsername());
+var userID;
 var _id = 0;
 var _name = "";
 var _location = "";
@@ -29,6 +28,8 @@ $(function() {
 	var PARSE_JS = "w4ffwNOQtdfqDb2tWBXUoPmD7qJrpmHv6xcnuZj4";
 
 	Parse.initialize(PARSE_APP, PARSE_JS);
+	
+	userID = Parse.User.current().getUsername();
 
     currentEventsTemplate = $("#currentEvents-template").html();
     currentEventsTemplateCompiled = Handlebars.compile(currentEventsTemplate);
@@ -204,51 +205,94 @@ function searchSession(input){
 	query1.equalTo("EventId", _id);
 	query1.find({
 		success: function(results){
-			
 			if (results.length == 0){
 				checkin.set("EventId", _id);
-				checkin.set("UserID", userID);
-				checkin.set("EventName", _name);
-				checkin.set("EventLocation", _location);
-				
-				employee = Parse.Object.extend("employee");
-				query = new Parse.Query(employee);
-				userID = parseInt(userID);
-				
-				query.equalTo("employee_id", userID);
-				query.find({
-					success: function(result){
-						var emp = result[0];
-						name = emp.get("name");
-						locat = emp.get("location");
-						title = emp.get("title");
-			
-						checkin.set("Name", name);
-						checkin.set("location", locat);
-						checkin.set("Title", title);
+						checkin.set("UserID", userID);
+						checkin.set("EventName", _name);
+						checkin.set("EventLocation", _location);
 						
-						var date = new Date();
-					 	var time = convertTime(date);
-					 	
-						checkin.save(null, {
-							success: function(checkin) {
-								//alert("You have successfully checked into " + _name + " at " + time);								
-							},
-							error: function(checkin, error) {
-								alert("Error saving to server");
+						employee = Parse.Object.extend("employee");
+						query = new Parse.Query(employee);
+						userID = parseInt(userID);
+						
+						query.equalTo("employee_id", userID);
+						query.find({
+							success: function(result){
+								var emp = result[0];
+								name = emp.get("name");
+								locat = emp.get("location");
+								title = emp.get("title");
+								
+								checkin.set("Name", name);
+								checkin.set("location", locat);
+								checkin.set("Title", title);
+								
+								var date = new Date();
+							 	var time = convertTime(date);
+							 	
+								checkin.save(null, {
+									success: function(checkin) {
+										//alert("You have successfully checked into " + _name + " at " + time);								
+									},
+									error: function(checkin, error) {
+										alert("Error saving to server");
+									}
+								});	
 							}
-						});	
-					}
-				});
+						});
 			}
 			else{
-					alert("You have already checked in to the event");
+				for(var i=0, len=results.length; i<len;i++){
+					var res = results[i];
+					
+						if ((res.length == 0) || (res.get("UserID") != userID)){
+							
+							checkin.set("EventId", _id);
+							checkin.set("UserID", userID);
+							checkin.set("EventName", _name);
+							checkin.set("EventLocation", _location);
+							
+							employee = Parse.Object.extend("employee");
+							query = new Parse.Query(employee);
+							userID = parseInt(userID);
+							
+							query.equalTo("employee_id", userID);
+							query.find({
+								success: function(result){
+									var emp = result[0];
+									name = emp.get("name");
+									locat = emp.get("location");
+									title = emp.get("title");
+									
+									checkin.set("Name", name);
+									checkin.set("location", locat);
+									checkin.set("Title", title);
+									
+									var date = new Date();
+								 	var time = convertTime(date);
+								 	
+									checkin.save(null, {
+										success: function(checkin) {
+											//alert("You have successfully checked into " + _name + " at " + time);								
+										},
+										error: function(checkin, error) {
+											alert("Error saving to server");
+										}
+									});	
+								}
+							});
+						}
+						else{
+								alert("You have already checked in to the event");
+						}
+				}
 			}
-			
+					
 			},
 			error: function(checkin, error){
 				alert("Error");
 			}
+			
 	});
 		
  }
@@ -398,8 +442,9 @@ function recentCheckins() {
 	var checkin = Parse.Object.extend("CheckIn");
 	var query = new Parse.Query(checkin);
 	
-	query.limit(10); // We only want the first 10 to show under Recent Checkins
 	
+	query.equalTo("UserID", userID);
+	query.limit(10); // We only want the first 10 to show under Recent Checkins
 	query.find({
 		success: function(results) {
 			
