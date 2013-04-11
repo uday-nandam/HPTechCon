@@ -13,6 +13,8 @@ $(function() {
 
 	Parse.initialize(PARSE_APP, PARSE_JS);
 
+	console.log(Parse.User.current());
+
     myBlogPostsTemplate = $("#myBlogPosts-template").html();
     myBlogPostsTemplateCompiled = Handlebars.compile(myBlogPostsTemplate);
     editBlogPostTemplate = $('#editBlogPost-template').html();
