@@ -95,7 +95,7 @@ $(function() {
 		$("#eventDetails").on('click', '#checkIn', function(e) {
 			e.preventDefault();
 			checkInConfirm();
-			//$.mobile.changePage('#checkin-main');
+			$.mobile.changePage('#checkin-main');
 		}); 
 		
 		$("#commentSection").on('click', '#commentSubmit', function(e) {
@@ -200,44 +200,57 @@ function searchSession(input){
 	var CheckIn = Parse.Object.extend("CheckIn");
 	var checkin = new CheckIn();
 	
-	checkin.set("EventId", _id);
-	checkin.set("UserID", userID);
-	checkin.set("EventName", _name);
-	checkin.set("EventLocation", _location);
-	
-	employee = Parse.Object.extend("employee");
-	query = new Parse.Query(employee);
-	userID = parseInt(userID);
-	
-	query.equalTo("employee_id", userID);
-	query.find({
-		success: function(result){
-			var emp = result[0];
-			name = emp.get("name");
-			locat = emp.get("location");
-			title = emp.get("title");
-
-			checkin.set("Name", name);
-			checkin.set("location", locat);
-			checkin.set("Title", title);
+	query1 = new Parse.Query(CheckIn);
+	query1.equalTo("EventId", _id);
+	query1.find({
+		success: function(results){
 			
-			var date = new Date();
-		 	var time = convertTime(date);
-		 	
-			checkin.save(null, {
-				success: function(checkin) {
-					//alert("You have successfully checked into " + _name + " at " + time);
-					//$.mobile.changePage("#checkin-main", {transition: "slideup"});
-					reload();
-				},
-				error: function(checkin, error) {
-					alert("Error saving to server");
-					$.mobile.changePage("#checkin-main", {reloadPage : true});
-				}
-			});	
-		}
+			if (results.length == 0){
+				checkin.set("EventId", _id);
+				checkin.set("UserID", userID);
+				checkin.set("EventName", _name);
+				checkin.set("EventLocation", _location);
+				
+				employee = Parse.Object.extend("employee");
+				query = new Parse.Query(employee);
+				userID = parseInt(userID);
+				
+				query.equalTo("employee_id", userID);
+				query.find({
+					success: function(result){
+						var emp = result[0];
+						name = emp.get("name");
+						locat = emp.get("location");
+						title = emp.get("title");
+			
+						checkin.set("Name", name);
+						checkin.set("location", locat);
+						checkin.set("Title", title);
+						
+						var date = new Date();
+					 	var time = convertTime(date);
+					 	
+						checkin.save(null, {
+							success: function(checkin) {
+								//alert("You have successfully checked into " + _name + " at " + time);								
+							},
+							error: function(checkin, error) {
+								alert("Error saving to server");
+							}
+						});	
+					}
+				});
+			}
+			else{
+					alert("You have already checked in to the event");
+			}
+			
+			},
+			error: function(checkin, error){
+				alert("Error");
+			}
 	});
-	
+		
  }
  
 // checks the system time against the parse server data to 
