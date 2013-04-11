@@ -244,9 +244,15 @@ function searchSession(input){
 			else{
 				for(var i=0, len=results.length; i<len;i++){
 					var res = results[i];
-					
-						if ((res.length == 0) || (res.get("UserID") != userID)){
-							
+						
+						if (res.get("UserID") == userID){
+							alert("You have already checked in to the event");
+							var alreadyIn = true;
+						}
+						
+				}
+				
+				if (!alreadyIn){	
 							checkin.set("EventId", _id);
 							checkin.set("UserID", userID);
 							checkin.set("EventName", _name);
@@ -282,11 +288,9 @@ function searchSession(input){
 								}
 							});
 						}
-						else{
-								alert("You have already checked in to the event");
-						}
+						
 				}
-			}
+			
 					
 			},
 			error: function(checkin, error){
