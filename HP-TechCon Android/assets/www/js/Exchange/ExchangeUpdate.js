@@ -19,7 +19,7 @@ function saveExchangeNotes() {
 					//alert("Error");
 				}
 			});
-			reload();
+			//reload();
 		},
 		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);

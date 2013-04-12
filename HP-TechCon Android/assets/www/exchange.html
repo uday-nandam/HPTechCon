@@ -15,7 +15,7 @@
                 <!-- Link css and js files -->
                 <link rel="stylesheet" href="css/my.css" />
                 <script src="js/handlebars.js"></script>
-                <script src="js/Exchange/Exchange.js"></script>
+                <script src="js/Exchange/ExchangeTest.js"></script>
 				<script src="js/Exchange/ExchangeUpdate.js"></script>
                 <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
 
@@ -37,7 +37,7 @@
 						<input name="exchangeInput" id="exchangeInput" placeholder="Enter E-mail or ID" value="" type="text">
 					</div>
 					<div class="ui-block-b">
-						<a href="#exchange-new" id="submitButton" onclick="searchContact()" data-role="button" data-mini="true">Go</a>
+						<a  id="submitButton" onclick="" data-role="button" data-mini="true">Go</a>
 					</div>
 				</div>
 				
@@ -47,15 +47,15 @@
 					<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="savedExchanges" class="listLook" data-icon="edit">
 						<li data-role="list-divider"> Recent Exchanges </li>                                    
 							{{#recentExchanges}}
-									<li id = "{{id}}"><a onclick = "exchangeDetails('{{id}}')" href="#exchange-details">
-											<img src="images/person1.PNG" alt="Photo">
-											<h2>{{to_name}}</h2>
-											<p>{{comments}}</p>
-											<p class="ui-li-aside">{{time}}</p>
+									<li id = "{{id}}"><a id = "{{id}}" onclick = "" href="#exchange-details">
+											<img id = "{{id}}" src="images/person1.PNG" alt="Photo">
+											<h2 id = "{{id}}">{{to_name}}</h2>
+											<p id = "{{id}}">{{comments}}</p>
+											<p id = "{{id}}" class="ui-li-aside">{{time}}</p>
 										</a>
 									</li>
 							{{/recentExchanges}}
-						<li data-icon="arrow-r"><a href="#exchange-all" onclick = "allExchanges()">
+						<li id = "viewAllExchangesLink" data-icon="arrow-r"><a href="#exchange-all" onclick = "">
 							<span>View all exchanges</span>
 						</a></li>
 					</ul>
@@ -104,11 +104,11 @@
 					<ul data-role="listview" id="allExchanges" data-autodividers="false" data-filter="true" 
 					data-inset="true"  data-divider-theme="a" data-filter-placeholder="Find an exchange" class="listLook" data-icon="edit">
 						{{#allExchanges}}	
-								<li id = "{{id}}"><a onclick = "exchangeDetails('{{id}}')" href="#exchange-details">
-										<img src="images/person3.PNG" alt="Photo">
-										<h2>{{to_name}}</h2>
-										<p>{{comments}}</p>
-										<p class="ui-li-aside">{{time}}</p>
+								<li id = "{{id}}"><a id = "{{id}}" onclick = "" href="#exchange-details">
+										<img id = "{{id}}" src="images/person3.PNG" alt="Photo">
+										<h2 id = "{{id}}">{{to_name}}</h2>
+										<p id = "{{id}}">{{comments}}</p>
+										<p id = "{{id}}" class="ui-li-aside">{{time}}</p>
 								</a></li>
 						{{/allExchanges}}
 					</ul>
@@ -166,10 +166,10 @@
 						</div></li>
 						<li><div class="ui-grid-a">
 							<div class="ui-block-a">
-								<a href="#exchange-main" onclick = "reload()" data-role="button">Cancel</a>
+								<a id = "cancelNoteButton" href="#exchange-main" onclick = "" data-role="button">Cancel</a>
 							</div>
 							<div class="ui-block-b">
-								<button class = "buttonSave" type = "button" onclick="saveExchangeNotes()" data-theme="a">Save</button>
+								<button id = "saveNoteButton" class = "buttonSave" type = "button" onclick="" data-theme="a">Save</button>
 							</div>
 						</div></li>
 					</ul>
@@ -194,7 +194,8 @@
 						</li>
 						<li><div class="exchangeDetails ui-grid-a">
 							<div class="ui-block-a">
-								<img src="images/personNew.PNG" alt="Photo" class="portrait">
+								<img src="images/personNew.PNG" alt="Photo" class="portrait"> 
+							<!--	<img src="{{picture}}" alt="Photo" class="portrait"> -->
 							</div>
 							<div class="ui-block-b">
 								<table class="personDetails">
@@ -224,10 +225,10 @@
 						</div></li>
 						<li><div class="options ui-grid-a">
 							<div class="ui-block-a">
-								<a onclick = "reload()" data-role="button">Cancel</a>
+								<a id = "cancelExchange" onclick = "" data-role="button">Cancel</a>
 							</div>
 							<div class="ui-block-b">
-								<button class = "buttonExchange" type = "button" onclick = "exchangeConfirm()" data-theme="b">Exchange</button>
+								<button class = "buttonExchange" id = "exchangeConfirm" type = "button" onclick = "" data-theme="b">Exchange</button>
 							</div>
 						</div></li>
 					</ul>				
