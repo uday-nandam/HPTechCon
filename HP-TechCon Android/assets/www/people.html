@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <title>People</title>
+        
+                <!-- Adapted from API panel example-->
+                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                <script src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
+                
+                <!-- Link css and js files -->
+                <link rel="stylesheet" href="css/my.css" />
+                <script src="js/handlebars.js"></script>
+                <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+
+    </head>
+    <body>
+        <!-- Main page -->
+        <div data-role="page" data-url ="people-main" id="people-main" class="ui-responsive-panel">
+            <!-- Header -->
+            <div data-role="header" data-theme="a" data-position="fixed">
+                <h3 class="headerTitle">People</h3>
+				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+            </div>
+			<!-- Content -->
+            <div data-role="content" class="jqm-content">
+				<!-- List of all people -->
+				<div id="">
+					<ul data-role="listview" id="peopleList" data-autodividers="true" data-filter="true" 
+					data-inset="true"  data-divider-theme="a" data-filter-placeholder="Find a person" class="listLook">
+						<li><a href="#person-details">
+								<img src="images/person3.PNG" alt="Photo">
+								<h2>Abby</h2>
+								<p>Short summary?</p>
+						</a></li>
+						<li><a href="#person-details">
+								<img src="images/person3.PNG" alt="Photo">
+								<h2>Angel</h2>
+								<p>Short summary?</p>
+						</a></li>
+						<li><a href="#person-details">
+								<img src="images/person3.PNG" alt="Photo">
+								<h2>Sheila</h2>
+								<p>Short summary?</p>
+						</a></li>
+						<li><a href="#person-details">
+								<img src="images/person3.PNG" alt="Photo">
+								<h2>Victoria</h2>
+								<p>Short summary?</p>
+						</a></li>
+					</ul>
+				</div>
+            </div>
+            <!-- Navigation panel -->
+			<div data-role="panel" data-position-fixed="true"  data-display="reveal" data-theme="a" id="nav-panel">
+				<ul data-role="listview" data-theme="a" class="nav-search">
+					<li><a href="home.html#home-main" rel="external">
+						<img src="images/Home_1.png" alt="Home">Home
+					</a></li>
+					<li><a href="checkin.html#checkin-main" rel="external">
+						<img src="images/Check_In_1.png" alt="Check In">Check In
+					</a></li>
+					<li><a href="#exchange-main" rel="external">
+						<img src="images/Exchange_1.png" alt="Exchange">Exchange
+					</a></li>
+					<li><a href="microblog.html#microblog-main" rel="external">
+						<img src="images/Microblog_1.png" alt="Microblog">Microblog
+					</a></li>
+					<li><a href="#">
+						<img src="images/Note_1.png" alt="Notes">Notes
+					</a></li>
+					<li><a href="#">
+						<img src="images/Agenda_1.png" alt="Agenda">Agenda
+					</a></li>
+					<li><a href="#people-main" data-rel="close">
+						<img src="images/People_1.png" alt="People">People
+					</a></li>
+				</ul>
+			</div>
+        </div>
+        
+		<!-- Details page -->
+        <div data-role="page" data-url ="person-details" id="person-details" class="ui-responsive-panel">
+			<!-- Header -->
+            <div data-role="header" data-theme="a" data-position="fixed">
+                <h3 class="headerTitle">Person Details</h3>
+				<a href="#checkin-main" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
+				<a href="exchange.html#exchange-main" rel="external" data-icon="arrow-r" data-iconpos="right">Exchange</a>
+            </div>
+			<!-- Content -->
+			<div data-role="content" class="jqm-content">
+				<!-- Person details-->
+					<ul data-role="listview" data-inset="true" data-divider-theme="a">
+						<li data-role="list-divider">
+							<h1>Name</h1>
+						</li>
+						<li><div class="personDetails ui-grid-a">
+							<div class="ui-block-a">
+								<img src="images/person1.PNG" alt="Photo" class="portrait">
+							</div>
+							<div class="ui-block-b">
+								<table class="personDetails">
+									<tr>
+										<th>Email:</th> <td>xxx@abc.com</td>
+									</tr>
+									<tr>
+										<th>Place:</th> <td>TX</td>
+									</tr>
+									<tr>
+										<th>Dept:</th> <td>Software Engineering</td>
+									</tr>
+									<tr>
+										<th>Title:</th> <td>Doctor</td>
+									</tr>
+									<tr>
+										<th>Date:</th> <td>3/3/13</td>
+									</tr>
+								</table>
+							</div>
+						</div></li>
+					</ul>
+				<!-- Links and counts to -->
+				<div data-role="collapsible-set" data-theme="a">
+					<div data-role="collapsible">
+						<h2>Recent Check-Ins</h2>
+						<ul data-role="listview" class="listLook">
+							<li><a href="#">
+								<h2>Event Name</h2>
+								<p>Location: XXX</p>
+								<p><em>Checked in @ XX:XX</em></p>
+							</a></li>
+							<li><a href="#">
+								<h2>Event Name</h2>
+								<p>Location: XXX</p>
+								<p><em>Checked in @ XX:XX</em></p>
+							</a></li>
+							<li><a href="#">
+								<h2>Event Name</h2>
+								<p>Location: XXX</p>
+								<p><em>Checked in @ XX:XX</em></p>
+							</a></li>
+						</ul>
+					</div>
+					<div data-role="collapsible">
+						<h2>Recent Microblog Posts</h2>
+						<ul data-role="listview" class="listLook">
+							<li><a href="#">
+								<p>Great presentation on transistors.</p>
+								<p><em>Posted @ XX:XX - Comments(X)</em></p>
+							</a></li>
+							<li><a href="#">
+								<p>Great presentation on transistors.</p>
+								<p><em>Posted @ XX:XX - Comments(X)</em></p>
+							</a></li>
+						</ul>
+					</div>
+					<div data-role="collapsible">
+						<h2>Recent Exchanges</h2>
+						<ul data-role="listview" class="listLook">
+							<li><a href="#">
+								<img src="images/person1.PNG" alt="Photo">
+								<h2>Person</h2>
+								<p><em>Exchanged @ XX:XX</em></p>
+							</a></li>
+							<li><a href="#">
+							<img src="images/person1.PNG" alt="Photo">
+								<h2>Person</h2>
+								<p><em>Exchanged @ XX:XX</em></p>
+							</a></li>
+							<li><a href="#">
+								<img src="images/person1.PNG" alt="Photo">
+								<h2>Person</h2>
+								<p><em>Exchanged @ XX:XX</em></p>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+            </div>
+        </div>
+    </body>
+</html>

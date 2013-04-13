@@ -1,3 +1,7 @@
+body{
+	font-size: small;
+}
+
 textarea{
 	resize: none;
 }
@@ -49,14 +53,15 @@ textarea{
 .header{
 	text-align: center;
 }
-.listLook span{
-	font-size: small;
-}
 .listLook p{
 	font-size: small;
+	max-height: 35px; /* Temporary solution */
+	width: 100%;
 }
 .listLook h2{
 	font-size: small;
+	width: 75%;
+	height: 100%;
 }
 .listLook img{
 	width: 50px;
@@ -69,7 +74,7 @@ textarea{
 }
 .listLook .attachment{
 	width: 70%;
-	height: 150px;
+	height: 75px; /* Testing values */
 	padding-bottom: 5px;
 	padding-left: 10px;
 }
@@ -87,9 +92,9 @@ textarea{
 
 /* Exchange-details page */
 .portrait{
-	width: 90px;
-	height: 90px;
-	padding-top: 15px;
+	width: 75px;
+	height: 75px;
+	padding-top: 10px;
 }
 
 table th{
@@ -150,8 +155,7 @@ table td{
 
 /* Post details */
 .attachView{
-	width: 350px;
-	height: 250px;
+	width: 100%;
 	text-align: center;
 }
 .postDetails .ui-block-a{
@@ -176,10 +180,10 @@ table td{
 }
 
 /* Pop up options */
-#menuChecked ul{
+#menuShare1 ul, a{
 	font-size: small;
 }
-#menuChecked a{
+#menuShare2 ul, a{
 	font-size: small;
 }
 
@@ -193,6 +197,15 @@ table td{
 }
 #messageBody{
 	height: 100px;
+}
+
+/* People Page */
+.personDetails .ui-block-a{
+	width: 32%; /* PLEASE TEST ON PHONE */
+}
+
+.listLook em{
+	font-size: x-small;
 }
 
 /* Icons */
