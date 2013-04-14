@@ -44,8 +44,9 @@ function getPeople(){
 			for(var i=0; i < result.length ;i++){
 				name = result[i].get("name");
 				lastName = result[i].get("Last_Name");
-				img = result[i].get("picture");
+				img = result[i].get("picture").url;
 				_personID = result[i].get("employee_id");
+				
 				
 				data += '{"name": "' + name + '", ';
 				data += '"id": "' + _personID + '", ';
