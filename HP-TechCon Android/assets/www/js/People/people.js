@@ -51,12 +51,6 @@ $(function() {
 			$.mobile.changePage('#event-details');
 		}); 
 		
-		$("#peopleEvents").on('click', '#peopleMicro li', function(e) {
-			e.preventDefault();
-			_eventID = e.target.id;
-			$.mobile.changePage('#event-details');
-		}); 
-		
 		$("#peopleEvents").on('click', '#peopleExchange li', function(e) {
 			e.preventDefault();
 			_eventID = e.target.id;
@@ -65,8 +59,8 @@ $(function() {
 		
 		getPersonDetails();
 		getPeopleCheckins();
-		//getPeopleMicros();
-		//getPeopleExchanges();
+		getPeopleMicros();
+		getPeopleExchanges();
 		
 	});
 	

@@ -118,7 +118,7 @@
 					<li><a href="#">
 						<img src="images/Agenda_1.png" alt="Agenda">Agenda
 					</a></li>
-					<li><a href="#">
+					<li><a href="people.html#people-main" rel="external">
 						<img src="images/People_1.png" alt="People">People
 					</a></li>
 				</ul>
@@ -340,7 +340,7 @@
                 <a href="#checkin-main" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
             </div>
 			<!-- Content -->
-            <div data-role="content" class="jqm-content">
+            <div id="eventShare" data-role="content" class="jqm-content">
 				<!-- Quick post -->
 				<ul data-role="listview" data-inset="true" data-divider-theme="a" id="quickPost" class="listLook">
 					<li data-role="list-divider">Share /Event Name/
@@ -359,7 +359,7 @@
 						<div class="ui-block-a">
 						</div>
 						<div class="ui-block-b">
-							<a href="#" onclick="share()" data-role="button" data-mini="true">Share</a>
+							<a id="shareButton" data-role="button" data-mini="true">Share</a>
 						</div>
 					</div></li>
 				</ul>

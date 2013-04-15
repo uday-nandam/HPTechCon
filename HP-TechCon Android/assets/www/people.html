@@ -134,28 +134,31 @@
 						</ul>
 						</script>
 					</div>
-					<div data-role="collapsible">
+					<div id="peopleMicroDiv" data-role="collapsible">
 						<h2>Recent Microblog Posts</h2>
 						<script id="peopleMicro-template" type="text/x-handlebars-template">
 						<ul data-role="listview" id="peopleMicro" class="listLook">
-							<li id="{{eventID}}">
-								<a id="{{eventID}}">
-								<p id="{{eventID}}">{{post}}</p>
-								<p id="{{eventID}}"><em>Posted @ {{time}} - Comments(X)</em></p>
-							</a></li>
+							{{#peopleMicro}}
+							<li>
+								<p>{{post}}</p>
+								<p><em>Posted @ {{time}} - Comments(X)</em></p>
+							</li>
+							{{/peopleMicro}}
 						</ul>
 						</script>
 					</div>
-					<div data-role="collapsible">
+					<div id="peopleExchangeDiv" data-role="collapsible">
 						<h2>Recent Exchanges</h2>
 						<script id="peopleExchanges-template" type="text/x-handlebars-template">
 						<ul data-role="listview" id="peopleExchange" class="listLook">
-							<li id="{{eventID}}">
-								<a id="{{eventID}}">
-								<img src="{{image}}" alt="Photo">
-								<h2 id="{{eventID}}">{{Person}}</h2>
-								<p id="{{eventID}}"><em>Exchanged @ {{time}}</em></p>
+							{{#peopleExchange}}
+							<li id="{{id}}">
+								<a id="{{id}}">
+								<img src="{{id}}" alt="Photo">
+								<h2 id="{{id}}">{{Person}}</h2>
+								<p id="{{id}}"><em>Exchanged @ {{time}}</em></p>
 							</a></li>
+							{{/peopleExchange}}
 						</ul>
 						</script>
 					</div>

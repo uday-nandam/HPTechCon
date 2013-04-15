@@ -1,11 +1,30 @@
 // Share.js
 // This is the JS file which includes all of the "Share" feature implementation.
-var PARSE_APP = "9AeVfYuAP1SWUgUv5bogPOaGwldaZTstNEO8tdJx";
-var PARSE_JS = "w4ffwNOQtdfqDb2tWBXUoPmD7qJrpmHv6xcnuZj4";
 
-Parse.initialize(PARSE_APP, PARSE_JS);
+var recommendedEventsTemplate;
+var recommendedEventsTemplateCompiled;
+
+$(function() {
+	
+	var PARSE_APP = "9AeVfYuAP1SWUgUv5bogPOaGwldaZTstNEO8tdJx";
+	var PARSE_JS = "w4ffwNOQtdfqDb2tWBXUoPmD7qJrpmHv6xcnuZj4";
+
+	Parse.initialize(PARSE_APP, PARSE_JS);
+	
+	recommendedEventsTemplate = $("#recommendedEvents-template").html();
+    recommendedEventsTemplateCompiled = Handlebars.compile(recommendedEventsTemplate);
+
+	$(document).delegate('#event-share', 'pageinit', function(event) {
+		
+		$("#eventShare").on('click', '#shareButton', function(e) {
+				e.preventDefault();
+				share();
+				$.mobile.changePage('#event-details');
+		}); 
+	});
 
 recommendedEvents();
+});
 
 function share() 
 {
@@ -30,22 +49,22 @@ function share()
 		}
 	});
 	
-	window.location = "#event-details";
+	//window.location = "#event-details";
 }
 
 function recommendedEvents()
 {
 	var SharedEvents = Parse.Object.extend("Share");
 	var query = new Parse.Query(SharedEvents);
-	
-	query.equalTo("to_id", userID);
+	var userIDint = parseInt(userID);
+	query.equalTo("to_id", userIDint);
 
 	query.limit(2);
 	
 	query.find({
 		success: function(results) {
 			
-			var source = $("#recommendedEvents-template").html();
+			
 			// Create JSON array 
 			var data = '{ "recommendedEvents" : [';
 			for(var a = 0; a < results.length; a++) {
@@ -64,10 +83,10 @@ function recommendedEvents()
 			
 			var arr = JSON.parse(data);
 			
-			var template = Handlebars.compile(source);
-			
-			$("#recommendedEventsdiv").append(template(arr)).trigger('create');
+			$("#recommendedEventsdiv").html(recommendedEventsTemplateCompiled(arr)).trigger("create");
 			$("#recommendedEventsdiv ul").listview();
+			
+			
 		}
 	});
 }
