@@ -1,8 +1,17 @@
 var userID;
 var _personID;
+var _eventID;
 
 var peopleTemplate;
 var peopleTemplateCompiled;
+var peopleDetailsTemplate;
+var peopleDetailsTemplateCompiled;
+var peopleCheckInTemplate;
+var peopleCheckInTemplateCompiled;
+var peopleMicroTemplate;
+var peopleMircroTemplateCompiled;
+var peopleExchangeTemplate;
+var peopleExchangeTemplateCompiled;
 
 $(function() {
 
@@ -15,14 +24,52 @@ $(function() {
 	
 	peopleTemplate = $("#people-template").html();
     peopleTemplateCompiled = Handlebars.compile(peopleTemplate);
+    
+    peopleDetailsTemplate = $("#peopleDetails-template").html();
+    peopleDetailsTemplateCompiled = Handlebars.compile(peopleDetailsTemplate);
+    
+    peopleCheckInTemplate = $("#peopleCheckIn-template").html();
+    peopleCheckInTemplateCompiled = Handlebars.compile(peopleCheckInTemplate);
+    
+    peopleMicroTemplate = $("#peopleMicro-template").html();
+    peopleMicroTemplateCompiled = Handlebars.compile(peopleMicroTemplate);
+    
+    peopleExchangeTemplate = $("#peopleExchanges-template").html();
+    peopleExchangeTemplateCompiled = Handlebars.compile(peopleExchangeTemplate);
 	
 	$("#peoplediv").on('click', '#peopleList li', function(e) {
 		e.preventDefault();
-		_id = e.target.id;
-		
+		_personID = e.target.id;
 		$.mobile.changePage('#person-details');
 	}); 
-
+	
+	$(document).delegate('#person-details', 'pageinit', function(event) {
+		
+		$("#peopleEvents").on('click', '#peopleCheckIn li', function(e) {
+			e.preventDefault();
+			_eventID = e.target.id;
+			$.mobile.changePage('#event-details');
+		}); 
+		
+		$("#peopleEvents").on('click', '#peopleMicro li', function(e) {
+			e.preventDefault();
+			_eventID = e.target.id;
+			$.mobile.changePage('#event-details');
+		}); 
+		
+		$("#peopleEvents").on('click', '#peopleExchange li', function(e) {
+			e.preventDefault();
+			_eventID = e.target.id;
+			$.mobile.changePage('#event-details');
+		}); 
+		
+		getPersonDetails();
+		getPeopleCheckins();
+		//getPeopleMicros();
+		//getPeopleExchanges();
+		
+	});
+	
 	getPeople();
 
 });
