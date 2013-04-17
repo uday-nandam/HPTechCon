@@ -31,15 +31,18 @@
 			<!-- Content -->
             <div data-role="content" class="jqm-content">
 				<!-- Input text box; not search -->
-				<div class="ui-grid-a" id="inputBar">
-					<div class="ui-block-a">
-						<label for="exchangeInput" class="ui-hidden-accessible">Enter E-mail or ID: </label>
-						<input name="exchangeInput" id="exchangeInput" placeholder="Enter E-mail or ID" value="" type="text">
-					</div>
-					<div class="ui-block-b">
-						<a  id="submitButton" onclick="" data-role="button" data-mini="true">Go</a>
-					</div>
-				</div>
+				<ul data-role="listview" data-inset="true" data-divider-theme="a" class="listLook">
+					<li data-role="list-divider">People Search</li>
+					<li><div class="ui-grid-a" id="inputBar">
+						<div class="ui-block-a">
+							<label for="exchangeInput" class="ui-hidden-accessible">Enter E-mail or ID: </label>
+							<input name="exchangeInput" id="exchangeInput" placeholder="Enter E-mail or ID" value="" type="text">
+						</div>
+						<div class="ui-block-b">
+							<a href="#exchange-new" id="submitButton" onclick="searchContact()" data-role="button" data-mini="true">Go</a>
+						</div>
+					</div></li>
+				</ul>
 				
 				<!-- Listview for saved exchanges -->
 				<div id = "recentExchangesdiv">
@@ -51,7 +54,7 @@
 											<img id = "{{id}}" src="images/person1.PNG" alt="Photo">
 											<h2 id = "{{id}}">{{to_name}}</h2>
 											<p id = "{{id}}">{{comments}}</p>
-											<p id = "{{id}}" class="ui-li-aside">{{time}}</p>
+											<p id = "{{id}}"><em>Exchanged @ {{time}}</em></p>
 										</a>
 									</li>
 							{{/recentExchanges}}
@@ -77,13 +80,7 @@
 					<li><a href="microblog.html#microblog-main" rel="external">
 						<img src="images/Microblog_1.png" alt="Microblog">Microblog
 					</a></li>
-					<li><a href="#">
-						<img src="images/Note_1.png" alt="Notes">Notes
-					</a></li>
-					<li><a href="#">
-						<img src="images/Agenda_1.png" alt="Agenda">Agenda
-					</a></li>
-					<li><a href="#">
+					<li><a href="people.html#people-main" rel="external">
 						<img src="images/People_1.png" alt="People">People
 					</a></li>
 				</ul>
@@ -101,14 +98,14 @@
             <div data-role="content" class="jqm-content">
 				<div id="allExchangesdiv">
 				<script id="allexchanges-template" type="text/x-handlebars-template">
-					<ul data-role="listview" id="allExchanges" data-autodividers="false" data-filter="true" 
+					<ul data-role="listview" id="allExchanges" data-autodividers="true" data-filter="true" 
 					data-inset="true"  data-divider-theme="a" data-filter-placeholder="Find an exchange" class="listLook" data-icon="edit">
 						{{#allExchanges}}	
 								<li id = "{{id}}"><a id = "{{id}}" onclick = "" href="#exchange-details">
 										<img id = "{{id}}" src="images/person3.PNG" alt="Photo">
 										<h2 id = "{{id}}">{{to_name}}</h2>
 										<p id = "{{id}}">{{comments}}</p>
-										<p id = "{{id}}" class="ui-li-aside">{{time}}</p>
+										<p id = "{{id}}"><em>Posted on {{time}}</em></p>
 								</a></li>
 						{{/allExchanges}}
 					</ul>
@@ -138,7 +135,7 @@
 							<div class="ui-block-b">
 								<table class="personDetails">
 									<tr>
-										<th>E-mail:</th> <td>{{email}}</td>
+										<th>Email:</th> <td>{{email}}</td>
 									</tr>
 									<tr>
 										<th>Place:</th> <td>{{location}}</td>
@@ -200,7 +197,7 @@
 							<div class="ui-block-b">
 								<table class="personDetails">
 									<tr>
-										<th>E-mail:</th> <td>{{email}}</td>
+										<th>Email:</th> <td>{{email}}</td>
 									</tr>
 									<tr>
 										<th>Place:</th> <td>{{location}}</td>

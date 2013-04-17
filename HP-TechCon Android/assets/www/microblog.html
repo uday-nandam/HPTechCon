@@ -63,16 +63,16 @@
 								<img src="images/person2.PNG" alt="Photo">
 								<h2>John Doe</h2>
 								<p>The next transistors discussion will be at 3:00PM. Please plan on attending.</p>
-								<p class="ui-li-aside"><strong>2:47</strong>PM</p>
-								<div><img src="images/snapshot-lobby.PNG" class="attachment" alt="Attachment">
-								</div>
+								<img src="images/snapshot-lobby.PNG" class="attachment" alt="Attachment">
+								<br /><br />
+								<p><em>Posted at 2:47 PM - Comments (X) </em></p>
 							</a></li>
 							{{#feed}}
 								<li data-postid="{{post_id}}">
 									<img src="images/person3.PNG" alt="Photo">
 									<h2>{{post_author}}</h2>
 									<p>{{post_content}}</p>
-									<p class="ui-li-aside"><strong>{{posted_at}}</strong></p>
+									<p id="{{post_id}}"><em>Posted at {{posted_at}} - Comments (X)</em></p>
 								</li>
 							{{/feed}}
 						</ul>
@@ -94,13 +94,7 @@
 					<li><a href="#microblog-main" data-rel="close">
 						<img src="images/Microblog_1.png" alt="Microblog">Microblog
 					</a></li>
-					<li><a href="#">
-						<img src="images/Note_1.png" alt="Notes">Notes
-					</a></li>
-					<li><a href="#">
-						<img src="images/Agenda_1.png" alt="Agenda">Agenda
-					</a></li>
-					<li><a href="#">
+					<li><a href="people.html#people-main" rel="external">
 						<img src="images/People_1.png" alt="People">People
 					</a></li>
 				</ul>
@@ -126,7 +120,7 @@
 										<img src="images/personMe.PNG" id="{{post_id}}" alt="Photo" >
 										<br>
 										<p id="{{post_id}}">{{post_content}}</p>
-										<p class="ui-li-aside" id="{{post_id}}"><strong>{{posted_at}}</strong></p>
+										<p id="{{post_id}}"><em>Posted at {{posted_at}} - Comments (X) </em></p>
 									</a>
 								</li>
 							{{/allMyBlogPosts}}
@@ -192,10 +186,11 @@
 						<div class="ui-block-a">
 							<img src="images/person3.PNG" alt="Photo" class="portrait">
 						</div>
-						<div class="ui-block-b"><br>
+						<div class="ui-block-b">
 							<h2>Avery Walker</h2>
-							<p class="ui-li-aside"><strong>2:50</strong>PM</p>
-							<p>Stop by the poster session!</p>
+							<p>Stop by the poster session! There are several great posters to check out!</p>
+							<br>
+							<p><em>Posted at 2:50 PM</em></p>
 						</div>
 					</div></li>	
 					<li><div>
@@ -210,13 +205,13 @@
 						<img src="images/person1.PNG" alt="Photo">
 						<h2>Stephen Weber</h2>
 						<p>Really enjoyed it. Thanks for sharing.</p>
-						<p class="ui-li-aside"><strong>2:55</strong>PM</p>
+						<p><em>Posted at 2:55 PM</em></p>
 					</li>
 					<li>
 						<img src="images/personNew.PNG" alt="Photo">
 						<h2>Leeroy Jenkins</h2>
 						<p>Favorite one was the XYZ poster.</p>
-						<p class="ui-li-aside"><strong>3:10</strong>PM</p>
+						<p><em>Posted at 3:10 PM</em></p>
 					</li>
 					<li>
 						<img src="images/personMe.PNG" alt="Photo">
