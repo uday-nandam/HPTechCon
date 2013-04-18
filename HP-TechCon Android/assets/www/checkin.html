@@ -47,7 +47,7 @@
 							<br><p><strong>Found a QR code?</strong></p>
 						</div>
 						<div class="ui-block-b">
-							<button class = "buttonCam" data-mini="true"  onclick="scan()" data-inline="true" data-icon="camera" data-iconpos="right">Scan</button>
+							<a class = "buttonCam" data-role="button" data-mini="true"  onclick="scan()" data-icon="camera" data-iconpos="right">Scan</a>
 						</div>
 					</div>
 				</li>
@@ -58,10 +58,11 @@
 						<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="recommendedEvents" class="listLook">
 							<li data-role="list-divider">Recommended Events</li>
 							{{#recommendedEvents}}
-							<li id="{{event_id}}">
+							<li id="{{event_id}}">						
 								<a id="{{event_id}}">
 								<h2 id="{{event_id}}">{{event_name}}</h2>
 								<p id="{{event_id}}">From: {{from_id}}, {{comment}}</p>
+								<br>							
 								<p class="ui-li-aside" id="{{event_id}}"><strong>2:00</strong>PM</p>
 								<p><em>Comments (X)</em></p>
 								</a>

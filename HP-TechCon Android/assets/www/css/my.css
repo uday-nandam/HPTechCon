@@ -60,7 +60,7 @@ textarea{
 }
 .listLook h2{
 	font-size: small;
-	width: 100%;
+	width: 75%;
 	height: 100%;
 }
 .listLook img{
@@ -68,6 +68,11 @@ textarea{
 	height: 50px;
 	padding-top: 15px;
 	padding-left: 10px;
+}
+.listLook em{
+	font-size: x-small;
+	position: absolute;
+	bottom: 2px;
 }
 .ui-listview .ui-li-desc{
 	white-space: normal;
@@ -129,20 +134,15 @@ table td{
 
 /* Check in Page */
 #eventBar .ui-block-a{
-	width: 72%;
+	width: 70%;
 }
 #eventBar .ui-block-b{
 	padding-top: 7px;
-	width: 28%;
+	width: 30%;
 }
-
-/* .eventDetails{
-	padding-left: 10%;
+#eventBar a{
+	width: 92%;
 }
-
-.eventDetails th{
-	font-size: large;
-} */
 
 /* Microblog Post */
 #blogNote{
@@ -201,10 +201,6 @@ table td{
 /* People Page */
 .personDetails .ui-block-a{
 	width: 32%; /* PLEASE TEST ON PHONE */
-}
-
-.listLook em{
-	font-size: x-small;
 }
 
 /* Icons */
