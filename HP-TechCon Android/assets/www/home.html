@@ -55,12 +55,12 @@
 						<li><a href="microblog.html#microblog-main" rel="external"><span>Let others know youre here!</span></a>
 						</li>
 						{{#feed}}
-								<li id="{{post_id}}">
+								<li id="{{post_id}}" class="post">
 									<a href="microblog.html#microblog-view" data-ajax="false" data-id="{{post_id}}">
 										<img src="images/person3.PNG" alt="Photo">
 										<h2>{{post_author}}</h2>
 										<p>{{post_content}}</p>
-										<p class="ui-li-aside"><em>Posted @ {{posted_at}} | Comments(X) |</em></p>
+										<p><em>Posted @ {{posted_at}} - Comments(X)</em></p>
 									</a>
 								</li>
 						{{/feed}}

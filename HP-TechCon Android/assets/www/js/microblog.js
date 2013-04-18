@@ -113,23 +113,28 @@ $(function() {
 	    $("#submitNewPost").click(function(e) {
 	    	//retrieve the value from the text area
 	    	var blogContent = $("#blogNote").val();
-	    	var currentUser = Parse.User.current();
-	    	$.mobile.loading('show');
-	    	submitNewPost(blogContent, "111111");
-	    	setTimeout( function() { 
-				$.mobile.changePage(window.location.href, {
-				        allowSamePageTransition: true,
-				        transition: 'none',
-				        reloadPage: true,
-				        changeHash: false
-				    });
-			}, 1500);
+	    	if(blogContent != "") {
+		    	var currentUser = Parse.User.current();
+		    	$.mobile.loading('show');
+		    	submitNewPost(blogContent, "123456");
+		    	setTimeout( function() { 
+					$.mobile.changePage(window.location.href, {
+					        allowSamePageTransition: true,
+					        transition: 'none',
+					        reloadPage: true,
+					        changeHash: false
+					    });
+				}, 1500);
+			}
+			else {
+				alert("Sorry! Cannot post an empty blog post!");
+			}
 	  	});
 
 	    //fetch microblog feed with unlimited length
 	    fetchMicroBlogFeed(microBlogFeedTemplateCompiled, 0);
 
-		$("#microBlogFeed").delegate("ul#blogNewsfeed li", "click", function(e) {
+		$("#microBlogFeed").delegate("ul#blogNewsfeed li.post", "click", function(e) {
 			e.preventDefault();
 			viewBlogPost($(this).attr('id'));
 			$.mobile.changePage("#microblog-view");
