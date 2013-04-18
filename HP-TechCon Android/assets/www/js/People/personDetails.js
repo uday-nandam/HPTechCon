@@ -85,8 +85,8 @@ function getPeopleCheckins(){
 			
 			var arr = JSON.parse(data);
 			
-			$("#peopleCheckInDiv").html(peopleCheckInTemplateCompiled(arr)).trigger('create');
-			$("#peopleCheckInDiv ul").listview('refresh');	
+			$("#peopleCheckInOuterDiv").html(peopleCheckInTemplateCompiled(arr)).trigger("create");
+			$('div[data-role=collapsible]').trigger("create").collapsible();
 			
 		},
 		error: function(error) {
@@ -121,8 +121,8 @@ function getPeopleMicros(){
 				
 				var arr = JSON.parse(data);
 				//template1 = Handlebars.compile(templateSource);
-				$("#peopleMicroDiv").html(peopleMicroTemplateCompiled(arr)).trigger('create');
-				$("#peopleMicroDiv ul").listview('create');
+				$("#peopleMicroOuterDiv").html(peopleMicroTemplateCompiled(arr)).trigger("create");
+				$('div[data-role=collapsible]').trigger("create").collapsible();
 			},
 			error: function(results) {
 				alert("Error: " + error.code + " " + error.message);
@@ -160,8 +160,8 @@ function getPeopleExchanges(){
 			
 			var arr = JSON.parse(data);
 			
-			$("#peopleExchangeDiv").html(peopleExchangeTemplateCompiled(arr)).trigger('create');
-			$("#peopleExchangeDiv ul").listview('create');
+			$("#peopleExchangeOuterDiv").html(peopleExchangeTemplateCompiled(arr)).trigger("create");
+			$('div[data-role=collapsible]').trigger("create").collapsible();
 		},
 		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);

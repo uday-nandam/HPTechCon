@@ -16,9 +16,9 @@
                 <!-- Link css and js files -->
                 <link rel="stylesheet" href="css/my.css" />
                 <script src="js/handlebars.js"></script>
+                <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
                 <script src="js/People/people.js"></script>
                 <script src="js/People/personDetails.js"></script>
-                <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
 
     </head>
     <body>
@@ -113,48 +113,54 @@
 					</script>
 				</div>
 				<!-- Links and counts to -->
-				<div id="peopleEvents" data-role="collapsible-set" data-theme="a">
-					<div id="peopleCheckInDiv" data-role="collapsible">
-						<h2>Recent Check-Ins</h2>
-						<script id="peopleCheckIn-template" type="text/x-handlebars-template">
-						<ul data-role="listview" id="peopleCheckin" class="listLook">
-							{{#peopleCheckins}}
-							<li id="{{eventID}}">
-								<a id="{{eventID}}">
-								<h2 id="{{eventID}}">{{eventName}}</h2>
-								<p id="{{eventID}}">Location: {{eventLocation}}</p>
-								<p id="{{eventID}}"><em>Checked in at {{time}}</em></p>
-							</a></li>
-							{{/peopleCheckins}}
-						</ul>
+				<div id="peopleEvents">
+					<div id="peopleCheckInOuterDiv">
+						<script id="peopleCheckIn-template" type="text/x-handlebars-template">	
+						<div id="peopleCheckInDiv" data-role="collapsible" data-theme="a">
+							<h2>Recent Check-Ins</h2>
+							<ul data-role="listview" id="peopleCheckin">
+								{{#peopleCheckins}}
+								<li id="{{eventID}}">
+									<a id="{{eventID}}">
+									<h2 id="{{eventID}}">{{eventName}}</h2>
+									<p id="{{eventID}}">Location: {{eventLocation}}</p>
+									<p id="{{eventID}}"><em>Checked in at {{time}}</em></p>
+								</a></li>
+								{{/peopleCheckins}}
+							</ul>
+						</div>
 						</script>
 					</div>
-					<div id="peopleMicroDiv" data-role="collapsible" data-theme="a">
-						<h2>Recent Microblog Posts</h2>
+					<div id="peopleMicroOuterDiv">
 						<script id="peopleMicro-template" type="text/x-handlebars-template">
-						<ul data-role="listview" id="peopleMicro" class="listLook">
-							{{#peopleMicro}}
-							<li>
-								<p>{{post}}</p>
-								<p><em>Posted at {{time}} - Comments(X)</em></p>
-							</li>
-							{{/peopleMicro}}
-						</ul>
+						<div id="peopleMicroDiv" data-role="collapsible" data-theme="a">
+							<h2>Recent Microblog Posts</h2>
+							<ul data-role="listview" id="peopleMicro" class="listLook">
+								{{#peopleMicro}}
+								<li><a>
+									<p>{{post}}</p>
+									<p><em>Posted at {{time}} - Comments(X)</em></p>
+								</a></li>
+								{{/peopleMicro}}
+							</ul>
+						</div>
 						</script>
 					</div>
-					<div id="peopleExchangeDiv" data-role="collapsible" data-theme="a">
-						<h2>Recent Exchanges</h2>
+					<div id="peopleExchangeOuterDiv">
 						<script id="peopleExchanges-template" type="text/x-handlebars-template">
-						<ul data-role="listview" id="peopleExchange" class="listLook">
-							{{#peopleExchange}}
-							<li id="{{id}}">
-								<a id="{{id}}">
-								<img src="{{id}}" alt="Photo">
-								<h2 id="{{id}}">{{Person}}</h2>
-								<p id="{{id}}"><em>Exchanged at {{time}}</em></p>
-							</a></li>
-							{{/peopleExchange}}
-						</ul>
+						<div id="peopleExchangeDiv" data-role="collapsible" data-theme="a">
+							<h2>Recent Exchanges</h2>
+							<ul data-role="listview" id="peopleExchange" class="listLook">
+								{{#peopleExchange}}
+								<li id="{{id}}">
+									<a id="{{id}}">
+									<img src="{{id}}" alt="Photo">
+									<h2 id="{{id}}">{{Person}}</h2>
+									<p id="{{id}}"><em>Exchanged at {{time}}</em></p>
+								</a></li>
+								{{/peopleExchange}}
+							</ul>
+						</div>
 						</script>
 					</div>
 				</div>
