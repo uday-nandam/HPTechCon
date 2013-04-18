@@ -38,12 +38,12 @@ $(function() {
 	newExchangeTemplateCompiled = Handlebars.compile(newExchangeTemplate);
 	
 	$(document).delegate('#exchange-main', 'pageshow', function () {
+		$("#exchangeInput").val("");
 		recentExchanges();
 	});
 	
 	$("#submitButton").click(function(e) {
 		searchContact();
-		$.mobile.changePage('#exchange-new');
 	});
 	
 	$("#recentExchangesdiv").on('click', '#viewAllExchangesLink', function(e) {
@@ -108,6 +108,7 @@ $(function() {
 });
 
 function searchContact() {
+	
 	var Employee = Parse.Object.extend("employee");
 	
 	var query = new Parse.Query(Employee);
@@ -127,14 +128,14 @@ function searchContact() {
 		
 	// Invalid Input check	
 	} else if (($("#exchangeInput").val().length) != 6) {
-		alert("No Employee exists with this HP ID.");
+		alert("No Employee exists with this HP ID!");
 		$.mobile.changePage('#exchange-main');
 	}
 	
 	query.find({
 		success: function(result) {
 			// result is an instance of Parse.Object.
-			
+			console.log(result.length);
 			// Checking for invalid input.
 			if (result.length == 0) {
 				alert("No Employee exists with this HP ID.");
@@ -143,12 +144,12 @@ function searchContact() {
 			
 			var emp = result[0];
 			
-			_id = parseInt(emp.get("employee_id"));
+			var lastName = emp.get("Last_Name");
 			
-			//image = emp.get("picture");
-			//_picture = image.getUrl();
-			//console.log("Picture: " + _picture);
-			_name = emp.get("name");
+			//_id = parseInt(emp.get("employee_id"));
+			console.log(_id);
+			_picture = emp.get("picture").url;
+			_name = emp.get("name") + " " + lastName;
 			_work_email = emp.get("work_email");
 			_location = emp.get("location");
 			_department = emp.get("department");
@@ -169,13 +170,13 @@ function searchContact() {
 			//var html = template(data);
 			$("#newexchange-div").html(newExchangeTemplateCompiled(data)).trigger("create");
 			$("#newexchange-div ul").listview();
+			$.mobile.changePage('#exchange-new');
 		},
 		error: function(result, error) {
 			// error is an instance of Parse.Error.
 			alert("Error");
 		}
 	});
-	$("#exchangeInput").val("");
 }
 
 // Exchange Confirmed and Saved to Parse.com.
@@ -220,10 +221,13 @@ function recentExchanges() {
 				data += '"comments": "' + results[a].get("comments") + '", ';
 				data += '"id": "' + results[a].id + '", ';
 				
+				var time = results[a].createdAt;
+				time = convertTime(time);
+				
 				if(a == 3) {
-					data += '"time": "' + results[a].createdAt + '"}';
+					data += '"time": "' + time + '"}';
 				} else { 
-					data += '"time": "' + results[a].createdAt + '"}, '; 
+					data += '"time": "' + time + '"}, '; 
 				}
 			}
 			data += ']}';
@@ -258,10 +262,13 @@ function allExchanges() {
 				data += '"comments": "' + results[a].get("comments") + '", ';
 				data += '"id": "' + results[a].id + '", ';
 				
+				var time = results[a].createdAt;
+				time = convertTime(time);
+				
 				if(a  > results.length-2) {
-					data += '"time": "' + results[a].createdAt + '"}';
+					data += '"time": "' + time + '"}';
 				} else { 
-					data += '"time": "' + results[a].createdAt + '"}, '; 
+					data += '"time": "' + time + '"}, '; 
 				}
 			}
 			data += ']}';
@@ -309,17 +316,21 @@ function createExchangeDetailTemplate(id, _comments, _time) {
 	
 	query.find({
 		success: function(result) {
-			//var source = $("#exchangedetails-template").html();
-			//var template = Handlebars.compile(source);
+		
+			var locTime = new Date(_time);
+			var locDate = convertDate(locTime);
+			locTime = convertTime(locTime);
 			
 			var data = {
-				name: result[0].get("name"), 
+				name: result[0].get("name"),
+				lastname: result[0].get("Last_Name"),
+				picture: result[0].get("picture").url,
 				email: result[0].get("work_email"),
 				location: result[0].get("location"),
 				department: result[0].get("department"),
 				title: result[0].get("title"),
 				comments: _comments,
-				time: _time
+				time: locTime
 			};
 			//var html = template(data);
 			
@@ -335,6 +346,42 @@ function createExchangeDetailTemplate(id, _comments, _time) {
 			alert("Error: " + error.code + " " + error.message);
 		}
 	});
+}
+
+function convertDate(date){
+	var date = new Date(date);
+	var month = date.getMonth();
+	var day = date.getDate();
+	var year = date.getFullYear();
+	var monthNames = [ "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December" ];
+    
+    var d = "";
+    d += monthNames[month] + " " + day + "," + year;
+    return d;
+}
+
+function convertTime(time){
+	var time = new Date(time);
+	var hours = time.getHours();
+	var minutes = time.getMinutes();
+	
+	if(minutes < 10){
+		minutes = "0" + minutes;
+	}
+	if(hours > 11){
+		var postfix = "PM";
+	} else {
+		var postfix = "AM";
+	}
+	if (hours > 12){
+		hours -= 12;
+	}
+	var d = "";
+	d += hours + ":" + minutes + " " + postfix;
+	
+	return d;
+			
 }
 
 function reload() {

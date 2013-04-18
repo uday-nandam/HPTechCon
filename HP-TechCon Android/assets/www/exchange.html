@@ -39,7 +39,7 @@
 							<input name="exchangeInput" id="exchangeInput" placeholder="Enter E-mail or ID" value="" type="text">
 						</div>
 						<div class="ui-block-b">
-							<a href="#exchange-new" id="submitButton" onclick="searchContact()" data-role="button" data-mini="true">Go</a>
+							<a href="#exchange-new" id="submitButton" onclick="" data-role="button" data-mini="true">Go</a>
 						</div>
 					</div></li>
 				</ul>
@@ -126,11 +126,12 @@
 				<script id="exchangedetails-template" type="text/x-handlebars-template">
 					<ul data-role="listview" data-inset="true" data-divider-theme="a">
 						<li data-role="list-divider">
-							<h1>{{name}}</h1>
+							<h1>{{name}} {{lastname}}</h1>
 						</li>
 						<li><div class="exchangeDetails ui-grid-a">
 							<div class="ui-block-a">
-								<img src="images/person1.PNG" alt="Photo" class="portrait">
+							<!--	<img src="images/person1.PNG" alt="Photo" class="portrait"> -->
+								<img src="{{picture}}" alt="Photo" class="portrait">
 							</div>
 							<div class="ui-block-b">
 								<table class="personDetails">
@@ -191,8 +192,8 @@
 						</li>
 						<li><div class="exchangeDetails ui-grid-a">
 							<div class="ui-block-a">
-								<img src="images/personNew.PNG" alt="Photo" class="portrait"> 
-							<!--	<img src="{{picture}}" alt="Photo" class="portrait"> -->
+							<!--	<img src="images/personNew.PNG" alt="Photo" class="portrait"> -->
+								<img src="{{picture}}" alt="Photo" class="portrait">
 							</div>
 							<div class="ui-block-b">
 								<table class="personDetails">
