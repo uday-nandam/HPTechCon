@@ -35,6 +35,8 @@ var my_id = 111111; // Personal ID hard coded. (Perhaps implemented using Login 
 
 recentExchanges();
 
+console.log(Parse.User.current());
+
 function searchContact() {
 	var input = parseInt($("#exchangeInput").val()); // Retrieve what the user searched for.
 	_id = input;

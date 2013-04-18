@@ -8,24 +8,15 @@
         <title>Tech Con '13</title>
         
 		<!-- Adapted from API panel example-->
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+    	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+    	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+        <script src="js/handlebars.js"></script>          
+        <script src="js/microblog.js"></script>
 		
 		<!-- Link css and js files -->
 		<link rel="stylesheet" href="css/my.css" />
-
-        <!-- User-generated js -->
-        <script>
-            try {
-
-    $(function() {
-    	
-    });
-
-  } catch (error) {
-    console.error("Your javascript has an error: " + error);
-  }
         </script>
     </head>
     <body>			
@@ -57,35 +48,25 @@
 				</ul>
 			
 				<!-- Listview for microblog blurb -->
-				<ul data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook">
-					<li data-role="list-divider" class="header">What's Going On</li>
-					<li><a href="microblog.html#microblog-main" rel="external"><span>Let others know you're here!</span></a>
-					</li>
-					<li>
-						<img src="images/person3.PNG" alt="Photo">
-						<h2>Avery Walker</h2>
-						<p>Great presentation on upcoming laptops.</p>
-						<p><em>Posted @ 2:25 PM - Comments (X) </em></p>
-					</li>
-					<li>
-						<img src="images/person1.PNG" alt="Photo">
-						<h2>Stephen Weber</h2>
-						<p>Testing out the microblog. Hello world!</p>
-						<p><em>Posted @ 2:20 PM - Comments (X) </em></p>
-					</li>
-					<li>
-						<img src="images/person2.PNG" alt="Photo">
-						<h2>John Doe</h2>
-						<p>Next presentation on transistors is at 4:00PM. Don't miss it!</p>
-						<p><em>Posted @ 2:14 PM - Comments (X) </em></p>
-					</li>
-					<li>
-						<img src="images/personNew.PNG" alt="Photo">
-						<h2>Leeroy Jenkins</h2>
-						<p>Check out the ABC Poster.</p>
-						<p><em>Posted @ 2:05 PM - Comments (X) </em></p>
-					</li>
-				</ul>
+				<div id="microBlogFeed">
+				<script id="microBlogFeedHome-template" type="text/x-handlebars-template">
+					<ul id="microblog-blurb" data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook">
+						<li data-role="list-divider" class="header">Whats Going On</li>
+						<li><a href="microblog.html#microblog-main" rel="external"><span>Let others know youre here!</span></a>
+						</li>
+						{{#feed}}
+								<li id="{{post_id}}">
+									<a href="microblog.html#microblog-view" data-ajax="false" data-id="{{post_id}}">
+										<img src="images/person3.PNG" alt="Photo">
+										<h2>{{post_author}}</h2>
+										<p>{{post_content}}</p>
+										<p class="ui-li-aside"><em>Posted @ {{posted_at}} | Comments(X) |</em></p>
+									</a>
+								</li>
+						{{/feed}}
+					</ul>
+				</script>
+				</div>
 			</div>
 		</div>
     </body>

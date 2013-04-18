@@ -21,7 +21,7 @@
     </head>
     <body>
         <!-- Main page -->
-        <div data-role="page" data-url ="microblog-main" id="microblog-main" class="ui-responsive-panel">
+        <div data-role="page" data-url="microblog-main" id="microblog-main" class="ui-responsive-panel" data-dom-cache="false">
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Microblog</h3>
@@ -68,11 +68,21 @@
 								<p><em>Posted at 2:47 PM - Comments (X) </em></p>
 							</a></li>
 							{{#feed}}
+<<<<<<< HEAD
 								<li data-postid="{{post_id}}">
 									<img src="images/person3.PNG" alt="Photo">
 									<h2>{{post_author}}</h2>
 									<p>{{post_content}}</p>
 									<p id="{{post_id}}"><em>Posted at {{posted_at}} - Comments (X)</em></p>
+=======
+								<li id="{{post_id}}">
+									<a href="#" data-id="{{post_id}}">
+										<img src="images/person3.PNG" alt="Photo">
+										<h2>{{post_author}}</h2>
+										<p>{{post_content}}</p>
+										<p class="ui-li-aside"><strong>{{posted_at}}</strong></p>
+									</a>
+>>>>>>> microblog-updates-heavy
 								</li>
 							{{/feed}}
 						</ul>
@@ -102,7 +112,7 @@
         </div>		
 		
 		<!-- All of my microblog posts page -->
-        <div data-role="page" data-url ="microblog-mine" id="microblog-mine" class="ui-responsive-panel">
+        <div data-role="page" data-url ="microblog-mine" id="microblog-mine" class="ui-responsive-panel" data-dom-cache="false">
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Microblog</h3>
@@ -131,7 +141,7 @@
         </div>
 		
 		<!-- Edit page -->
-		<div data-role="page" data-url ="microblog-edit" id="microblog-edit" class="ui-responsive-panel">
+		<div data-role="page" data-url ="microblog-edit" id="microblog-edit" class="ui-responsive-panel" data-dom-cache="false">
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Microblog</h3>
@@ -169,7 +179,7 @@
 			</div>
 		</div>
 		<!-- View post page -->
-		<div data-role="page" data-url ="microblog-view" id="microblog-view" class="ui-responsive-panel">
+		<div data-role="page" data-url ="microblog-view" id="microblog-view" class="ui-responsive-panel" data-dom-cache="false">
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Microblog</h3>
@@ -177,52 +187,40 @@
             </div>
 			<!-- Content -->			
 			<div data-role="content" class="jqm-content">
-				<!-- Post -->
-				<ul data-role="listview" data-inset="true" data-divider-theme="a">
-					<li data-role="list-divider">
-						<h1>View Post</h1>
-					</li>
-					<li><div class="postDetails ui-grid-a">
-						<div class="ui-block-a">
-							<img src="images/person3.PNG" alt="Photo" class="portrait">
-						</div>
-						<div class="ui-block-b">
-							<h2>Avery Walker</h2>
-							<p>Stop by the poster session! There are several great posters to check out!</p>
-							<br>
-							<p><em>Posted at 2:50 PM</em></p>
-						</div>
-					</div></li>	
-					<li><div>
-						<h2>Attachments:</h2>
-						<img src="images/snapshot-lobby.PNG" class="attachView" alt="Attachment">
-					</div></li>
-				</ul>
-				<!-- Listview for comments -->
-				<ul data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook">
-					<li data-role="list-divider" class="header">Comments</li>
-					<li>
-						<img src="images/person1.PNG" alt="Photo">
-						<h2>Stephen Weber</h2>
-						<p>Really enjoyed it. Thanks for sharing.</p>
-						<p><em>Posted at 2:55 PM</em></p>
-					</li>
-					<li>
-						<img src="images/personNew.PNG" alt="Photo">
-						<h2>Leeroy Jenkins</h2>
-						<p>Favorite one was the XYZ poster.</p>
-						<p><em>Posted at 3:10 PM</em></p>
-					</li>
-					<li>
-						<img src="images/personMe.PNG" alt="Photo">
-						<h2>My Name</h2>
-						<label for="myComment" class="ui-hidden-accessible">Add your comment</label>
-						<textarea cols="40" rows="5" id="myComment" name="myComment" placeholder="Add your comment"></textarea>
-						<div id="commentButton">
-						<a href="#" data-role="button" data-mini="true">Submit</a>
-						</div>
-					</li>
-				</ul>
+				<div id="view-microblog">
+					<script id="view-microblog-template" type="text/x-handlebars-template">
+						<!-- Post -->
+						<ul data-role="listview" data-inset="true" data-divider-theme="a">
+							<li data-role="list-divider">
+								<h1>View Post</h1>
+							</li>
+							<li><div class="postDetails ui-grid-a">
+								<div class="ui-block-a">
+									<img src="images/person3.PNG" alt="Photo" class="portrait">
+								</div>
+								<div class="ui-block-b"><br>
+									<h2>{{posted_by}}</h2>
+									<p>{{post_content}}</p>
+									<p><em>Posted @ {{posted_at}}</em></p>
+								</div>
+							</div></li>	
+							<li><div>
+								<h2>Attachments:</h2>
+								<img src="images/snapshot-lobby.PNG" class="attachView" alt="Attachment">
+							</div></li>
+						</ul>
+						<!-- Listview for comments -->
+						<ul data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook">
+							<li data-role="list-divider" class="header">Comments</li>
+							<li>
+								<img src="images/person1.PNG" alt="Photo">
+								<h2>Stephen Weber</h2>
+								<p>Really enjoyed it. Thanks for sharing.</p>
+								<p><em>Posted @ 2:55 PM</em></p>
+							</li>
+						</ul>
+					</script>
+				</div>
 			</div>
 		</div>
     </body>
