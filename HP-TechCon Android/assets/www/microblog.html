@@ -68,12 +68,14 @@
 								<p><em>Posted at 2:47 PM - Comments (X) </em></p>
 							</a></li>
 							{{#feed}}
-								<li data-postid="{{post_id}}">
+							<li id="{{post_id}}" class="post">
+              					<a href="#" data-id="{{post_id}}">
 									<img src="images/person3.PNG" alt="Photo">
 									<h2>{{post_author}}</h2>
 									<p>{{post_content}}</p>
 									<p id="{{post_id}}"><em>Posted at {{posted_at}} - Comments (X)</em></p>
-								</li>
+								</a>
+							</li>
 							{{/feed}}
 						</ul>
 					</script>
