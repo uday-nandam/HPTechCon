@@ -40,6 +40,10 @@ $(function() {
 	$("#peoplediv").on('click', '#peopleList li', function(e) {
 		e.preventDefault();
 		_personID = e.target.id;
+		getPersonDetails();
+		getPeopleCheckins();
+		getPeopleMicros();
+		getPeopleExchanges();
 		$.mobile.changePage('#person-details');
 	}); 
 	
@@ -55,13 +59,7 @@ $(function() {
 			e.preventDefault();
 			_eventID = e.target.id;
 			$.mobile.changePage('#event-details');
-		}); 
-		
-		getPersonDetails();
-		getPeopleCheckins();
-		getPeopleMicros();
-		getPeopleExchanges();
-		
+		});
 	});
 	
 	getPeople();
