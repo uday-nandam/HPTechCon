@@ -179,11 +179,11 @@
 					<li data-role="list-divider" class="header">Comments</li>
 						{{#commentSection}}
 						<li>
-							<img src="images/person1.PNG" alt="Photo">
-							<h2>{{name}}</h2>
+							<img src="{{image}}" alt="Photo">
+							<h2>{{firstName}} {{lastName}}</h2>
 							<p>{{comment}}</p>
 							<!--<p class="ui-li-aside"><strong>2:55</strong>PM</p>-->
-							<p><em>Posted on XX/XX</em></p>
+							<p><em>Posted on {{date}} {{time}}</em></p>
 						</li>
 						{{/commentSection}}
 						<li>

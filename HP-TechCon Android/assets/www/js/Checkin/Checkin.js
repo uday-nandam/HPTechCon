@@ -197,6 +197,8 @@ function searchSession(input){
  	
  	var name;
  	var locat;
+ 	var lastName;
+ 	var image;
  	
 	var CheckIn = Parse.Object.extend("CheckIn");
 	var checkin = new CheckIn();
@@ -220,12 +222,16 @@ function searchSession(input){
 							success: function(result){
 								var emp = result[0];
 								name = emp.get("name");
+								lastName = emp.get("Last_Name");
+								image = emp.get("picture").url;
 								locat = emp.get("location");
 								title = emp.get("title");
 								
-								checkin.set("Name", name);
+								checkin.set("firstName", name);
+								checkin.set("lastName", lastName)
 								checkin.set("location", locat);
 								checkin.set("Title", title);
+								checkin.set("picture", image);
 								
 								var date = new Date();
 							 	var time = convertTime(date);
@@ -379,27 +385,55 @@ function checkEvents(){
 // when the submit button is pressed on the comment section on the event details page
 //	the comment is saved to the server
 function comment(){
+	
+	var firstName;
+	var lastName;
+	var image;
+	
 	var Comment = Parse.Object.extend("Comments");
 	var comments = new Comment();
 	var input = $("#myComment").val();
 	
 	comments.set("EventId", _id);
 	comments.set("Comment", input);
+	comments.set("Commenter", userID);
 	
-	comments.save(null, {
-		success: function(exchange) {
+	var employee = Parse.Object.extend("employee");
+	var query = new Parse.Query(employee);
+	var myID = parseInt(userID);
+	
+	query.equalTo("employee_id", myID);
+	query.find({
+		success: function(result){
+			var emp = result[0];
+			firstName = emp.get("name");
+			lastName = emp.get("Last_Name");
+			image = emp.get("picture").url;
 			
-		},
-		error: function(exchange, error) {
-			alert("Error");
-			$.mobile.changePage("#checkin-main", {reloadPage : true});
+			comments.set("first_name", firstName);
+			comments.set("last_name", lastName);
+			comments.set("picture", image);
+			
+									
+			comments.save(null, {
+				success: function(exchange) {
+					
+				},
+				error: function(exchange, error) {
+					alert("Error");
+					$.mobile.changePage("#checkin-main", {reloadPage : true});
+				}
+			});	
 		}
-	});	
+	});
 }
 // displays all comments about an event when on the event details page
 function getComments(){
-	var name = "Tom Watts";
+	var firstName;
+	var lastName;
+	var image;
 	var comments;
+	var timeCreated;
 	
 	var Comment = Parse.Object.extend("Comments");
 	var query = new Parse.Query(Comment);
@@ -415,8 +449,19 @@ function getComments(){
 				var comm = result[i];
 				
 				comments = comm.get("Comment");
+				firstName = comm.get("first_name");
+				lastName = comm.get("last_name");
+				image = comm.get("picture");
+				timeCreated = comm.createdAt;
+				var dateCreated = convertDate(timeCreated);
+				timeCreated = convertTime(timeCreated);
+
 				
-				data += '{"name": "' + name + '", ';
+				data += '{"firstName": "' + firstName + '", ';
+				data += '"lastName": "' + lastName + '", ';
+				data += '"image": "' + image + '", ';
+				data += '"time": "' + timeCreated + '", ';
+				data += '"date": "' + dateCreated + '", ';
 				
 				if (i == size){
 					data += '"comment": "' + comments + '"} ';				
@@ -425,6 +470,7 @@ function getComments(){
 				data += '"comment": "' + comments + '"}, ';
 				}
 			}
+			
 			data += ']}';
 			
 			var arr = JSON.parse(data);		
