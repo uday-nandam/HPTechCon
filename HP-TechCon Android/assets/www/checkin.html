@@ -91,7 +91,7 @@
 					</script>
 				</div>
 				<!-- Link to attended events; please give me feedback on where to place this -->
-				<a href="#event-attended" data-role="button" onclick="recentCheckins()" data-mini="true">View Attended Events</a>
+				<a id="attendedButton" data-role="button" data-mini="true">View Attended Events</a>
             </div>
 			<!-- Navigation panel -->
 			<div data-role="panel" data-position-fixed="true"  data-display="reveal" data-theme="a" id="nav-panel">
@@ -162,7 +162,7 @@
 					</li>
 					<li><div class="options ui-grid-a">
 						<div class="ui-block-a">
-							<a href="#checkin-main" onclick = "reload()" data-role="button">Cancel</a>
+							<a id='checkBack' data-role="button">Cancel</a>
 						</div>
 						<div class="ui-block-b">
 							<!--<button class = "buttonCheckIn" type = "button" onclick="checkInConfirm()" data-theme="a">Check In</button>-->
@@ -293,7 +293,7 @@
 								<a onclick = "reload()" data-role="button">Cancel</a>
 							</div>
 							<div class="ui-block-b">
-								<button class = "buttonExchange" type = "button" onclick = "exchangeConfirm()" data-theme="a">Save</button>
+								<button id="eventSave" class = "eventSave" type = "button" data-theme="a">Save</button>
 							</div>
 						</div></li>
 					</ul>
@@ -306,11 +306,11 @@
 						<li data-role="list-divider" class="header">Comments</li>
 						{{#commentSection}}
 						<li>
-							<img src="images/person1.PNG" alt="Photo">
-							<h2>{{name}}</h2>
+							<img src="{{image}}" alt="Photo">
+							<h2>{{firstName}} {{lastName}}</h2>
 							<p>{{comment}}</p>
 							<!--<p class="ui-li-aside"><strong>2:55</strong>PM</p>-->
-							<p><em>Posted on XX/XX</em></p>
+							<p><em>Posted on {{date}} {{time}}</em></p>
 						</li>
 						{{/commentSection}}
 						<li>

@@ -70,10 +70,8 @@ $(function() {
 				}
 			}
 		});
-		
-		
-		
 	});
+
 	
 	$("#currentEventsdiv").on('click', '#currentEvents li', function(e) {
 		e.preventDefault();
@@ -91,11 +89,28 @@ $(function() {
 		$.mobile.changePage('#event-details');
 	}); 
 	
+		
+	$(document).delegate('#checkin-main', 'pagebeforeshow', function(event) { 
+		
+		console.log("pageshow");
+		
+		$("#attendedButton").click(function(e) {
+			$.mobile.changePage('#event-attended');
+		});
+
+		checkEvents();
+	});
+	
 	$(document).delegate('#event-details', 'pageinit', function(event) {
 
 		$("#eventDetails").on('click', '#checkIn', function(e) {
 			e.preventDefault();
 			checkInConfirm();
+			$.mobile.changePage('#checkin-main');
+		}); 
+		
+		$("#eventDetails").on('click', '#checkBack', function(e) {
+			e.preventDefault();
 			$.mobile.changePage('#checkin-main');
 		}); 
 		
@@ -106,7 +121,8 @@ $(function() {
 		}); 
 	});
 
-	$(document).delegate("#event-attended", 'pageinit', function(event) {
+	$(document).delegate("#event-attended", 'pagebeforeshow', function(event) {
+		recentCheckins();
 		
 		$("#eventAttended").on('click', '#attendedEvents li', function(e) {
 			e.preventDefault();
@@ -121,9 +137,10 @@ $(function() {
 	
 	$(document).delegate("#event-checked", 'pageinit', function(event) {
 		
-		$("#eventChecked").on('click', '#attachNote', function(e) {
+		$("#eventChecked").on('click', '#eventSave', function(e) {
 			e.preventDefault();
-			createNote();
+			//createNote();
+			$.mobile.changePage('#checkin-main');
 		});
 		
 		$("#commentschecked").on('click', '#commentSubmit', function(e) {
@@ -134,8 +151,6 @@ $(function() {
 
 	});
 
-    //fetch the current events
-    checkEvents();
 
 });
 
@@ -208,16 +223,16 @@ function searchSession(input){
 	query1.find({
 		success: function(results){
 			if (results.length == 0){
-				checkin.set("EventId", _id);
+						checkin.set("EventId", _id);
 						checkin.set("UserID", userID);
 						checkin.set("EventName", _name);
 						checkin.set("EventLocation", _location);
 						
-						employee = Parse.Object.extend("employee");
-						query = new Parse.Query(employee);
-						userID = parseInt(userID);
+						var employee = Parse.Object.extend("employee");
+						var query = new Parse.Query(employee);
+						var myID = parseInt(userID);
 						
-						query.equalTo("employee_id", userID);
+						query.equalTo("employee_id", myID);
 						query.find({
 							success: function(result){
 								var emp = result[0];
@@ -272,11 +287,15 @@ function searchSession(input){
 							query.find({
 								success: function(result){
 									var emp = result[0];
-									name = emp.get("name");
+									firstName = emp.get("name");
+									lastName = emp.get("Last_Name");
 									locat = emp.get("location");
 									title = emp.get("title");
+									image = emp.get("picture").url;
 									
-									checkin.set("Name", name);
+									checkin.set("firstName", firstName);
+									checkin.set("lastName", lastName);
+									checkin.set("picture", image);
 									checkin.set("location", locat);
 									checkin.set("Title", title);
 									
@@ -375,7 +394,7 @@ function checkEvents(){
 			var arr = JSON.parse(data);		
 			
 			$("#currentEventsdiv").html(currentEventsTemplateCompiled(arr)).trigger("create");
-			$("#currentEventsdiv ul").listview();
+			$("#currentEventsdiv ul").listview('refresh');
 		},
 		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
@@ -421,7 +440,7 @@ function comment(){
 				},
 				error: function(exchange, error) {
 					alert("Error");
-					$.mobile.changePage("#checkin-main", {reloadPage : true});
+					$.mobile.changePage("#checkin-main");
 				}
 			});	
 		}
@@ -486,8 +505,7 @@ function getComments(){
 	
 	});
 }
-// displays events the user has checked in to ( I wrote this a couple weeks ago before the UI was updated, so havent tried it out yet)
-// ( the template names and div id were just placeholders i made up, they are not actually in the checkin.html file)
+// displays events the user has checked in to 
 function recentCheckins() {
 	var checkin = Parse.Object.extend("CheckIn");
 	var query = new Parse.Query(checkin);
@@ -518,7 +536,9 @@ function recentCheckins() {
 			var arr = JSON.parse(data);
 			
 			$("#eventAttended").html(eventsAttendedTemplateCompiled(arr)).trigger('create');
-			
+			$("#eventAttended ul").listview('referesh');
+			//$('#eventAttended').listview('create');
+		
 		},
 		error: function(error) {
 			alert("Error: " + error.code + " " + error.message);
@@ -584,8 +604,11 @@ function searchChecked(input){
 }
 //retrieve the comments for the events that have already been checked into
 function getCommentsChecked(){
-	var name = "Tom Watts";
+	var firstName;
+	var lastName;
+	var image;
 	var comments;
+	var timeCreated;
 	
 	var Comment = Parse.Object.extend("Comments");
 	var query = new Parse.Query(Comment);
@@ -601,8 +624,19 @@ function getCommentsChecked(){
 				var comm = result[i];
 				
 				comments = comm.get("Comment");
+				firstName = comm.get("first_name");
+				lastName = comm.get("last_name");
+				image = comm.get("picture");
+				timeCreated = comm.createdAt;
+				var dateCreated = convertDate(timeCreated);
+				timeCreated = convertTime(timeCreated);
+
 				
-				data += '{"name": "' + name + '", ';
+				data += '{"firstName": "' + firstName + '", ';
+				data += '"lastName": "' + lastName + '", ';
+				data += '"image": "' + image + '", ';
+				data += '"time": "' + timeCreated + '", ';
+				data += '"date": "' + dateCreated + '", ';
 				
 				if (i == size){
 					data += '"comment": "' + comments + '"} ';				
@@ -611,9 +645,11 @@ function getCommentsChecked(){
 				data += '"comment": "' + comments + '"}, ';
 				}
 			}
+			
 			data += ']}';
 			
 			var arr = JSON.parse(data);		
+				
 	
 			$("#commentschecked").html(commentscheckedTemplateCompiled(arr)).trigger("create");
 			$("#commentschecked").listview('refresh');			
