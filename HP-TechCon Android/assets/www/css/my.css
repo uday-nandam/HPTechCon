@@ -52,6 +52,7 @@ textarea{
 /* Change how it looks in all listviews */
 .header{
 	text-align: center;
+	overflow: visble;
 }
 .listLook p{
 	font-size: small;
@@ -99,7 +100,9 @@ textarea{
 .portrait{
 	width: 75px;
 	height: 75px;
-	padding-top: 5px;
+	position: absolute;
+	top: 10px;
+	left: 7px;
 }
 
 table th{
@@ -108,12 +111,12 @@ table th{
 }
 table td{
 	font-weight: normal;
-	overflow: auto;
 	width: 100%;
+	word-wrap: break-word;
 }
 
 .exchangeDetails .ui-block-a{
-	width: 32%; /* PLEASE TEST ON PHONE */
+	width: 27%; /* PLEASE TEST ON PHONE */
 }
 
 #savedNote{
@@ -200,7 +203,7 @@ table td{
 
 /* People Page */
 .personDetails .ui-block-a{
-	width: 32%; /* PLEASE TEST ON PHONE */
+	width: 27%;
 }
 
 /* Icons */
