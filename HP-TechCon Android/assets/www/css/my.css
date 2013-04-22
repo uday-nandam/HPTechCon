@@ -56,7 +56,7 @@ textarea{
 }
 .listLook p{
 	font-size: small;
-	max-height: 35px; /* Temporary solution */
+	max-height: 50px; /* Temporary solution */
 	width: 100%;
 }
 .listLook h2{
@@ -70,10 +70,12 @@ textarea{
 	padding-top: 15px;
 	padding-left: 10px;
 }
-.listLook em{
-	font-size: x-small;
+ul em{
 	position: absolute;
 	bottom: 2px;
+}
+.listLook em{
+	font-size: x-small;
 }
 .ui-listview .ui-li-desc{
 	white-space: normal;
@@ -100,9 +102,6 @@ textarea{
 .portrait{
 	width: 75px;
 	height: 75px;
-	position: absolute;
-	top: 10px;
-	left: 7px;
 }
 
 table th{
@@ -132,6 +131,7 @@ table td{
 
 /* Attachment option bar */
 .options{
+	padding-top: 7px;
 	font-size: small;
 }
 
@@ -150,6 +150,17 @@ table td{
 /* Microblog Post */
 #blogNote{
 	font-weight: normal;
+	height: 100px;
+}
+.listLook .smallItem1{
+	height: 30px;
+}
+.listLook .smallItem1 div{
+	position: relative;
+	top: -2px;
+}
+.listLook .smallItem2{
+	height: 40px;
 }
 
 /* Post details */
@@ -158,10 +169,10 @@ table td{
 	text-align: center;
 }
 .postDetails .ui-block-a{
-	width: 32%; /* PLEASE TEST ON PHONE */
+	width: 27%;
 }
 .postDetails .ui-block-b{
-	width: 68%; /* PLEASE TEST ON PHONE */
+	width: 73%;
 }
 .postDetails p{
 	width: 100%;

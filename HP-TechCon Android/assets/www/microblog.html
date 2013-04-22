@@ -30,29 +30,30 @@
 			<!-- Content -->
             <div data-role="content" class="jqm-content">
 				<!-- Quick post -->
-				<ul data-role="listview" data-inset="true" data-divider-theme="a" id="quickPost" class="listLook">
-					<li data-role="list-divider">Post Here!
-					</li>
-					<li><div>
-						<label for="blogNote" class="ui-hidden-accessible">Post your message here</label>
-						<textarea cols="40" rows="8" name="blogNote" id="blogNote" placeholder="Post your message here"></textarea>
-						</div>
-					</li>
-					<li><div class="ui-grid-a">
-						<div class="ui-block-a">
-							<div class="options">
-							<strong>Attach:</strong>
-							<button class = "buttonCam" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>
+				<div data-role="collapsible" data-theme="a" data-content-theme="c">
+					<h2>Click here to post!</h2>
+					<ul data-role="listview" id="quickPost" class="listLook">
+						<li><div>
+							<label for="blogNote" class="ui-hidden-accessible">Post your message here</label>
+							<textarea name="blogNote" id="blogNote" placeholder="Post your message here"></textarea>
 							</div>
-						</div>
-						<div class="ui-block-b">
-							<a id="submitNewPost" data-role="button" data-mini="true">Submit</a>
-						</div>
-					</div></li>
-					<li>
-					<a href="#microblog-mine" data-icon="arrow-r" data-iconpos="right"><h2>View All My Posts</h2></a>
-					</li>
-				</ul>
+						</li>
+						<li class="smallItem1"><div class="ui-grid-a">
+							<div class="ui-block-a">
+								<div class="options">
+								<strong>Attach:</strong>
+								<button class = "buttonCam" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>
+								</div>
+							</div>
+							<div class="ui-block-b">
+								<a id="submitNewPost" data-role="button" data-mini="true">Submit</a>
+							</div>
+						</div></li>
+						<li class="smallItem2">
+						<a href="#microblog-mine" data-icon="arrow-r" data-iconpos="right"><h2>View All My Posts</h2></a>
+						</li>
+					</ul>
+				</div>
 				<!-- Listview for recent microblog posts -->
 				<div id="microBlogFeed">
 					<script id="microBlogFeed-template" type="text/x-handlebars-template">
@@ -73,7 +74,7 @@
 									<img src="images/person3.PNG" alt="Photo">
 									<h2>{{post_author}}</h2>
 									<p>{{post_content}}</p>
-									<p id="{{post_id}}"><em>Posted at {{posted_at}} - Comments (X)</em></p>
+									<p id="{{post_id}}"><em>Posted on {{posted_at}} - Comments (X)</em></p>
 								</a>
 							</li>
 							{{/feed}}
@@ -192,8 +193,8 @@
 								</div>
 								<div class="ui-block-b"><br>
 									<h2>{{posted_by}}</h2>
-									<p>{{post_content}}</p>
-									<p><em>Posted @ {{posted_at}}</em></p>
+									<p>{{post_content}}</p><br>
+									<p><em>Posted at {{posted_at}}</em></p>
 								</div>
 							</div></li>	
 							<li><div>
@@ -209,6 +210,15 @@
 								<h2>Stephen Weber</h2>
 								<p>Really enjoyed it. Thanks for sharing.</p>
 								<p><em>Posted @ 2:55 PM</em></p>
+							</li>
+							<li>
+								<img src="images/personMe.PNG" alt="Photo">
+								<h2>My Name</h2>
+								<label for="myComment" class="ui-hidden-accessible">Add your comment</label>
+								<textarea cols="40" rows="5" id="myComment" name="myComment" placeholder="Add your comment"></textarea>
+								<div id="commentButton">
+								<a href="#" data-role="button" data-mini="true">Post</a>
+								</div>
 							</li>
 						</ul>
 					</script>
