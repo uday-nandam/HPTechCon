@@ -176,9 +176,22 @@ table td{
 }
 .postDetails p{
 	width: 100%;
+	min-height: 50px;
 }
 .postDetails h2{
 	font-size: small;
+}
+.portraitPost{
+	width: 75px;
+	height: 75px;
+	
+	position: absolute;
+	left: 5px;
+	padding-bottom: 50px;
+}
+.postDetails em{
+	font-weight: normal;
+	bottom: 5px;
 }
 
 /* Comment Feed */
