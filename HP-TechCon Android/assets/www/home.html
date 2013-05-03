@@ -23,9 +23,9 @@
 		<!-- Home main page -->
 		<div data-role="page" data-url="home-main" id="home-main">
 			<div data-role="header" data-theme="a">
-				<h3 class="headerTitle">HP TechCon</h3>
-			</div><!-- /header -->
-
+				<h3 class="headerTitle">TechCon</h3>
+			</div>
+			<!-- /header -->
 			<div data-role="content" class="jqm-content">
 				<!-- Here goes the buttons; grid, 2 x 3 -->
 				<ul data-role="listview" data-inset="true" data-divider-theme="a">
@@ -49,7 +49,7 @@
 				<!-- Listview for microblog blurb -->
 				<div id="microBlogFeed">
 				<script id="microBlogFeedHome-template" type="text/x-handlebars-template">
-					<ul id="microblog-blurb" data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook">
+					<ul id="microblog-blurb" data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook" data-icon="false">
 						<li data-role="list-divider" class="header">Whats Going On</li>
 						<li><a href="microblog.html#microblog-main" rel="external">Let others know you're here!</a>
 						</li>
@@ -59,7 +59,7 @@
 										<img src="images/person3.PNG" alt="Photo">
 										<h2>{{post_author}}</h2>
 										<p>{{post_content}}</p>
-										<p><em>Posted @ {{posted_at}} - Comments(X)</em></p>
+										<em>Posted at {{posted_at}} - Comments(X)</em>
 									</a>
 								</li>
 						{{/feed}}

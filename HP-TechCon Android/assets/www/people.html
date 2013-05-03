@@ -27,15 +27,14 @@
             <!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">People</h3>
-				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+				<a href="#nav-panel" data-icon="bars" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Menu</a>
             </div>
 			<!-- Content -->
             <div data-role="content" class="jqm-content">
 				<!-- List of all people -->
 				<div id="peoplediv">
 					<script id="people-template" type="text/x-handlebars-template">
-					<ul data-role="listview" id="peopleList" data-autodividers="true" data-filter="true" 
-					data-inset="true"  data-divider-theme="a" data-filter-placeholder="Find a person" class="listLook">
+					<ul data-role="listview" id="peopleList" data-autodividers="true" data-filter="true" data-inset="true"  data-divider-theme="a" data-filter-placeholder="Find a person" class="listLook" data-icon="false">
 						{{#peopleList}}
 						<li id="{{id}}">
 							<a id="{{id}}">
@@ -50,7 +49,7 @@
             </div>
             <!-- Navigation panel -->
 			<div data-role="panel" data-position-fixed="true"  data-display="reveal" data-theme="a" id="nav-panel">
-				<ul data-role="listview" data-theme="a" class="nav-search">
+				<ul data-role="listview" data-theme="a" class="nav-search" data-icon="false">
 					<li><a href="home.html#home-main" rel="external">
 						<img src="images/Home_1.png" alt="Home">Home
 					</a></li>
@@ -74,15 +73,15 @@
         <div data-role="page" data-url ="person-details" id="person-details" class="ui-responsive-panel">
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
-                <h3 class="headerTitle">Person Details</h3>
-				<a href="#checkin-main" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
+                <h3 class="headerTitle">People</h3>
+				<a href="#checkin-main" data-rel="back" data-icon="barrow" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Back</a>
             </div>
 			<!-- Content -->
 			<div data-role="content" class="jqm-content">
 				<!-- Person details-->
 				<div id="peopleDetails" class="peopleDetails">
 					<script id="peopleDetails-template" type="text/x-handlebars-template">
-					<ul data-role="listview" data-inset="true" data-divider-theme="a">
+					<ul data-role="listview" data-inset="true" data-divider-theme="a" data-icon="false">
 						<li data-role="list-divider">
 							<h1>{{firstName}} {{lastName}}</h1>
 						</li>
@@ -118,13 +117,13 @@
 						<script id="peopleCheckIn-template" type="text/x-handlebars-template">	
 						<div id="peopleCheckInDiv" data-role="collapsible" data-theme="a">
 							<h2>Recent Check-Ins</h2>
-							<ul data-role="listview" id="peopleCheckin">
+							<ul data-role="listview" id="peopleCheckin" class="listLook" data-icon="false">
 								{{#peopleCheckins}}
 								<li id="{{eventID}}">
 									<a id="{{eventID}}">
 									<h2 id="{{eventID}}">{{eventName}}</h2>
 									<p id="{{eventID}}">Location: {{eventLocation}}</p>
-									<p id="{{eventID}}"><em>Checked in at {{time}}</em></p>
+									<em id="{{eventID}}">Checked in at {{time}}</em>
 								</a></li>
 								{{/peopleCheckins}}
 							</ul>
@@ -135,11 +134,12 @@
 						<script id="peopleMicro-template" type="text/x-handlebars-template">
 						<div id="peopleMicroDiv" data-role="collapsible" data-theme="a">
 							<h2>Recent Microblog Posts</h2>
-							<ul data-role="listview" id="peopleMicro" class="listLook">
+							<ul data-role="listview" id="peopleMicro" class="listLook" data-icon="false">
 								{{#peopleMicro}}
 								<li><a>
+									<h2>Posted at {{time}}</h2>
 									<p>{{post}}</p>
-									<p><em>Posted at {{time}} - Comments(X)</em></p>
+									<em>Comments(X)</em>
 								</a></li>
 								{{/peopleMicro}}
 							</ul>
@@ -150,13 +150,13 @@
 						<script id="peopleExchanges-template" type="text/x-handlebars-template">
 						<div id="peopleExchangeDiv" data-role="collapsible" data-theme="a">
 							<h2>Recent Exchanges</h2>
-							<ul data-role="listview" id="peopleExchange" class="listLook">
+							<ul data-role="listview" id="peopleExchange" class="listLook" data-icon="false">
 								{{#peopleExchange}}
 								<li id="{{id}}">
 									<a id="{{id}}">
 									<img src="{{id}}" alt="Photo">
 									<h2 id="{{id}}">{{Person}}</h2>
-									<p id="{{id}}"><em>Exchanged at {{time}}</em></p>
+									<p id="{{id}}">Exchanged at {{time}}</p>
 								</a></li>
 								{{/peopleExchange}}
 							</ul>

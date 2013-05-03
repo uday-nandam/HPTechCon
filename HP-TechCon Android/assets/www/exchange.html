@@ -26,7 +26,7 @@
             <!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Exchange</h3>
-				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+				<a href="#nav-panel" data-icon="bars" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Menu</a>
             </div>
 			<!-- Content -->
             <div data-role="content" class="jqm-content">
@@ -47,18 +47,18 @@
 				<!-- Listview for saved exchanges -->
 				<div id = "recentExchangesdiv">
 					<script id="recentexchanges-template" type="text/x-handlebars-template">
-					<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="savedExchanges" class="listLook" data-icon="edit">
+					<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="savedExchanges" class="listLook" data-icon="false">
 						<li data-role="list-divider"> Recent Exchanges </li>                                    
 							{{#recentExchanges}}
 									<li id = "{{id}}"><a id = "{{id}}" onclick = "" href="#exchange-details">
 											<img id = "{{id}}" src="images/person1.PNG" alt="Photo">
 											<h2 id = "{{id}}">{{to_name}}</h2>
 											<p id = "{{id}}">{{comments}}</p>
-											<p id = "{{id}}"><em>Exchanged @ {{time}}</em></p>
+											<p id = "{{id}}"><em>Exchanged at {{time}}</em></p>
 										</a>
 									</li>
 							{{/recentExchanges}}
-						<li id = "viewAllExchangesLink" data-icon="arrow-r"><a href="#exchange-all" onclick = "">
+						<li id = "viewAllExchangesLink"><a href="#exchange-all" onclick = "">
 							<span>View all exchanges</span>
 						</a></li>
 					</ul>
@@ -67,7 +67,7 @@
             </div>
             <!-- Navigation panel -->
 			<div data-role="panel" data-position-fixed="true"  data-display="reveal" data-theme="a" id="nav-panel">
-				<ul data-role="listview" data-theme="a" class="nav-search">
+				<ul data-role="listview" data-theme="a" class="nav-search" data-icon="false">
 					<li><a href="home.html#home-main" rel="external">
 						<img src="images/Home_1.png" alt="Home">Home
 					</a></li>
@@ -91,15 +91,14 @@
         <div data-role="page" data-url ="exchange-all" id="exchange-all" class="ui-responsive-panel">
             <!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
-                <h3 class="headerTitle">All Exchanges</h3>
-                <a href="#" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
+                <h3 class="headerTitle">Exchanges</h3>
+                <a href="#" data-rel="back" data-icon="barrow" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Back</a>
             </div>
 			<!-- Content -->
             <div data-role="content" class="jqm-content">
 				<div id="allExchangesdiv">
 				<script id="allexchanges-template" type="text/x-handlebars-template">
-					<ul data-role="listview" id="allExchanges" data-autodividers="true" data-filter="true" 
-					data-inset="true"  data-divider-theme="a" data-filter-placeholder="Find an exchange" class="listLook" data-icon="edit">
+					<ul data-role="listview" id="allExchanges" data-autodividers="true" data-filter="true" data-inset="true"  data-divider-theme="a" data-filter-placeholder="Find an exchange" class="listLook" data-icon="false">
 						{{#allExchanges}}	
 								<li id = "{{id}}"><a id = "{{id}}" onclick = "" href="#exchange-details">
 										<img id = "{{id}}" src="images/person3.PNG" alt="Photo">
@@ -118,7 +117,7 @@
         <div data-role="page" data-url ="exchange-details" id="exchange-details" class="ui-responsive-panel">
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
-                <h3 class="headerTitle">Exchange Details</h3>
+                <h3 class="headerTitle">Exchange</h3>
             </div>
 			<!-- Content -->
 			<div data-role="content" class="jqm-content">
@@ -158,8 +157,8 @@
 							<textarea cols="40" rows="8" name="savedNote" id="savedNote" placeholder="Add note (visible to you only)">{{comments}}</textarea>
 							<div class="options">
 								<strong>Attach:</strong>
-								<button class = "buttonCam" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>
-								<button class = "buttonMic" data-mini="true"  onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</button>
+								<a class = "buttonCam ui-icon-nodisc" data-iconshadow="false" data-role="button" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</a>
+								<a class = "buttonMic ui-icon-nodisc" data-iconshadow="false" data-role="button" data-mini="true"  onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</a>
 							</div>
 						</div></li>
 						<li><div class="ui-grid-a">
@@ -180,7 +179,7 @@
         <div data-role="page" data-url ="exchange-new" id="exchange-new" class="ui-responsive-panel">
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
-                <h3 class="headerTitle">Exchange Details</h3>
+                <h3 class="headerTitle">Exchange</h3>
             </div>
 			<!-- Content -->
 			<div data-role="content" class="jqm-content">
@@ -217,8 +216,8 @@
 							<textarea cols="40" rows="8" name="inputNote" id="inputNote" placeholder="Add note (visible to you only)"></textarea>
 							<div class="options">
 								<strong>Attach:</strong>
-								<button class = "buttonCam" data-mini="true" onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>
-								<button class = "buttonMic" data-mini="true" onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</button>
+								<a class = "buttonCam ui-icon-nodisc" data-iconshadow="false" data-role="button" data-mini="true" onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</a>
+								<a class = "buttonMic ui-icon-nodisc" data-iconshadow="false" data-role="button" data-mini="true" onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</a>
 							</div>
 						</div></li>
 						<li><div class="options ui-grid-a">
@@ -226,7 +225,7 @@
 								<a id = "cancelExchange" onclick = "" data-role="button">Cancel</a>
 							</div>
 							<div class="ui-block-b">
-								<button class = "buttonExchange" id = "exchangeConfirm" type = "button" onclick = "" data-theme="b">Exchange</button>
+								<button class = "buttonExchange" id = "exchangeConfirm" type = "button" onclick = "" data-theme="a">Exchange</button>
 							</div>
 						</div></li>
 					</ul>				

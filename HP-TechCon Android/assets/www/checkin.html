@@ -27,12 +27,12 @@
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Check In</h3>
-				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+				<a href="#nav-panel" data-icon="bars" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Menu</a>
             </div>
 			<!-- Content -->
             <div data-role="content" class="jqm-content">
                 <!-- Input text box; not search -->
-				<ul data-role="listview" data-inset="true" data-divider-theme="a" class="listLook">
+				<ul data-role="listview" data-inset="true" data-divider-theme="a" class="listLook" data-icon="false">
 				<li data-role="list-divider">Check Into an Event</li>
 				<li>
 					<div class="ui-grid-a" id="eventBar">
@@ -47,7 +47,7 @@
 							<br><p><strong>Found a QR code?</strong></p>
 						</div>
 						<div class="ui-block-b">
-							<a class = "buttonCam" data-role="button" data-mini="true"  onclick="scan()" data-icon="camera" data-iconpos="right">Scan</a>
+							<a class = "buttonCam ui-icon-nodisc" data-iconshadow="false" data-role="button" data-mini="true"  onclick="scan()" data-icon="camera" data-iconpos="right">Scan</a>
 						</div>
 					</div>
 				</li>
@@ -59,16 +59,15 @@
 				<!-- Recommended events -->
 				<div id = "recommendedEventsdiv">
 					<script id="recommendedEvents-template" type="text/x-handlebars-template">
-						<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="recommendedEvents" class="listLook">
+						<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="recommendedEvents" class="listLook" data-icon="false">
 							<li data-role="list-divider">Recommended Events</li>
 							{{#recommendedEvents}}
 							<li id="{{event_id}}">						
 								<a id="{{event_id}}">
 								<h2 id="{{event_id}}">{{event_name}}</h2>
-								<p id="{{event_id}}">From: {{from_id}}, {{comment}}</p>
-								<br>							
-								<p class="ui-li-aside" id="{{event_id}}"><strong>2:00</strong>PM</p>
-								<p><em>Comments (X)</em></p>
+								<p id="{{event_id}}">From: {{from_id}}, {{comment}}</p>						
+								<p class="ui-li-aside time" id="{{event_id}}"><strong>2:00</strong>PM</p>
+								<em>Comments (X)</em>
 								</a>
 							</li>
 							{{/recommendedEvents}}
@@ -78,7 +77,7 @@
 				<!-- Listview for current events -->
 				<div id = "currentEventsdiv">
 					<script id="currentEvents-template" type="text/x-handlebars-template">
-					<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="currentEvents" class="listLook">
+					<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="currentEvents" class="listLook" data-icon="false">
 					<li data-role="list-divider">Current Events</li>
 					{{#currentEvents}}
 					<!--<li><a  onclick="searchSession('{{id}}')"-->
@@ -86,8 +85,8 @@
 						<a  href="#" id="{{id}}">
 						<h2 id="{{id}}">{{name}}</h2>
 						<p id="{{id}}">Location: {{location}}</p>
-						<p class="ui-li-aside" id="{{id}}"><strong>{{time}}</strong></p>
-						<p><em>Comments (X)</em></p>
+						<p class="ui-li-aside time" id="{{id}}"><strong>{{time}}</strong></p>
+						<em>Comments (X)</em>
 						</a>
 					</li>
 					{{/currentEvents}}
@@ -97,7 +96,7 @@
             </div>
 			<!-- Navigation panel -->
 			<div data-role="panel" data-position-fixed="true"  data-display="reveal" data-theme="a" id="nav-panel">
-				<ul data-role="listview" data-theme="a" class="nav-search">
+				<ul data-role="listview" data-theme="a" class="nav-search" data-icon="false">
 					<li><a href="home.html#home-main" rel="external">
 						<img src="images/Home_1.png" alt="Home">Home
 					</a></li>
@@ -121,11 +120,11 @@
         <div data-role="page" data-url ="event-details" id="event-details" class="ui-responsive-panel">
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
-                <h3 class="headerTitle">Event Details</h3>
-				<a href="#menuShare1" data-rel="popup" data-role="button" data-inline="true" data-transition="none" data-icon="share" data-iconpos="right" data-theme="a" class="ui-btn-right">Share</a>
+                <h3 class="headerTitle">Check In</h3>
+				<a href="#menuShare1" data-rel="popup" data-role="button" data-inline="true" data-transition="none" data-icon="share" data-iconpos="notext" data-theme="a" class="ui-btn-right ui-icon-nodisc" data-iconshadow="false">Share</a>
 				<!-- Pop up menu -->
 				<div data-role="popup" id="menuShare1" data-theme="a">
-					<ul data-role="listview" data-inset="true" style="min-width:175px;" data-theme="d">
+					<ul data-role="listview" data-inset="true" style="min-width:175px;" data-theme="d" data-icon="false">
 						<li><a href="#event-share">Recommend to Friend</a></li>
 						<li><a href="microblog.html#microblog-main" rel="external">Post About It</a></li>
 					</ul>
@@ -185,7 +184,7 @@
 							<h2>{{firstName}} {{lastName}}</h2>
 							<p>{{comment}}</p>
 							<!--<p class="ui-li-aside"><strong>2:55</strong>PM</p>-->
-							<p><em>Posted on {{date}} {{time}}</em></p>
+							<em>Posted on {{date}} {{time}}</em>
 						</li>
 						{{/commentSection}}
 						<li>
@@ -195,7 +194,7 @@
 							<textarea cols="40" rows="5" id="myComment" name="myComment" placeholder="Add your comment"></textarea>
 							<div id="commentButton">
 							<!--<a id="commentSubmit" onclick= "comment()" data-role="button" data-mini="true">Submit</a>-->
-							<a id="commentSubmit"  data-role="button" data-mini="true">Submit</a>
+							<a id="commentSubmit"  data-role="button" data-mini="true">Post</a>
 							</div>
 						</li>
 					</ul>
@@ -203,21 +202,19 @@
 				</div>
             </div>
         </div>
-		
-		
-		<!-- NEW PAGES; PLEASE LOOK THESE OVER -->
-		
+
 		<!-- Attended events page -->
         <div data-role="page" data-url ="event-attended" id="event-attended" class="ui-responsive-panel">
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
-                <h3 class="headerTitle">Attended Events</h3>
-				<a href="#checkin-main" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
+                <h3 class="headerTitle">Check In</h3>
+				<a href="#checkin-main" data-rel="back" data-icon="barrow" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Back</a>
             </div>
             <div id="eventAttended" data-role="content" class="jqm-content">
             	<script id="eventsAttended-template" type="text/x-handlebars-template">
 				<ul data-role="listview" id="attendedEvents" data-autodividers="false" data-filter="true" 
 				data-inset="true"  data-divider-theme="a" data-filter-placeholder="Find an event" class="listLook">
+					<li data-role="list-divider">My Attended Events</li>
 					{{#eventsAttended}}
 					<!--<li><a onclick="searchChecked('{{id}}')">-->
 					<li id="{{id}}">
@@ -225,7 +222,7 @@
 						<h2 id="{{id}}">{{eventName}}</h2>
 						<p id="{{id}}">Location: {{location}}</p>
 						<p class="ui-li-aside" id="{{id}}"><strong>{{time}}</strong></p>
-						<p><em>Comments (X)</em></p>
+						<em>Comments (X)</em>
 						</a>
 					</li>
 					{{/eventsAttended}}
@@ -239,11 +236,10 @@
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Event Details</h3>
-				<a href="#" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
-				<a href="#menuShare2" data-rel="popup" data-role="button" data-inline="true" data-transition="none" data-icon="share" data-iconpos="right" data-theme="a">Share</a>
+				<a href="#menuShare2" data-rel="popup" data-role="button" data-inline="true" data-transition="none" data-icon="share" data-iconpos="notext" data-theme="a" class="ui-btn-right ui-icon-nodisc" data-iconshadow="false">Share</a>
 				<!-- Pop up menu -->
 				<div data-role="popup" id="menuShare2" data-theme="a">
-					<ul data-role="listview" data-inset="true" style="min-width:175px;" data-theme="d">
+					<ul data-role="listview" data-inset="true" style="min-width:175px;" data-theme="d" data-icon="false">
 						<li><a href="#event-share">Recommend to Friend</a></li>
 						<li><a href="microblog.html#microblog-main" rel="external">Post About It</a></li>
 					</ul>
@@ -286,8 +282,8 @@
 							<textarea cols="40" rows="8" name="inputNote" id="savedNote" placeholder="Add note (visible to you only)"></textarea>
 							<div class="options">
 								<strong>Attach:</strong>
-								<button class = "buttonCam" data-mini="true" onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>
-								<button class = "buttonMic" data-mini="true" onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</button>
+								<a class = "buttonCam ui-icon-nodisc" data-iconshadow="false" data-role="button" data-mini="true" onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</a>
+								<a class = "buttonMic ui-icon-nodisc" data-iconshadow="false" data-role="button" data-mini="true" onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</a>
 							</div>
 						</div></li>
 						<li><div class="options ui-grid-a">
@@ -312,7 +308,7 @@
 							<h2>{{firstName}} {{lastName}}</h2>
 							<p>{{comment}}</p>
 							<!--<p class="ui-li-aside"><strong>2:55</strong>PM</p>-->
-							<p><em>Posted on {{date}} {{time}}</em></p>
+							<em>Posted on {{date}} {{time}}</em>
 						</li>
 						{{/commentSection}}
 						<li>
@@ -333,14 +329,14 @@
         <div data-role="page" data-url ="event-share" id="event-share" class="ui-responsive-panel">
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
-                <h3 class="headerTitle">Share Event</h3>
-                <a href="#checkin-main" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
+                <h3 class="headerTitle">Check In</h3>
+                <a href="#checkin-main" data-rel="back" data-icon="barrow" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Back</a>
             </div>
 			<!-- Content -->
             <div id="eventShare" data-role="content" class="jqm-content">
 				<!-- Quick post -->
 				<ul data-role="listview" data-inset="true" data-divider-theme="a" id="quickPost" class="listLook">
-					<li data-role="list-divider">Share /Event Name/
+					<li data-role="list-divider">Recommend to a Friend
 					</li>
 					<li><div>
 						<label for="messageTo">Send To:</label>

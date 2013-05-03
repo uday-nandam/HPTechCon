@@ -25,14 +25,14 @@
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Microblog</h3>
-				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+				<a href="#nav-panel" data-icon="bars" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Menu</a>
             </div>
 			<!-- Content -->
             <div data-role="content" class="jqm-content">
 				<!-- Quick post -->
 				<div data-role="collapsible" data-theme="a" data-content-theme="c">
 					<h2>Click here to post!</h2>
-					<ul data-role="listview" id="quickPost" class="listLook">
+					<ul data-role="listview" id="quickPost" class="listLook" data-icon="false">
 						<li><div>
 							<label for="blogNote" class="ui-hidden-accessible">Post your message here</label>
 							<textarea name="blogNote" id="blogNote" placeholder="Post your message here"></textarea>
@@ -42,22 +42,22 @@
 							<div class="ui-block-a">
 								<div class="options">
 								<strong>Attach:</strong>
-								<button class = "buttonCam" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>
+								<a class = "buttonCam ui-icon-nodisc" data-iconshadow="false" data-role="button" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</a>
 								</div>
 							</div>
 							<div class="ui-block-b">
 								<a id="submitNewPost" data-role="button" data-mini="true">Submit</a>
 							</div>
 						</div></li>
-						<li class="smallItem2">
-							<a href="#microblog-mine" data-icon="arrow-r" data-iconpos="right"><h2>View All My Posts</h2></a>
+						<li>
+							<a href="#microblog-mine" data-icon="arrow-r" data-iconpos="right">View All My Posts</a>
 						</li>
 					</ul>
 				</div>
 				<!-- Listview for recent microblog posts -->
 				<div id="microBlogFeed">
 					<script id="microBlogFeed-template" type="text/x-handlebars-template">
-						<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="blogNewsfeed" class="listLook">
+						<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="blogNewsfeed" class="listLook" data-icon="false">
 							<li data-role="list-divider">Microblog Feed
 							</li>
 							<li><a href="#microblog-view">
@@ -66,7 +66,7 @@
 								<p>The next transistors discussion will be at 3:00PM. Please plan on attending.</p>
 								<img src="images/snapshot-lobby.PNG" class="attachment" alt="Attachment">
 								<br /><br />
-								<p><em>Posted at 2:47 PM - Comments (X) </em></p>
+								<em>Posted at 2:47 PM - Comments (X) </em>
 							</a></li>
 							{{#feed}}
 							<li id="{{post_id}}" class="post">
@@ -84,7 +84,7 @@
             </div>
 			<!-- Navigation panel -->
 			<div data-role="panel" data-position-fixed="true"  data-display="reveal" data-theme="a" id="nav-panel">
-				<ul data-role="listview" data-theme="a" class="nav-search">
+				<ul data-role="listview" data-theme="a" class="nav-search" data-icon="false">
 					<li><a href="home.html#home-main" rel="external">
 						<img src="images/Home_1.png" alt="Home">Home
 					</a></li>
@@ -109,13 +109,13 @@
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Microblog</h3>
-				<a href="#microblog-main" data-icon="back" data-iconpos="notext">Back</a>
+				<a href="#microblog-main" data-icon="barrow" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Back</a>
             </div>
 			<!-- Content -->
             <div data-role="content" class="jqm-content">
             	<div id="myBlogPosts">
 	            	<script id="myBlogPosts-template" type="text/x-handlebars-template">
-						<ul data-role="listview" id="myBlogPostsList" data-inset="true"  data-divider-theme="a" class="listLook" data-icon="edit" data-filter="true" data-filter-placeholder="Find a post">
+						<ul data-role="listview" id="myBlogPostsList" data-inset="true"  data-divider-theme="a" class="listLook" data-icon="false" data-filter="true" data-filter-placeholder="Find a post">
 							<li data-role="list-divider">My Posts</li>
 							{{#allMyBlogPosts}}
 								<li id="{{post_id}}">
@@ -137,7 +137,7 @@
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Microblog</h3>
-				<button id="deletePost" data-role="button" data-theme="a" data-icon="delete" data-iconpos="right" class="ui-btn-right">Delete Post</button>
+				<a id="deletePost" data-role="button" data-theme="a" data-icon="trash" data-iconpos="notext" class="ui-btn-right ui-icon-nodisc" data-iconshadow="false">Delete</a>
             </div>
 			<!-- Content -->			
 			<div data-role="content" class="jqm-content">
@@ -154,7 +154,7 @@
 								<textarea cols="40" rows="8" name="savedNote" id="savedNote">{{post_content}}</textarea>
 								<div class="options">
 									<strong>Attach:</strong>
-									<button class="buttonCam" data-mini="true" onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>
+									<a class="buttonCam ui-icon-nodisc" data-iconshadow="false" data-role="button" data-mini="true" onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</a>
 								</div>
 							</div></li>
 							<li><div class="options ui-grid-a">
@@ -175,7 +175,7 @@
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Microblog</h3>
-				<a href="#" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
+				<a href="#" data-rel="back" data-icon="barrow" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Back</a>
             </div>
 			<!-- Content -->			
 			<div data-role="content" class="jqm-content">
@@ -184,20 +184,19 @@
 						<!-- Post -->
 						<ul data-role="listview" data-inset="true" data-divider-theme="a">
 							<li data-role="list-divider">
-								<h1>View Post</h1>
+								<h1>{{posted_by}}</h1>
 							</li>
 							<li><div class="postDetails ui-grid-a">
 								<div class="ui-block-a">
 									<img src="images/person3.PNG" alt="Photo" class="portraitPost">
 								</div>
 								<div class="ui-block-b">
-									<h2>{{posted_by}}</h2>
+									<h2>Posted at {{posted_at}}</h2>
 									<p>{{post_content}}</p><br>
-									<em>Posted at {{posted_at}}</em>
 								</div>
 							</div></li>	
 							<li><div>
-								<h2>Attachments:</h2>
+								<strong>Attachment:</strong>
 								<img src="images/snapshot-lobby.PNG" class="attachView" alt="Attachment">
 							</div></li>
 						</ul>
@@ -208,7 +207,7 @@
 								<img src="images/person1.PNG" alt="Photo">
 								<h2>Stephen Weber</h2>
 								<p>Really enjoyed it. Thanks for sharing.</p>
-								<p><em>Posted @ 2:55 PM</em></p>
+								<em>Posted at 2:55 PM</em>
 							</li>
 							<li>
 								<img src="images/personMe.PNG" alt="Photo">
