@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <title>Microblog</title>
+        
+		<!-- Adapted from API panel example-->
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
+		<script type="text/javascript" src="cordova-2.4.0.js"></script>
+        <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+		
+		<!-- Link css and js files -->
+		<link rel="stylesheet" href="css/my.css">
+    </head>
+    <body>
+        <!-- Main page -->
+        <div data-role="page" data-url="microblog-main" id="microblog-main" class="ui-responsive-panel" data-dom-cache="false">
+			<!-- Header -->
+            <div data-role="header" data-theme="a" data-position="fixed">
+                <h3 class="headerTitle">Microblog</h3>
+				<a href="#nav-panel" data-icon="bars" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Menu</a>
+            </div>
+			<!-- Content -->
+            <div data-role="content" class="jqm-content">
+				<!-- Quick post -->
+				<div data-role="collapsible" data-theme="a" data-content-theme="c">
+					<h2>Click here to post!</h2>
+					<ul data-role="listview" id="quickPost" class="listLook" data-icon="false">
+						<li><div>
+							<label for="blogNote" class="ui-hidden-accessible">Post your message here</label>
+							<textarea name="blogNote" id="blogNote" placeholder="Post your message here"></textarea>
+							</div>
+						</li>
+						<li class="smallItem1"><div class="ui-grid-a">
+							<div class="ui-block-a">
+								<div class="options">
+								<strong>Attach:</strong>
+								<a class = "buttonCam ui-icon-nodisc" data-role="button" data-iconshadow="false" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</a>
+								</div>
+							</div>
+							<div class="ui-block-b">
+								<a id="submitNewPost" data-role="button" data-mini="true">Submit</a>
+							</div>
+						</div></li>
+						<li>
+							<a href="#microblog-mine">View All My Posts</a>
+						</li>
+					</ul>
+				</div>
+				<!-- Listview for recent microblog posts -->
+				<div id="microBlogFeed">
+					<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="blogNewsfeed" class="listLook" data-icon="false">
+						<li data-role="list-divider">Microblog Feed
+						</li>
+						<li><a href="#microblog-view">
+							<img src="images/person3.PNG" alt="Photo">
+							<h2>Avery Walker</h2>
+							<p>Great presentation on upcoming laptops. It's really the buzz going on right now!</p>
+							<em>Posted at 2:25PM - Comments(1) - Attachment</em>
+						</a></li>
+						<li><a href="#">
+							<img src="images/person1.PNG" alt="Photo">
+							<h2>Stephen Weber</h2>
+							<p>Testing out the microblog. Hello world!</p>
+							<em>Posted at 2:20PM - Comments(0)</em>
+						</a></li>
+						<li><a href="#">
+							<img src="images/person2.PNG" alt="Photo">
+							<h2>John Doe</h2>
+							<p>Next presentation on transistors is at 4:00PM. Don't miss it! It will be held in the conference room 2.20.</p>
+							<em>Posted at 2:14PM - Comments(0)</em>
+						</a></li>
+						<li><a href="#">
+							<img src="images/personNew.PNG" alt="Photo">
+							<h2>Leeroy Jenkins</h2>
+							<p>Check out the ABC Poster.</p>
+							<em>Posted at 2:10PM - Comments(0)</em>
+						</a></li>
+						<li><a href="#">
+							<img src="images/person3.PNG" alt="Photo">
+							<h2>Avery Walker</h2>
+							<p>I think we need more presentations on the newer projects from department A.</p>
+							<em>Posted at 1:55PM - Comments(0)</em>
+						</a></li>
+						<li><a href="#">
+							<img src="images/person5.PNG" alt="Photo">
+							<h2>Elisabeth Beasley</h2>
+							<p>System.out.println("Hello world");</p>
+							<em>Posted at 1:40PM - Comments(0)</em>
+						</a></li>
+					</ul>
+				</div>
+            </div>
+			<!-- Navigation panel -->
+			<div data-role="panel" data-position-fixed="true"  data-display="reveal" data-theme="a" id="nav-panel">
+				<ul data-role="listview" data-theme="a" class="nav-search" data-icon="false">
+					<li><a href="home.html#home-main" rel="external">
+						<img src="images/Home_1.png" alt="Home">Home
+					</a></li>
+					<li><a href="checkin.html#checkin-main" rel="external">
+						<img src="images/Check_In_1.png" alt="Check In">Check In
+					</a></li>
+					<li><a href="exchange.html#exchange-main" rel="external">
+						<img src="images/Exchange_1.png" alt="Exchange">Exchange
+					</a></li>
+					<li><a href="#microblog-main" data-rel="close">
+						<img src="images/Microblog_1.png" alt="Microblog">Microblog
+					</a></li>
+					<li><a href="people.html#people-main" rel="external">
+						<img src="images/People_1.png" alt="People">People
+					</a></li>
+					<li><a href="#">
+						<img src="images/Note_1.png" alt="Notes">Notes
+					</a></li>
+					<li><a href="#">
+						<img src="images/Agenda_1.png" alt="Agenda">Agenda
+					</a></li>
+				</ul>
+			</div>
+        </div>		
+		
+		<!-- All of my microblog posts page -->
+        <div data-role="page" data-url ="microblog-mine" id="microblog-mine" class="ui-responsive-panel" data-dom-cache="false">
+			<!-- Header -->
+            <div data-role="header" data-theme="a" data-position="fixed">
+                <h3 class="headerTitle">Microblog</h3>
+				<a href="#microblog-main" data-icon="barrow" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Back</a>
+            </div>
+			<!-- Content -->
+            <div data-role="content" class="jqm-content">
+            	<div id="myBlogPosts">
+					<ul data-role="listview" id="myBlogPostsList" data-inset="true"  data-divider-theme="a" class="listLook" data-icon="false" data-filter="true" data-filter-placeholder="Find a post">
+						<li data-role="list-divider">My Posts</li>
+						<li><a href="#microblog-edit">
+							<img src="images/personMe.PNG" alt="Photo">
+							<h2>My Name</h2>
+							<p>Definitely check out the new project presentation by the A Team.</p>
+							<em>Posted at 1:35PM - Comments(2)</em>
+						</a></li>
+						<li><a href="#">
+							<img src="images/personMe.PNG" alt="Photo">
+							<h2>My Name</h2>
+							<p>System.out.println("Test");</p>
+							<em>Posted at 1:05PM - Comments(1)</em>
+						</a></li>
+					</ul>
+				</div>
+            </div>			
+        </div>
+		
+		<!-- Edit page -->
+		<div data-role="page" data-url ="microblog-edit" id="microblog-edit" class="ui-responsive-panel" data-dom-cache="false">
+			<!-- Header -->
+            <div data-role="header" data-theme="a" data-position="fixed">
+                <h3 class="headerTitle">Microblog</h3>
+				<a id="deletePost" data-role="button" data-theme="a" data-icon="trash" data-iconpos="notext" class="ui-btn-right ui-icon-nodisc" data-iconshadow="false">Delete</a>
+            </div>
+			<!-- Content -->			
+			<div data-role="content" class="jqm-content">
+				<div id="editpost">
+					<!-- Post -->
+					<ul data-role="listview" data-inset="true" data-divider-theme="a">
+						<li data-role="list-divider">
+							<h1>Edit Post</h1>
+						</li>
+						<li><div>
+							<p>Posted at <strong>1:35PM</strong></p>
+							<label for="savedNote" class="ui-hidden-accessible">Post your message here</label>
+							<textarea cols="40" rows="8" name="savedNote" id="savedNote">Definitely check out the new project presentation by the A Team.</textarea>
+							<div class="options">
+								<strong>Attach:</strong>
+								<a class="buttonCam ui-icon-nodisc" data-role="button" data-iconshadow="false" data-mini="true" onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</a>
+							</div>
+						</div></li>
+						<li><div class="options ui-grid-a">
+							<div class="ui-block-a">
+								<a href="#microblog-main" id="cancelEdit" data-role="button">Cancel</a>
+							</div>
+							<div class="ui-block-b">
+								<a href="#microblog-main" id="saveEdit" class = "buttonSave" data-role="button" data-theme="a">Save</a>
+							</div>
+						</div></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<!-- View post page -->
+		<div data-role="page" data-url ="microblog-view" id="microblog-view" class="ui-responsive-panel" data-dom-cache="false">
+			<!-- Header -->
+            <div data-role="header" data-theme="a" data-position="fixed">
+                <h3 class="headerTitle">Microblog</h3>
+				<a href="#" data-rel="back" data-icon="barrow" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Back</a>
+            </div>
+			<!-- Content -->			
+			<div data-role="content" class="jqm-content">
+				<div id="view-microblog">
+					<!-- Post -->
+					<ul data-role="listview" data-inset="true" data-divider-theme="a">
+						<li data-role="list-divider">
+							<h1>Avery Walker</h1>
+						</li>
+						<li><div class="postDetails ui-grid-a">
+							<div class="ui-block-a">
+								<img src="images/person3.PNG" alt="Photo" class="portraitPost">
+							</div>
+							<div class="ui-block-b">
+								<h2>Posted at 2:25pm</h2>
+								<p>Great presentation on upcoming laptops. It's really the buzz going on right now!</p><br>
+							</div>
+						</div></li>	
+						<li><div>
+							<strong>Attachment:</strong>
+							<img src="images/snapshot-lobby.PNG" class="attachView" alt="Attachment">
+						</div></li>
+					</ul>
+					<!-- Listview for comments -->
+					<ul data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook">
+						<li data-role="list-divider" class="header">Comments</li>
+						<li>
+							<img src="images/person1.PNG" alt="Photo">
+							<h2>Stephen Weber</h2>
+							<p>I agree!</p>
+							<em>Posted at 2:55 PM</em>
+						</li>
+						<li>
+							<img src="images/personMe.PNG" alt="Photo">
+							<h2>My Name</h2>
+							<label for="myComment" class="ui-hidden-accessible">Add your comment</label>
+							<textarea cols="40" rows="5" id="myComment" name="myComment" placeholder="Add your comment"></textarea>
+							<div id="commentButton">
+							<a href="#" data-role="button" data-mini="true">Post</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+    </body>
+</html>

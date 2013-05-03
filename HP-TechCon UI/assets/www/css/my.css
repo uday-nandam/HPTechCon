@@ -1,17 +1,20 @@
-/* Put your custom CSS here */
-#logIn label{
+body{
 	font-size: small;
 }
 
-/* Home page */
-#logo{
-	position: relative;
-	top: 10%;
-	left: 5px;
+textarea{
+	resize: none;
 }
 
-#features-panel span{
-	font-size: medium;
+/* Log in page */
+#logIn label{
+	font-size: small;
+}
+#logo{
+	background-image:url('../images/TechCon_Logo.png');
+	background-repeat:no-repeat;
+	background-position:center center;
+	height: 200px;
 }
 
 /* Home page */
@@ -21,17 +24,17 @@
 #featuresGrid div{
 	padding-top: 10px;
 }
-#featuresGrid a:link{ 
-	color: #000000; 
-	text-decoration: none;
-}
-#featuredGrid a:visited{ 
-	color: #000000; 
-	text-decoration: none;
-}
+#featuresGrid a{ text-decoration: none; }
+#featuresGrid a:link{	color: #000000; }
+#featuresGrid a:visited { color:#000000; }
+
 .homeIcons{
-	width: 60px;
-	height: 60px;
+	width: 80px;
+	height: 80px;
+}
+
+#features-panel span{
+	font-size: medium;
 }
 
 /* Navigation panel */
@@ -48,15 +51,22 @@
 /* Change how it looks in all listviews */
 .header{
 	text-align: center;
-}
-.listLook span{
-	font-size: small;
+	overflow: visible;
 }
 .listLook p{
 	font-size: small;
+	max-height: 50px; /* Temporary solution */
+	width: 100%;
+}
+.listLook .time{
+	position: absolute;
+	right: 10px;
+	top: 10px;
 }
 .listLook h2{
 	font-size: small;
+	width: 100%;
+	height: 100%;
 }
 .listLook img{
 	width: 50px;
@@ -64,9 +74,26 @@
 	padding-top: 15px;
 	padding-left: 10px;
 }
+ul em{
+	position: absolute;
+	bottom: 2px;
+}
+.listLook em{
+	font-size: x-small;
+	font-weight: normal;
+}
 .ui-listview .ui-li-desc{
 	white-space: normal;
 }
+.listLook .attachment{
+	width: 70%;
+	height: 75px; /* Testing values */
+	padding-bottom: 5px;
+	padding-left: 10px;
+}
+/* Change padding between image and text in listviews */
+.ui-li-has-thumb .ui-btn-inner a.ui-link-inherit,.ui-li-static.ui-li-has-thumb{padding-left:70px !important}
+.ui-li-has-thumb .ui-btn-inner a.ui-link-inherit,.ui-li-static.ui-li-has-thumb{padding-right:05px !important}
 
 /* Exchange-main page */
 #inputBar .ui-block-a{
@@ -79,63 +106,130 @@
 
 /* Exchange-details page */
 .portrait{
-	width: 90px;
-	height: 90px;
-	padding-top: 15px;
-	padding-left: 5px;
+	width: 75px;
+	height: 75px;
 }
 
 table th{
+	vertical-align: text-top;
 	text-align: left;
-	font-size: large; /* PLEASE TEST THIS ON PHONE */
 }
 table td{
-	
+	font-weight: normal;
+	width: 100%;
+	word-wrap: break-word;
 }
 
 .exchangeDetails .ui-block-a{
-	width: 28%; /* PLEASE TEST ON PHONE */
+	width: 27%; /* PLEASE TEST ON PHONE */
 }
 
 #savedNote{
 	height: 100px;
 	font-size: small;
+	font-weight: normal;
 }
 #inputNote{
 	height: 100px;
 	font-size: small;
+	font-weight: normal;
 }
 
 /* Attachment option bar */
 .options{
+	padding-top: 7px;
 	font-size: small;
 }
 
 /* Check in Page */
-/* Check in Page */
 #eventBar .ui-block-a{
-	width: 51%;
+	width: 70%;
 }
 #eventBar .ui-block-b{
-	padding-top: 6px;
-	width: 21%;
+	padding-top: 7px;
+	width: 30%;
 }
-#eventBar .ui-block-c{
-	/* border-left: 1px solid #848484; */
-	padding-top: 6px;
-	width: 20%;
-}
-#QR{
-	width: 45px;
-	height: 45px;
+#eventBar a{
+	width: 92%;
 }
 
-.eventDetails{
-	padding-left: 10%;
+/* Microblog Post */
+#blogNote{
+	font-weight: normal;
+	height: 100px;
+}
+.listLook .smallItem1{
+	height: 30px;
+}
+.listLook .smallItem1 div{
+	position: relative;
+	top: -2px;
 }
 
-.eventDetails th{
-	font-size: large;
+/* Post details */
+.attachView{
+	width: 100%;
+	text-align: center;
+}
+.postDetails .ui-block-a{
+	width: 27%;
+}
+.postDetails .ui-block-b{
+	width: 73%;
+}
+.postDetails p{
+	width: 100%;
+}
+.postDetails h2{
+	font-size: small;
+}
+.portraitPost{
+	width: 75px;
+	height: 75px;
+	
+	position: absolute;
+	left: 5px;
+	padding-bottom: 50px;
+}
+.postDetails em{
+	font-weight: normal;
+	bottom: 5px;
+}
+
+/* Comment Feed */
+#myComment{
+	resize: none;
+	font-size: small;
+	font-weight: normal;
+}
+#commentButton{
+	width: 25%;
+	padding-left: 75%;
+}
+
+/* Pop up options */
+#menuShare1 ul, a{
+	font-size: small;
+}
+#menuShare2 ul, a{
+	font-size: small;
+}
+
+/* Share Page */
+.listLook label{
+	font-size: small;
+	font-weight: bold;
+}
+#messageTo{
+	
+}
+#messageBody{
+	height: 100px;
+}
+
+/* People Page */
+.personDetails .ui-block-a{
+	width: 27%;
 }
 
 /* Icons */
@@ -145,4 +239,21 @@ table td{
 
 .ui-icon-microphone{
 	background-image: url("../images/microphone.png");
+}
+
+.ui-icon-share{
+	background-image: url("../images/share.png");
+}
+
+.ui-icon-barrow{
+	background-image: url("../images/back-arrow.png");
+}
+
+.ui-icon-trash{
+	background-image: url("../images/trash.png");
+}
+
+
+.ui-page {
+    -webkit-backface-visibility: hidden;
 }

@@ -5,94 +5,113 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <title>Exchange</title>
+        <title>Checkin</title>
         
 		<!-- Adapted from API panel example-->
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
-		
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
+		<script type="text/javascript" src="cordova-2.4.0.js"></script>
+			
 		<!-- Link css and js files -->
-		<link rel="stylesheet" href="my.css" />
-        <script src="my.js"></script>
-
-        <!-- User-generated js -->
-        <script>
-            try {
-
-    $(function() {
-
-    });
-
-  } catch (error) {
-    console.error("Your javascript has an error: " + error);
-  }
-        </script>
+		<link rel="stylesheet" href="css/my.css" />
+        <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
     </head>
     <body>
         <!-- Main page -->
-        <div data-role="page" data-url ="checkin-main" id="checkin-main" class="ui-responsive-panel">
+        <div data-role="page" data-url="checkin-main" id="checkin-main" class="ui-responsive-panel">
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Check In</h3>
-				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+				<a href="#nav-panel" data-icon="bars" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Menu</a>
             </div>
+			<!-- Content -->
             <div data-role="content" class="jqm-content">
-				<!-- Input text box; not search -->
-				<div class="ui-grid-b" id="eventBar">
-					<div class="ui-block-a">
-						<label for="checkinInput" class="ui-hidden-accessible">Enter Event ID: </label>
-						<input name="checkinInput" id="checkinInput" placeholder="Enter Event ID" value="" type="text">
+                <!-- Input text box; not search -->
+				<ul data-role="listview" data-inset="true" data-divider-theme="a" class="listLook" data-icon="false">
+				<li data-role="list-divider">Check Into an Event</li>
+				<li>
+					<div class="ui-grid-a" id="eventBar">
+						<div class="ui-block-a">
+							<label for="checkinInput" class="ui-hidden-accessible">Enter Event ID: </label>
+							<input name="checkinInput" id="checkinInput" placeholder="Enter Event ID" value="" type="text">
+						</div>
+						<div class="ui-block-b">
+							<a id="submitButton" data-role="button" data-mini="true">Go</a>
+						</div>
+						<div class="ui-block-a">
+							<br><p><strong>Found a QR code?</strong></p>
+						</div>
+						<div class="ui-block-b">
+							<a class = "buttonCam ui-icon-nodisc" data-iconshadow="false" data-role="button" data-mini="true"  onclick="scan()" data-icon="camera" data-iconpos="right">Scan</a>
+						</div>
 					</div>
-					<div class="ui-block-b">
-						<a href="#checkin-new" id="submitButton" data-role="button" data-mini="true">Go</a>
-					</div>
-                    <div class="ui-block-c">
-						<!-- QR image button 
-						<input name="scanQRCode" id="QR" type="image" onclick="cameraFunction()" src="images/qrcode.png">-->
-						<button class = "buttonCam" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="right">Scan QR</button>
-					</div>
-				</div>
-				
-				<!-- Listview for saved checkins -->
-				<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="currentEvents" class="listLook">
-					<li data-role="list-divider">Ongoing Events</li>
+				</li>
+				<li>
+					<!-- Link to attended events -->
+					<a href="#event-attended">View Attended Events</a>
+				</li>
+				</ul>
+				<!-- Recommended events -->
+				<div id = "recommendedEventsdiv">
+					<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="recommendedEvents" class="listLook" data-icon="false">
+						<li data-role="list-divider">Recommended Events</li>
+						<li><a href="#event-details">
+							<h2>HP Scanner</h2>
+							<p>From: 1123, This is great!</p>
+							<p class="ui-li-aside time"><strong>2:00</strong>PM</p>
+							<em>Comments (1)</em>
+						</a></li>
+					</ul>
+				</div>		
+				<!-- Listview for current events -->
+				<div id = "currentEventsdiv">
+					<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="currentEvents" class="listLook" data-icon="false">
+					<li data-role="list-divider">Current Events</li>
 					<li><a href="#event-details">
 						<h2>HP Scanner</h2>
 						<p>Location: Ballroom</p>
-						<p class="ui-li-aside"><strong>2:00</strong>PM</p>
+						<p class="ui-li-aside time"><strong>2:00</strong>PM</p>
+						<em>Comments (1)</em>
 					</a></li>
 					<li><a href="#">
 						<h2>Poster Session</h2>
 						<p>Location: Northeast Wing</p>
-						<p class="ui-li-aside"><strong>2:00</strong>PM</p>
+						<p class="ui-li-aside time"><strong>2:00</strong>PM</p>
+						<em>Comments (0)</em>
 					</a></li>
 					<li><a href="#">
 						<h2>Laptop Info Session</h2>
 						<p>Location: CR 125</p>
-						<p class="ui-li-aside"><strong>2:30</strong>PM</p>
+						<p class="ui-li-aside time"><strong>2:30</strong>PM</p>
+						<em>Comments (0)</em>
 					</a></li>
 					<li><a href="#">
 						<h2>Cameras</h2>
 						<p>Location: CR 105</p>
-						<p class="ui-li-aside"><strong>2:45</strong>PM</p>
+						<p class="ui-li-aside time"><strong>2:45</strong>PM</p>
+						<em>Comments (0)</em>
 					</a></li>
-				</ul>
+					</ul>
+				</div>
             </div>
 			<!-- Navigation panel -->
 			<div data-role="panel" data-position-fixed="true"  data-display="reveal" data-theme="a" id="nav-panel">
-				<ul data-role="listview" data-theme="a" class="nav-search">
+				<ul data-role="listview" data-theme="a" class="nav-search" data-icon="false">
 					<li><a href="home.html#home-main" rel="external">
 						<img src="images/Home_1.png" alt="Home">Home
 					</a></li>
-					<li><a href="#checkin-main">
+					<li><a href="#checkin-main" data-rel="close">
 						<img src="images/Check_In_1.png" alt="Check In">Check In
 					</a></li>
 					<li><a href="exchange.html#exchange-main" rel="external">
 						<img src="images/Exchange_1.png" alt="Exchange">Exchange
 					</a></li>
-					<li><a href="#">
+					<li><a href="microblog.html#microblog-main" rel="external">
 						<img src="images/Microblog_1.png" alt="Microblog">Microblog
+					</a></li>
+					<li><a href="people.html#people-main" rel="external">
+						<img src="images/People_1.png" alt="People">People
 					</a></li>
 					<li><a href="#">
 						<img src="images/Note_1.png" alt="Notes">Notes
@@ -100,51 +119,243 @@
 					<li><a href="#">
 						<img src="images/Agenda_1.png" alt="Agenda">Agenda
 					</a></li>
-					<li><a href="#">
-						<img src="images/People_1.png" alt="People">People
-					</a></li>
 				</ul>
 			</div>
         </div>		
+		
 		<!-- Details page -->
         <div data-role="page" data-url ="event-details" id="event-details" class="ui-responsive-panel">
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
-                <h3 class="headerTitle">Event Details</h3>
+                <h3 class="headerTitle">Check In</h3>
+				<a href="#menuShare1" data-rel="popup" data-role="button" data-inline="true" data-transition="none" data-icon="share" data-iconpos="notext" data-theme="a" class="ui-btn-right ui-icon-nodisc" data-iconshadow="false">Share</a>
+				<!-- Pop up menu -->
+				<div data-role="popup" id="menuShare1" data-theme="a">
+					<ul data-role="listview" data-inset="true" style="min-width:175px;" data-theme="d" data-icon="false">
+						<li><a href="#event-share">Recommend to Friend</a></li>
+						<li><a href="microblog.html#microblog-main" rel="external">Post About It</a></li>
+					</ul>
+				</div>
             </div>
 			<!-- Content -->
 			<div data-role="content" class="jqm-content">
-                <ul data-role="listview" data-inset="true" data-divider-theme="a" class="eventDetails">
-					<li data-role="list-divider">
-						<h1>HP Scanners</h1>
+				<div id="eventDetails" class="eventDetails">
+					<ul data-role="listview" data-inset="true" data-divider-theme="a">
+						<li data-role="list-divider">
+							<h1>HP Scanners</h1>
+						</li>
+						<li>
+							<table class="personDetails">
+							<tr>
+								<th>Presenter:</th> <td>Daniel Rodgers</td>
+							</tr>
+							<tr>
+								<th>Date:</th> <td>Sunday, May 5, 2013</td>
+							</tr>
+							<tr>
+								<th>Time:</th> <td>2:00PM - 3:00PM</td>
+							</tr>
+							<tr>
+								<th>Location:</th> <td>Ballroom</td>
+							</tr>
+							<tr>
+								<th>Summary:</th>
+								<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis risus nibh, porttitor in dictum eu, vestibulum semper risus. Aliquam vitae odio porta sapien malesuada ultrices. Pellentesque velit nisi, vulputate sit amet imperdiet nec, fringilla vel justo.</td>
+							</tr>
+							<tr>
+								<th>Tag:</th> <td>#HPScan</td>
+							</tr>
+							</table>
+						</li>
+						<li><div class="options ui-grid-a">
+							<div class="ui-block-a">
+								<a href="#checkin-main" data-role="button">Cancel</a>
+							</div>
+							<div class="ui-block-b">
+								<a href="#checkin-main" data-role="button" data-theme="a">Check In</a>
+							</div>
+						</div></li>
+					</ul>
+				</div>
+				<!-- Listview for comments -->
+				<div id="commentSection">
+					<ul data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook">
+						<li data-role="list-divider" class="header">Comments</li>
+						<li>
+							<img src="images/person1.PNG" alt="Photo">
+							<h2>Stephen Weber</h2>
+							<p>I heard this is going to be great!</p>
+							<em>Posted at 2:01PM</em>
+						</li>
+						<li>
+							<img src="images/personMe.PNG" alt="Photo">
+							<h2>My Name</h2>
+							<label for="myComment" class="ui-hidden-accessible">Add your comment</label>
+							<textarea cols="40" rows="5" id="myComment" name="myComment" placeholder="Add your comment"></textarea>
+							<div id="commentButton">
+							<a id="commentSubmit"  data-role="button" data-mini="true">Post</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+            </div>
+        </div>
+		
+		<!-- Attended events page -->
+        <div data-role="page" data-url ="event-attended" id="event-attended" class="ui-responsive-panel">
+			<!-- Header -->
+            <div data-role="header" data-theme="a" data-position="fixed">
+                <h3 class="headerTitle">Check In</h3>
+				<a href="#checkin-main" data-rel="back" data-icon="barrow" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Back</a>
+            </div>
+            <div id="eventAttended" data-role="content" class="jqm-content">
+				<ul data-role="listview" id="attendedEvents" data-autodividers="false" data-filter="true" 
+				data-inset="true"  data-divider-theme="a" data-filter-placeholder="Find an event" class="listLook" data-icon="false">
+					<li data-role="list-divider">My Attended Events</li>
+					<li><a href="#event-checked">
+						<h2>Super Devices of Tomorrow</h2>
+						<p>Location: 2nd Floor Theater</p>
+						<p class="ui-li-aside time"><strong>1:00</strong>PM</p>
+						<em>Comments (1)</em>
+					</a></li>
+					<li><a href="#">
+						<h2>Event C</h2>
+						<p>Location: Building C</p>
+						<p class="ui-li-aside time"><strong>12:00</strong>PM</p>
+						<em>Comments (3)</em>
+					</a></li>
+					<li><a href="#">
+						<h2>Event B</h2>
+						<p>Location: Building B</p>
+						<p class="ui-li-aside time"><strong>11:00</strong>AM</p>
+						<em>Comments (5)</em>
+					</a></li>
+					<li><a href="#">
+						<h2>Event A</h2>
+						<p>Location: Building A</p>
+						<p class="ui-li-aside time"><strong>10:30</strong>AM</p>
+						<em>Comments (2)</em>
+					</a></li>
+				</ul>
+            </div>
+        </div>
+		
+		<!-- Checked in event -->
+        <div data-role="page" data-url ="event-checked" id="event-checked" class="ui-responsive-panel">
+			<!-- Header -->
+            <div data-role="header" data-theme="a" data-position="fixed">
+                <h3 class="headerTitle">Check In</h3>
+				<a href="#menuShare2" data-rel="popup" data-icon="share" data-inline="true" data-transition="none" data-iconpos="notext" data-theme="a" class="ui-btn-right ui-icon-nodisc" data-iconshadow="false">Share</a>
+				<!-- Pop up menu -->
+				<div data-role="popup" id="menuShare2" data-theme="a">
+					<ul data-role="listview" data-inset="true" style="min-width:175px;" data-theme="d" data-icon="false">
+						<li><a href="#event-share">Recommend to Friend</a></li>
+						<li><a href="microblog.html#microblog-main" rel="external">Post About It</a></li>
+					</ul>
+				</div>
+            </div>
+			<!-- Content -->
+			<div data-role="content" class="jqm-content">
+				<div id="eventChecked" class="eventChecked">
+	                <ul data-role="listview" data-inset="true" data-divider-theme="a">
+						<li data-role="list-divider">
+							<h1>Super Devices of Tomorrow</h1>
+						</li>
+						<li><table class="personDetails">
+							<tr>
+								<th>Presenter:</th> <td>John Jacob</td>
+							</tr>
+							<tr>
+								<th>Date:</th> <td>Sunday, May 5, 2013</td>
+							</tr>
+							<tr>
+								<th>Time:</th> <td>1:00PM</td>
+							</tr>
+							<tr>
+								<th>Location:</th> <td>2nd Floor Theater</td>
+							</tr>
+							<tr>
+								<th>Summary:</th>
+								<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis risus nibh, porttitor in dictum eu, vestibulum semper risus. Aliquam vitae odio porta sapien malesuada ultrices. Pellentesque velit nisi, vulputate sit amet imperdiet nec, fringilla vel justo.</td>
+							</tr>
+							<tr>
+								<th>Tag:</th> <td>#SuperDevices</td>
+							</tr>
+							<tr>
+								<th>Checked In:</th> <td>1:02PM</td>
+							</tr>
+						</table></li>
+						<li><div class="noteField">
+							<label for="inputNote" class="ui-hidden-accessible">Add note (visible to you only)</label>
+							<textarea cols="40" rows="8" name="inputNote" id="savedNote" placeholder="Add note (visible to you only)"></textarea>
+							<div class="options">
+								<strong>Attach:</strong>
+								<a class="buttonCam ui-icon-nodisc" data-role="button" data-iconshadow="false" data-mini="true" onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</a>
+								<a class="buttonMic ui-icon-nodisc" data-role="button" data-iconshadow="false" data-mini="true" onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</a>
+							</div>
+						</div></li>
+						<li><div class="options ui-grid-a">
+							<div class="ui-block-a">
+								<a href="#checkin-main" data-role="button">Cancel</a>
+							</div>
+							<div class="ui-block-b">
+								<a href="#checkin-main" data-role="button" data-theme="a">Save</a>
+							</div>
+						</div></li>
+					</ul>
+				</div>
+				<!-- Listview for comments -->
+				<div id="commentschecked">
+					<ul data-role="listview" data-inset="true"  data-divider-theme="a" class="listLook">
+						<li data-role="list-divider" class="header">Comments</li>
+						<li>
+							<img src="images/person1.PNG" alt="Photo">
+							<h2>Stephen Weber</h2>
+							<p>Worth the wait. Catch this later tonight.</p>
+							<em>Posted at 1:45PM</em>
+						</li>
+						<li>
+							<img src="images/personMe.PNG" alt="Photo">
+							<h2>My Name</h2>
+							<label for="myComment" class="ui-hidden-accessible">Add your comment</label>
+							<textarea cols="40" rows="5" id="myComment" name="myComment" placeholder="Add your comment"></textarea>
+							<div id="commentButton">
+							<a href="#" data-role="button" id="commentSubmit" data-mini="true">Post</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+            </div>
+        </div>
+		<!-- Share page -->
+        <div data-role="page" data-url ="event-share" id="event-share" class="ui-responsive-panel">
+			<!-- Header -->
+            <div data-role="header" data-theme="a" data-position="fixed">
+                <h3 class="headerTitle">Check In</h3>
+                <a href="#checkin-main" data-rel="back" data-icon="barrow" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Back</a>
+            </div>
+			<!-- Content -->
+            <div id="eventShare" data-role="content" class="jqm-content">
+				<!-- Quick post -->
+				<ul data-role="listview" data-inset="true" data-divider-theme="a" id="quickPost" class="listLook">
+					<li data-role="list-divider">Recommend to a Friend
 					</li>
-					<li><table class="personDetails">
-						<tr>
-							<th>Presenter:</th> <td>Daniel Rodgers</td>
-						</tr>
-						<tr>
-							<th>Date:</th> <td>Sunday, May 5, 2013</td>
-						</tr>
-						<tr>
-							<th>Time:</th> <td>2:00PM - 3:00PM</td>
-						</tr>
-						<tr>
-							<th>Location:</th> <td>Ballroom</td>
-						</tr>
-						<tr>
-							<th>Summary:</th>
-							<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis risus nibh, porttitor in dictum eu, vestibulum semper risus. Aliquam vitae odio porta sapien malesuada ultrices. Pellentesque velit nisi, vulputate sit amet imperdiet nec, fringilla vel justo.</td>
-						</tr>
-						<tr>
-							<th>Tag:</th> <td>#HPScan</td>
-						</tr>
-					</table></li>
-					<li><div class="options ui-grid-a">
+					<li><div>
+						<label for="messageTo">Send To:</label>
+						<textarea cols="40" rows="3" name="messageTo" id="messageTo" placeholder="Enter ID"></textarea>
+						</div>
+					</li>
+					<li><div>
+						<label for="messageBody">Post your message here</label>
+						<textarea cols="40" rows="8" name="messageBody" id="messageBody" placeholder="Post your message here"></textarea>
+						</div>
+					</li>
+					<li><div class="ui-grid-a">
 						<div class="ui-block-a">
 							<a href="#checkin-main" data-role="button">Cancel</a>
 						</div>
 						<div class="ui-block-b">
-							<button class = "buttonCheckIn" type = "button" onclick="checkInConfirm()" data-theme="a">Check In</button>
+							<a href="#checkin-main"data-role="button" data-theme="a">Share</a>
 						</div>
 					</div></li>
 				</ul>

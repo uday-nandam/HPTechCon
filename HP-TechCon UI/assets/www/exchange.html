@@ -7,96 +7,91 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <title>Exchange</title>
         
-		<!-- Adapted from API panel example-->
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
-		
-		<!-- Link css and js files -->
-		<link rel="stylesheet" href="my.css" />
-        <script src="my.js"></script>
+                <!-- Adapted from API panel example-->
+                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css">
+                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                <script src="http://www.parsecdn.com/js/parse-1.2.1.min.js"></script>
+                
+                <!-- Link css and js files -->
+                <link rel="stylesheet" href="css/my.css" />
+                <script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
 
-        <!-- User-generated js -->
-        <script>
-            try {
-
-    $(function() {
-
-    });
-
-  } catch (error) {
-    console.error("Your javascript has an error: " + error);
-  }
-        </script>
     </head>
     <body>
         <!-- Main page -->
         <div data-role="page" data-url ="exchange-main" id="exchange-main" class="ui-responsive-panel">
-			<!-- Header -->
+            <!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
                 <h3 class="headerTitle">Exchange</h3>
-				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+				<a href="#nav-panel" data-icon="bars" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Menu</a>
             </div>
+			<!-- Content -->
             <div data-role="content" class="jqm-content">
 				<!-- Input text box; not search -->
-				<div class="ui-grid-a" id="inputBar">
-                    <div class="ui-block-a">
-					<label for="exchangeInput" class="ui-hidden-accessible">Enter E-mail or ID: </label>
-					<input name="exchangeInput" id="exchangeInput" placeholder="Enter E-mail or ID" value="" type="text">
-					</div>
-					<div class="ui-block-b">
-					<a href="#exchange-new" id="submitButton" data-role="button" data-mini="true">Go</a>
-					</div>
-				</div>
-				
-				<!-- Listview for recent exchanges -->
-				<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="savedExchanges" class="listLook">
-					<li class="recentExchngDivider" data-role="list-divider"> <br/> Recent Exchanges 
-						<!-- Temporary solution until I find out how to use javascript to change "pages" or we'll leave it as this -->
-						<span class="ui-li-aside"><a href="#exchange-all">
-						<button class ="buttonMore" data-mini="true" data-inline="true" data-icon="arrow-r" data-iconpos="right">
-						More</button></a></span>
-					</li>
-					<li><a href="#exchange-details">
-						<img src="images/person1.PNG" alt="Photo">
-						<h2>Stephen Weber</h2>
-						<p>Working on similar project. We should meet up and compare what we have so far.</p>
-						<p class="ui-li-aside"><strong>2:24</strong>PM</p>
-					</a></li>
-					<li><a href="#">
-						<img src="images/person2.PNG" alt="Photo">
-						<h2>John Doe</h2>
-						<p>Presenter of the transistors poster. Great work.</p>
-						<p class="ui-li-aside"><strong>2:18</strong>PM</p>
-					</a></li>
-					<li><a href="#">
-						<img src="images/person3.PNG" alt="Photo">
-						<h2>Avery Walker</h2>
-						<p>Possibility of working with Avery in the future.</p>
-						<p class="ui-li-aside"><strong>2:01</strong>PM</p>
-					</a></li>
-					<li><a href="#">
-						<img src="images/person4.PNG" alt="Photo">
-						<h2>Shinichi Kudou</h2>
-						<p>Very smart guy. Will keep in touch. </p>
-						<p class="ui-li-aside"><strong>1:48</strong>PM</p>
-					</a></li>
+				<ul data-role="listview" data-inset="true" data-divider-theme="a" class="listLook">
+					<li data-role="list-divider">People Search</li>
+					<li><div class="ui-grid-a" id="inputBar">
+						<div class="ui-block-a">
+							<label for="exchangeInput" class="ui-hidden-accessible">Enter Email or ID: </label>
+							<input name="exchangeInput" id="exchangeInput" placeholder="Enter Email or ID" value="" type="text">
+						</div>
+						<div class="ui-block-b">
+							<a href="#exchange-new" id="submitButton" onclick="" data-role="button" data-mini="true">Go</a>
+						</div>
+					</div></li>
 				</ul>
+				
+				<!-- Listview for saved exchanges -->
+				<div id = "recentExchangesdiv">
+					<ul data-role="listview" data-inset="true"  data-divider-theme="a" id="savedExchanges" class="listLook" data-icon="false">
+						<li data-role="list-divider"> Recent Exchanges </li>
+						<li><a href="#exchange-details">
+							<img src="images/person1.PNG" alt="Photo">
+							<h2>Stephen Weber</h2>
+							<p>Working on similar project. We should meet up and compare what we have so far.</p>
+							<em>Exchanged at 2:24PM</em>
+						</a></li>
+						<li><a href="#">
+							<img src="images/person2.PNG" alt="Photo">
+							<h2>John Doe</h2>
+							<p>Presenter of the transistors poster. Great work.</p>
+							<em>Exchanged at 2:18PM</em>
+						</a></li>
+						<li><a href="#">
+							<img src="images/person3.PNG" alt="Photo">
+							<h2>Avery Walker</h2>
+							<p>Possibility of working with Avery in the future.</p>
+							<em>Exchanged at 2:01PM</em>
+						</a></li>
+						<li><a href="#">
+							<img src="images/person4.PNG" alt="Photo">
+							<h2>Shinichi Kudou</h2>
+							<p>Very smart guy. Will keep in touch. </p>
+							<em>Exchanged at 1:48PM</em>
+						</a></li>
+						<li id = "viewAllExchangesLink"><a href="#exchange-all" onclick = "">
+							<span>View all exchanges</span>
+						</a></li>
+					</ul>
+				</div>                             
             </div>
-			<!-- Navigation panel -->
+            <!-- Navigation panel -->
 			<div data-role="panel" data-position-fixed="true"  data-display="reveal" data-theme="a" id="nav-panel">
-				<ul data-role="listview" data-theme="a" class="nav-search">
+				<ul data-role="listview" data-theme="a" class="nav-search" data-icon="false">
 					<li><a href="home.html#home-main" rel="external">
 						<img src="images/Home_1.png" alt="Home">Home
 					</a></li>
 					<li><a href="checkin.html#checkin-main" rel="external">
 						<img src="images/Check_In_1.png" alt="Check In">Check In
 					</a></li>
-					<li><a href="#exchange-main">
+					<li><a href="#exchange-main" data-rel="close">
 						<img src="images/Exchange_1.png" alt="Exchange">Exchange
 					</a></li>
-					<li><a href="#">
+					<li><a href="microblog.html#microblog-main" rel="external">
 						<img src="images/Microblog_1.png" alt="Microblog">Microblog
+					</a></li>
+					<li><a href="people.html#people-main" rel="external">
+						<img src="images/People_1.png" alt="People">People
 					</a></li>
 					<li><a href="#">
 						<img src="images/Note_1.png" alt="Notes">Notes
@@ -104,68 +99,68 @@
 					<li><a href="#">
 						<img src="images/Agenda_1.png" alt="Agenda">Agenda
 					</a></li>
-					<li><a href="#">
-						<img src="images/People_1.png" alt="People">People
-					</a></li>
 				</ul>
 			</div>
         </div>
-		
-		<!-- All exchanges page -->
+                
+        <!-- All exchanges page -->
         <div data-role="page" data-url ="exchange-all" id="exchange-all" class="ui-responsive-panel">
-			<!-- Header -->
+            <!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
-                <h3 class="headerTitle">All Exchanges</h3>
-				<a href="#exchange-main" data-icon="back" data-iconpos="notext">Back</a>
+                <h3 class="headerTitle">Exchanges</h3>
+                <a href="#" data-rel="back" data-icon="barrow" data-iconpos="notext" class="ui-icon-nodisc" data-iconshadow="false">Back</a>
             </div>
-            <div data-role="content" class="jqm-content">				
-				<!-- Listview for all exchanges; NOTE: I tried autodividers; will not work --> 
-				<ul data-role="listview" id="allExchanges" data-autodividers="false" data-filter="true" 
-				data-inset="false"  data-divider-theme="a" data-filter-placeholder="Find an exchange" class="listLook">
-					<li><a href="#">
-						<img src="images/person3.PNG" alt="Photo">
-						<h2>Avery Walker</h2>
-						<p>Possibility of working with Avery in the future.</p>
-						<p class="ui-li-aside"><strong>2:01</strong>PM</p>
-					</a></li>
-					<li><a href="#">
-						<img src="images/person5.PNG" alt="Photo">
-						<h2>Elisabeth Beasley</h2>
-						<p>Meeting with Elisabeth for lunch tomorrow.</p>
-						<p class="ui-li-aside"><strong>1:30</strong>PM</p>
-					</a></li>
-					<li><a href="#">
-						<img src="images/person2.PNG" alt="Photo">
-						<h2>John Doe</h2>
-						<p>Presenter of the transistors poster. Great work.</p>
-						<p class="ui-li-aside"><strong>2:18</strong>PM</p>
-					</a></li>
-					<li><a href="#">
-						<img src="images/person4.PNG" alt="Photo">
-						<h2>Shinichi Kudou</h2>
-						<p>Very smart guy. Will keep in touch. </p>
-						<p class="ui-li-aside"><strong>1:48</strong>PM</p>
-					</a></li>
-					<li><a href="#exchange-details">
-						<img src="images/person1.PNG" alt="Photo">
-						<h2>Stephen Weber</h2>
-						<p>Working on similar project. We should meet up and compare what we have so far.</p>
-						<p class="ui-li-aside"><strong>2:24</strong>PM</p>
-					</a></li>
-				</ul>
+			<!-- Content -->
+            <div data-role="content" class="jqm-content">
+				<div id="allExchangesdiv">
+					<ul data-role="listview" id="allExchanges" data-autodividers="true" data-filter="true" 
+					data-inset="true"  data-divider-theme="a" data-filter-placeholder="Find an exchange" class="listLook" data-icon="false">
+						<li><a href="#">
+							<img src="images/person3.PNG" alt="Photo">
+							<h2>Avery Walker</h2>
+							<p>Possibility of working with Avery in the future.</p>
+							<em>Exchanged at 2:01PM</em>
+						</a></li>
+						<li><a href="#">
+							<img src="images/person5.PNG" alt="Photo">
+							<h2>Elisabeth Beasley</h2>
+							<p>Meeting with Elisabeth for lunch tomorrow.</p>
+							<em>Exchanged at 1:30PM</em>
+						</a></li>
+						<li><a href="#">
+							<img src="images/person2.PNG" alt="Photo">
+							<h2>John Doe</h2>
+							<p>Presenter of the transistors poster. Great work.</p>
+							<em>Exchanged at 2:18PM</em>
+						</a></li>
+						<li><a href="#">
+							<img src="images/person4.PNG" alt="Photo">
+							<h2>Shinichi Kudou</h2>
+							<p>Very smart guy. Will keep in touch. </p>
+							<em>Exchanged at 1:48PM</em>
+						</a></li>
+						<li><a href="#exchange-details">
+							<img src="images/person1.PNG" alt="Photo">
+							<h2>Stephen Weber</h2>
+							<p>Working on similar project. We should meet up and compare what we have so far.</p>
+							<em>Exchanged at 2:24PM</em>
+						</a></li>
+					</ul>
+				</div>
             </div>
         </div>
-		
+        
 		<!-- Details page -->
         <div data-role="page" data-url ="exchange-details" id="exchange-details" class="ui-responsive-panel">
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
-                <h3 class="headerTitle">Exchange Details</h3>
+                <h3 class="headerTitle">Exchange</h3>
             </div>
 			<!-- Content -->
 			<div data-role="content" class="jqm-content">
-				<ul data-role="listview" data-inset="true" data-divider-theme="a">
-					<li data-role="list-divider">
+				<div id="exchangedetailsdiv">
+					<ul data-role="listview" data-inset="true" data-divider-theme="a">
+						<li data-role="list-divider">
 						<h1>Stephen Weber</h1>
 					</li>
 					<li><div class="exchangeDetails ui-grid-a">
@@ -175,7 +170,7 @@
 						<div class="ui-block-b">
 							<table class="personDetails">
 								<tr>
-									<th>E-mail:</th> <td>stephenweber@hp.com</td>
+									<th>Email:</th> <td>stephenweber@hp.com</td>
 								</tr>
 								<tr>
 									<th>Place:</th> <td>Austin, TX, USA</td>
@@ -187,84 +182,87 @@
 									<th>Status:</th> <td>Committee Member</td>
 								</tr>
 								<tr>
-									<th>Date:</th> <td>2/27/13 @ 2:24PM</td>
+									<th>Date:</th> <td>2/27/13 at 2:24PM</td>
 								</tr>
 							</table>
 						</div>
 					</div></li>
-					<li><div class="noteField">
-						<label for="savedNote" class="ui-hidden-accessible">Add note (visible to you only)</label>
-						<textarea cols="40" rows="8" name="savedNote" id="savedNote" placeholder="Add note (visible to you only)">Working on similar project. We should meet up and compare what we have so far.</textarea>
-						<div class="options">
-							<strong>Attach:</strong>
-							<button class = "buttonCam" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>
-							<button class = "buttonMic" data-mini="true"  onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</button>
-						</div>
-					</div></li>
-					<li><div class="ui-grid-a">
-						<div class="ui-block-a">
-							<a href="#exchange-main" data-role="button">Cancel</a>
-						</div>
-						<div class="ui-block-b">
-							<button class = "buttonSave" type = "button" onclick="saveExchangeNotes()" data-theme="a">Save</button>
-						</div>
-					</div></li>
-				</ul>
+						<li><div class="noteField">
+							<label for="savedNote" class="ui-hidden-accessible">Add note (visible to you only)</label>
+							<textarea cols="40" rows="8" name="savedNote" id="savedNote" placeholder="Add note (visible to you only)">Working on similar project. We should meet up and compare what we have so far.</textarea>
+							<div class="options">
+								<strong>Attach:</strong>
+								<a class="buttonCam ui-icon-nodisc" data-role="button" data-iconshadow="false" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</a>
+								<a class="buttonMic ui-icon-nodisc" data-role="button" data-iconshadow="false" data-mini="true"  onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</a>
+							</div>
+						</div></li>
+						<li><div class="ui-grid-a">
+							<div class="ui-block-a">
+								<a href="#exchange-main" data-role="button">Cancel</a>
+							</div>
+							<div class="ui-block-b">
+								<a href="#exchange-main" data-role="button" data-theme="a">Save</a>
+							</div>
+						</div></li>
+					</ul>
+				</div>
             </div>
         </div>
-		
-		<!-- New exchange page -->
+                
+        <!-- New exchange page -->
         <div data-role="page" data-url ="exchange-new" id="exchange-new" class="ui-responsive-panel">
 			<!-- Header -->
             <div data-role="header" data-theme="a" data-position="fixed">
-                <h3 class="headerTitle">Exchange Details</h3>
+                <h3 class="headerTitle">Exchange</h3>
             </div>
 			<!-- Content -->
 			<div data-role="content" class="jqm-content">
-				<ul data-role="listview" data-inset="true" data-divider-theme="a">
-					<li data-role="list-divider">
-						<h1>Leeroy Jenkins</h1>
-					</li>
-					<li><div class="exchangeDetails ui-grid-a">
-						<div class="ui-block-a">
-							<img src="images/personNew.PNG" alt="Photo" class="portrait">
-						</div>
-						<div class="ui-block-b">
-							<table class="personDetails">
-								<tr>
-									<th>E-mail:</th> <td>leeroyjenkins@hp.com</td>
-								</tr>
-								<tr>
-									<th>Place:</th> <td>San Jose, CA, USA</td>
-								</tr>
-								<tr>
-									<th>Dept:</th> <td>Engineering</td>
-								</tr>
-								<tr>
-									<th>Status:</th> <td>Committee Member</td>
-								</tr>
-							</table>
-						</div>
-					</div></li>
-					<li><div class="noteField">
-						<label for="inputNote" class="ui-hidden-accessible">Add note (visible to you only)</label>
-						<textarea cols="40" rows="8" name="inputNote" id="inputNote" placeholder="Add note (visible to you only)"></textarea>
-						<div class="options">
-							<strong>Attach:</strong>
-							<button class = "buttonCam" data-mini="true"  onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</button>
-							<button class = "buttonMic" data-mini="true"  onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</button>
-						</div>
-					</div></li>
-					<li><div class="options ui-grid-a">
-						<div class="ui-block-a">
-							<a href="#exchange-main" data-role="button">Cancel</a>
-						</div>
-						<div class="ui-block-b">
-							<button class = "buttonExchange" type = "button" onclick="exchgConfirm()" data-theme="a">Exchange</button>
-						</div>
-					</div></li>
-				</ul>
-            </div>
-        </div>
+				<div id="newexchange-div">
+					<ul data-role="listview" data-inset="true" data-divider-theme="a">
+						<li data-role="list-divider">
+							<h1>Leeroy Jenkins</h1>
+						</li>
+						<li><div class="exchangeDetails ui-grid-a">
+							<div class="ui-block-a">
+								<img src="images/personNew.PNG" alt="Photo" class="portrait">
+							</div>
+							<div class="ui-block-b">
+								<table class="personDetails">
+									<tr>
+										<th>Email:</th> <td>leeroyjenkins@hp.com</td>
+									</tr>
+									<tr>
+										<th>Place:</th> <td>San Jose, CA, USA</td>
+									</tr>
+									<tr>
+										<th>Dept:</th> <td>Engineering</td>
+									</tr>
+									<tr>
+										<th>Status:</th> <td>Committee Member</td>
+									</tr>
+								</table>
+							</div>
+						</div></li>
+						<li><div class="noteField">
+							<label for="inputNote" class="ui-hidden-accessible">Add note (visible to you only)</label>
+							<textarea cols="40" rows="8" name="inputNote" id="inputNote" placeholder="Add note (visible to you only)"></textarea>
+							<div class="options">
+								<strong>Attach:</strong>
+								<a class="buttonCam ui-icon-nodisc" data-role="button" data-iconshadow="false" data-mini="true" onclick="cameraFunction()" data-inline="true" data-icon="camera" data-iconpos="notext">Photo/Video</a>
+								<a class = "buttonMic ui-icon-nodisc" data-role="button" data-iconshadow="false" data-mini="true" onclick="micFunction()" data-inline="true" data-icon="microphone" data-iconpos="notext">Voice Note</a>
+							</div>
+						</div></li>
+						<li><div class="options ui-grid-a">
+							<div class="ui-block-a">
+								<a href="#exchange-main" data-role="button">Cancel</a>
+							</div>
+							<div class="ui-block-b">
+								<a href="#exchange-main" data-role="button" data-theme="a">Exchange</a>
+							</div>
+						</div></li>
+					</ul>		
+				</div>                
+            </div> 
+        </div>  
     </body>
 </html>
