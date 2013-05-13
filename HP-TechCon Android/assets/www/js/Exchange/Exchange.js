@@ -194,6 +194,29 @@ function exchangeConfirm() {
 	exchange.save(null, {
 		success: function(exchange) {
 			//alert("success");
+
+			//Reward User Points
+			var Employee = Parse.Object.extend("employee");
+			var query = new Parse.Query(Employee);
+			query.equalTo("employee_id", 123456);
+			query.first({
+				success: function(result) {
+					result.increment("points");
+					result.save();
+				},
+				error: function(error) {
+					console.log("Unable to reward user :(");
+				}
+			});
+
+			//log this interaction
+			var Points = Parse.Object.extend("Points");
+			var newEvent = new Points();
+			newEvent.set("eventID", exchange.id);
+			newEvent.set("eventType", "exchange");
+			newEvent.set("fromUserID", "123456");
+			newEvent.save();
+
 		},
 		error: function(exchange, error) {
 			//alert("Error");

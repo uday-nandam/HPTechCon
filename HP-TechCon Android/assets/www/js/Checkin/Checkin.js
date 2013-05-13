@@ -253,7 +253,30 @@ function searchSession(input){
 							 	
 								checkin.save(null, {
 									success: function(checkin) {
-										//alert("You have successfully checked into " + _name + " at " + time);								
+										//alert("You have successfully checked into " + _name + " at " + time);
+										
+										//Reward User Points
+										var Employee = Parse.Object.extend("employee");
+										var query = new Parse.Query(Employee);
+										query.equalTo("employee_id", 123456);
+										query.first({
+											success: function(result) {
+												result.increment("points");
+												result.save();
+											},
+											error: function(error) {
+												console.log("Unable to reward user :(");
+											}
+										});
+
+										//log this interaction
+										var Points = Parse.Object.extend("Points");
+										var newEvent = new Points();
+										newEvent.set("eventID", checkin.id);
+										newEvent.set("eventType", "checkin");
+										newEvent.set("fromUserID", "123456");
+										newEvent.save();
+
 									},
 									error: function(checkin, error) {
 										alert("Error saving to server");
@@ -305,6 +328,28 @@ function searchSession(input){
 									checkin.save(null, {
 										success: function(checkin) {
 											//alert("You have successfully checked into " + _name + " at " + time);								
+										
+											//Reward User Points
+											var Employee = Parse.Object.extend("employee");
+											var query = new Parse.Query(Employee);
+											query.equalTo("employee_id", 123456);
+											query.first({
+												success: function(result) {
+													result.increment("points");
+													result.save();
+												},
+												error: function(error) {
+													console.log("Unable to reward user :(");
+												}
+											});
+
+											//log this interaction
+											var Points = Parse.Object.extend("Points");
+											var newEvent = new Points();
+											newEvent.set("eventID", checkin.id);
+											newEvent.set("eventType", "checkin");
+											newEvent.set("fromUserID", "123456");
+											newEvent.save();
 										},
 										error: function(checkin, error) {
 											alert("Error saving to server");
